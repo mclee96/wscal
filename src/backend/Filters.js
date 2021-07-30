@@ -54,6 +54,7 @@ export const RESULT = "Result"
 export const TEXT = "Text"
 export const ESV = "Esv"
 export const NA28 = "Na28"
+export const ADVERB = "Adverb/particle Type"
 
 export const ALL = {
   [GENDER]: [FEMININE, MASCULINE, NEUTER],
