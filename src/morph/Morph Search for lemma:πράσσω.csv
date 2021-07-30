@@ -1,0 +1,40 @@
+Result,Lemma (Greek),Tense (Logos Greek),Voice (Logos Greek),Mood (Logos Greek),Person (Logos Greek),Gender (Logos Greek),Case (Logos Greek),Number (Logos Greek),Part of Speech,Reference,Previous Context,Next Context
+πέπραχά,πράσσω,perfect,active,indicative,first person,—,—,singular,verb,Acts 25:11,εἰ μὲν οὖν ἀδικῶ καὶ ἄξιον θανάτου,"τι, οὐ παραιτοῦμαι τὸ ἀποθανεῖν· εἰ δὲ οὐδέν ἐστιν ὧν οὗτοι κατηγοροῦσίν μου"
+πεπραγμένον,πράσσω,perfect,passive,participle,—,neuter,nominative,singular,verb,Luke 23:15,"ἀλλʼ οὐδὲ Ἡρῴδης, ἀνέπεμψεν γὰρ αὐτὸν πρὸς ἡμᾶς, καὶ ἰδοὺ οὐδὲν ἄξιον θανάτου ἐστὶν",αὐτῷ·
+πεπραγμένον,πράσσω,perfect,passive,participle,—,neuter,nominative,singular,verb,Acts 26:26,γὰρ αὐτόν [τι] τούτων οὐ πείθομαι οὐθέν· οὐ γάρ ἐστιν ἐν γωνίᾳ,τοῦτο.
+πεπραχέναι,πράσσω,perfect,active,infinitive,—,—,—,—,verb,Acts 25:25,ἐγὼ δὲ κατελαβόμην μηδὲν ἄξιον αὐτὸν θανάτου,",  αὐτοῦ δὲ τούτου ἐπικαλεσαμένου τὸν Σεβαστὸν ἔκρινα πέμπειν."
+πράξαντες,πράσσω,aorist,active,participle,—,masculine,nominative,plural,verb,John 5:29,"καὶ ἐκπορεύσονται οἱ τὰ ἀγαθὰ ποιήσαντες εἰς ἀνάστασιν ζωῆς, οἱ δὲ τὰ φαῦλα",εἰς ἀνάστασιν κρίσεως.
+πράξας,πράσσω,aorist,active,participle,—,masculine,nominative,singular,verb,1 Corinthians 5:2,"καὶ ὑμεῖς πεφυσιωμένοι ἐστὲ καὶ οὐχὶ μᾶλλον ἐπενθήσατε, ἵνα ἀρθῇ ἐκ μέσου ὑμῶν ὁ τὸ ἔργον τοῦτο",;
+πράξετε,πράσσω,future,active,indicative,second person,—,—,plural,verb,Acts 15:29,"ἀπέχεσθαι εἰδωλοθύτων καὶ αἵματος καὶ πνικτῶν καὶ πορνείας, ἐξ ὧν διατηροῦντες ἑαυτοὺς εὖ",. Ἔρρωσθε.
+πράξῃς,πράσσω,aorist,active,subjunctive,second person,—,—,singular,verb,Acts 16:28,ἐφώνησεν δὲ μεγάλῃ φωνῇ [ὁ] Παῦλος λέγων· μηδὲν,"σεαυτῷ κακόν, ἅπαντες γάρ ἐσμεν ἐνθάδε."
+πράσσει,πράσσω,present,active,indicative,third person,—,—,singular,verb,Acts 26:31,καὶ ἀναχωρήσαντες ἐλάλουν πρὸς ἀλλήλους λέγοντες ὅτι οὐδὲν θανάτου ἢ δεσμῶν ἄξιόν [τι],ὁ ἄνθρωπος οὗτος.
+πράσσειν,πράσσω,present,active,infinitive,—,—,—,—,verb,Luke 22:23,καὶ αὐτοὶ ἤρξαντο συζητεῖν πρὸς ἑαυτοὺς τὸ τίς ἄρα εἴη ἐξ αὐτῶν ὁ τοῦτο μέλλων,.
+πράσσειν,πράσσω,present,active,infinitive,—,—,—,—,verb,Acts 5:35,"εἶπέν τε πρὸς αὐτούς· ἄνδρες Ἰσραηλῖται, προσέχετε ἑαυτοῖς ἐπὶ τοῖς ἀνθρώποις τούτοις τί μέλλετε",.
+πράσσειν,πράσσω,present,active,infinitive,—,—,—,—,verb,Acts 19:36,ἀναντιρρήτων οὖν ὄντων τούτων δέον ἐστὶν ὑμᾶς κατεσταλμένους ὑπάρχειν καὶ μηδὲν προπετὲς,.
+πράσσειν,πράσσω,present,active,infinitive,—,—,—,—,verb,1 Thessalonians 4:11,καὶ φιλοτιμεῖσθαι ἡσυχάζειν καὶ,"τὰ ἴδια καὶ ἐργάζεσθαι ταῖς [ἰδίαις] χερσὶν ὑμῶν, καθὼς ὑμῖν παρηγγείλαμεν,"
+πράσσεις,πράσσω,present,active,indicative,second person,—,—,singular,verb,Romans 2:1,"κρίνων· ἐν ᾧ γὰρ  κρίνεις τὸν ἕτερον, σεαυτὸν κατακρίνεις, τὰ γὰρ αὐτὰ",ὁ κρίνων.
+πράσσετε,πράσσω,present,active,"imperative, indicative",second person,—,—,plural,verb,Luke 3:13,ὁ δὲ εἶπεν πρὸς αὐτούς· μηδὲν πλέον παρὰ τὸ διατεταγμένον ὑμῖν,.
+πράσσετε,πράσσω,present,active,"imperative, indicative",second person,—,—,plural,verb,Philippians 4:9,"ἃ καὶ ἐμάθετε καὶ παρελάβετε καὶ ἠκούσατε καὶ εἴδετε ἐν ἐμοί, ταῦτα",· καὶ ὁ θεὸς τῆς εἰρήνης ἔσται μεθʼ ὑμῶν.
+πράσσοντας,πράσσω,present,active,participle,—,masculine,accusative,plural,verb,Acts 26:20,"ἔθνεσιν ἀπήγγελλον μετανοεῖν καὶ ἐπιστρέφειν ἐπὶ τὸν θεόν, ἄξια τῆς μετανοίας ἔργα",.
+πράσσοντας,πράσσω,present,active,participle,—,masculine,accusative,plural,verb,Romans 2:2,οἴδαμεν δὲ ὅτι τὸ κρίμα τοῦ θεοῦ ἐστιν κατὰ ἀλήθειαν ἐπὶ τοὺς τὰ τοιαῦτα,.
+πράσσοντας,πράσσω,present,active,participle,—,masculine,accusative,plural,verb,Romans 2:3,"λογίζῃ δὲ τοῦτο, ὦ ἄνθρωπε ὁ κρίνων τοὺς τὰ τοιαῦτα","καὶ ποιῶν αὐτά, ὅτι σὺ ἐκφεύξῃ τὸ κρίμα τοῦ θεοῦ;"
+πράσσοντες,πράσσω,present,active,participle,—,masculine,nominative,plural,verb,Romans 1:32,οἵτινες τὸ δικαίωμα τοῦ θεοῦ ἐπιγνόντες  ὅτι οἱ τὰ τοιαῦτα,"ἄξιοι θανάτου εἰσίν, οὐ μόνον  αὐτὰ ποιοῦσιν ἀλλὰ καὶ συνευδοκοῦσιν τοῖς πράσσουσιν."
+πράσσοντες,πράσσω,present,active,participle,—,masculine,nominative,plural,verb,Galatians 5:21,"φθόνοι , μέθαι, κῶμοι καὶ τὰ ὅμοια τούτοις, ἃ προλέγω ὑμῖν, καθὼς  προεῖπον ὅτι οἱ τὰ τοιαῦτα",βασιλείαν θεοῦ οὐ κληρονομήσουσιν.
+πράσσοντι,πράσσω,present,active,participle,—,masculine,dative,singular,verb,Romans 13:4,μάχαιραν φορεῖ· θεοῦ γὰρ διάκονός ἐστιν ἔκδικος εἰς ὀργὴν τῷ τὸ κακὸν,.
+πράσσουσιν,πράσσω,present,active,indicative,third person,—,—,plural,verb,Acts 17:7,οὓς ὑποδέδεκται  Ἰάσων· καὶ οὗτοι πάντες ἀπέναντι τῶν δογμάτων Καίσαρος,βασιλέα ἕτερον λέγοντες εἶναι Ἰησοῦν.
+πράσσουσιν,πράσσω,present,active,participle,—,masculine,dative,plural,verb,Romans 1:32,"πράσσοντες ἄξιοι θανάτου εἰσίν, οὐ μόνον  αὐτὰ ποιοῦσιν ἀλλὰ καὶ συνευδοκοῦσιν τοῖς",.
+πράσσω,πράσσω,present,active,indicative,first person,—,—,singular,verb,Romans 7:15,ὃ γὰρ κατεργάζομαι οὐ γινώσκω· οὐ γὰρ ὃ θέλω τοῦτο,", ἀλλʼ ὃ μισῶ τοῦτο ποιῶ."
+πράσσω,πράσσω,present,active,indicative,first person,—,—,singular,verb,Romans 7:19,"οὐ γὰρ ὃ θέλω ποιῶ ἀγαθόν, ἀλλʼ ὃ οὐ θέλω κακὸν τοῦτο",.
+πράσσω,πράσσω,present,active,indicative,first person,—,—,singular,verb,1 Corinthians 9:17,εἰ γὰρ ἑκὼν τοῦτο,", μισθὸν  ἔχω· εἰ δὲ ἄκων, οἰκονομίαν πεπίστευμαι·"
+πράσσω,πράσσω,present,active,indicative,first person,—,—,singular,verb,Ephesians 6:21,"Ἵνα δὲ εἰδῆτε καὶ ὑμεῖς τὰ κατʼ ἐμέ, τί",", πάντα γνωρίσει ὑμῖν Τύχικος ὁ ἀγαπητὸς ἀδελφὸς καὶ πιστὸς διάκονος ἐν κυρίῳ,"
+πράσσων,πράσσω,present,active,participle,—,masculine,nominative,singular,verb,John 3:20,πᾶς γὰρ ὁ φαῦλα,"μισεῖ τὸ φῶς καὶ οὐκ ἔρχεται πρὸς τὸ φῶς, ἵνα μὴ ἐλεγχθῇ τὰ ἔργα αὐτοῦ·"
+πράσσῃς,πράσσω,present,active,subjunctive,second person,—,—,singular,verb,Romans 2:25,Περιτομὴ μὲν γὰρ ὠφελεῖ ἐὰν νόμον,"· ἐὰν δὲ παραβάτης νόμου ᾖς, ἡ περιτομή σου ἀκροβυστία γέγονεν."
+πραξάντων,πράσσω,aorist,active,participle,—,masculine,genitive,plural,verb,Acts 19:19,ἱκανοὶ δὲ τῶν τὰ περίεργα,"συνενέγκαντες τὰς βίβλους κατέκαιον ἐνώπιον πάντων, καὶ συνεψήφισαν τὰς τιμὰς αὐτῶν καὶ εὗρον ἀργυρίου μυριάδας πέντε."
+πραξάντων,πράσσω,aorist,active,participle,—,masculine,genitive,plural,verb,Romans 9:11,μήπω γὰρ γεννηθέντων μηδὲ,"τι ἀγαθὸν ἢ φαῦλον, ἵνα ἡ κατʼ ἐκλογὴν πρόθεσις τοῦ θεοῦ μένῃ,"
+πρᾶξαι,πράσσω,aorist,active,infinitive,—,—,—,—,verb,Acts 26:9,Ἐγὼ μὲν οὖν ἔδοξα ἐμαυτῷ πρὸς τὸ ὄνομα  Ἰησοῦ τοῦ Ναζωραίου δεῖν πολλὰ ἐναντία,","
+ἐπράξαμεν,πράσσω,aorist,active,indicative,first person,—,—,plural,verb,Luke 23:41,"καὶ ἡμεῖς μὲν δικαίως, ἄξια γὰρ ὧν",ἀπολαμβάνομεν· οὗτος δὲ οὐδὲν ἄτοπον ἔπραξεν.
+ἐπράξατε,πράσσω,aorist,active,indicative,second person,—,—,plural,verb,Acts 3:17,"Καὶ νῦν,  ἀδελφοί, οἶδα ὅτι κατὰ ἄγνοιαν",ὥσπερ καὶ οἱ ἄρχοντες ὑμῶν·
+ἔπραξα,πράσσω,aorist,active,indicative,first person,—,—,singular,verb,Luke 19:23,καὶ διὰ τί οὐκ ἔδωκάς μου τὸ ἀργύριον ἐπὶ τράπεζαν; κἀγὼ ἐλθὼν σὺν τόκῳ ἂν αὐτὸ,.
+ἔπραξαν,πράσσω,aorist,active,indicative,third person,—,—,plural,verb,2 Corinthians 12:21,προημαρτηκότων καὶ μὴ μετανοησάντων ἐπὶ τῇ ἀκαθαρσίᾳ καὶ πορνείᾳ καὶ ἀσελγείᾳ ᾗ,.
+ἔπραξεν,πράσσω,aorist,active,indicative,third person,—,—,singular,verb,Luke 23:41,"καὶ ἡμεῖς μὲν δικαίως, ἄξια γὰρ ὧν ἐπράξαμεν ἀπολαμβάνομεν· οὗτος δὲ οὐδὲν ἄτοπον",.
+ἔπραξεν,πράσσω,aorist,active,indicative,third person,—,—,singular,verb,2 Corinthians 5:10,"βήματος τοῦ Χριστοῦ, ἵνα κομίσηται ἕκαστος τὰ διὰ τοῦ σώματος πρὸς ἃ",", εἴτε ἀγαθὸν εἴτε φαῦλον."
