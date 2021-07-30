@@ -3,20 +3,30 @@ import './App.css';
 import React from 'react'
 import Data from './backend/Data.js'
 
-import {CASE, CHAPTER, NOMINATIVE, ACCUSATIVE} from './backend/Filters.js'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import ToggleButton from 'react-bootstrap/ToggleButton'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+import ALL from './backend/Filters.js'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = { };
+    this.updateFilters = this.updateFilters.bind(this)
+    this.getStudySet = this.getStudySet.bind(this)
   }
 
-  componentDidMount() {
-    Data.loadData();
+  updateFilters(type, filters) {
+    this.setState((state, props) => Object.assign(state, { [type]: filters }))
   }
 
-  click() {
-    console.log(Data.getRecords({ [CHAPTER]: [2, 3], [CASE]: [NOMINATIVE, ACCUSATIVE] }))
+  getStudySet() {
+    console.log(Data.getRecords(this.state))
   }
 
   render() {
@@ -35,7 +45,23 @@ class App extends React.Component {
           >
             Learn React
           </a>
-          <button onClick={this.click}>hi!</button>
+          <Container>
+            {Object.keys(ALL).map(filterType => (
+              <Container>
+                <ToggleButtonGroup id={filterType} key={filterType} type="checkbox" onChange={(e) => this.updateFilters(filterType, e)}>
+                  {ALL[filterType].map(cse => (
+                    <ToggleButton key={cse} id={cse} value={cse} variant='outline-danger'>
+                      {cse}
+                    </ToggleButton>
+                  ))}
+                </ToggleButtonGroup>
+              </Container>
+            ))}
+          </Container>
+          <Button onClick={this.getStudySet}>
+            Get Records!
+          </Button>
+
         </header>
       </div>
     );

@@ -104,7 +104,7 @@ class Data {
       .filter(row => 
         Object.keys(filters).every(fil => {
           return Array.isArray(filters[fil]) 
-            ? filters[fil].includes(row[fil])
+            ? filters[fil].length === 0 || filters[fil].includes(row[fil])
             : row[fil] === filters[fil]
         }))
       .map(row => {

@@ -4,6 +4,7 @@ export const NOMINATIVE = "nom"
 export const GENITIVE = "gen"
 export const DATIVE = "dat"
 export const ACCUSATIVE = "acc"
+export const VOCATIVE = "voc"
 
 // gender
 export const GENDER = "Gender";
@@ -53,3 +54,14 @@ export const RESULT = "Result"
 export const TEXT = "Text"
 export const ESV = "Esv"
 export const NA28 = "Na28"
+
+export const ALL = {
+  [GENDER]: [FEMININE, MASCULINE, NEUTER],
+  [CASE]: [NOMINATIVE, GENITIVE, DATIVE, ACCUSATIVE, VOCATIVE],
+  [PART]: [ADJECTIVE, NOUN, VERB],
+  [TENSE]: [PRESENT, IMPERFECT, FUTURE, AORIST],
+  [VOICE]: [ACTIVE, MIDDLE, PASSIVE],
+  [NUMBER]: [SINGULAR, PLURAL],
+}
+
+export default ALL
