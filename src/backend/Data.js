@@ -100,13 +100,6 @@ class Data {
   }
 
   static getRecords(filters) {
-    console.log(Data.full)
-    console.log(Data.full
-      .filter(
-          row => Object.keys(filters).every(
-              fil => Array.isArray(filters[fil]) 
-                  ? filters[fil].length === 0 || filters[fil].includes(row[fil])
-                  : row[fil] === filters[fil])))
     return Data.full
       .filter(
           row => Object.keys(filters).every(

@@ -81,6 +81,7 @@ class App extends React.Component {
         </Container>
 
         {/* preview dataset */}
+        {/*
         <Container>
           <Table responsive bordered hover>
               <thead>
@@ -101,6 +102,7 @@ class App extends React.Component {
               </tbody>
             </Table>
         </Container>
+        */}
       </div>
     );
   }
