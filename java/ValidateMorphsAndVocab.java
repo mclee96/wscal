@@ -7,7 +7,7 @@ import java.util.stream.*;
 import org.apache.commons.csv.*;
 
 /*
-    java -cp commons-csv-1.8/commons-csv-1.8.jar ValidateMorphsAndVocab.java
+    java -cp ~/Developer/commons-csv-1.8/commons-csv-1.8.jar ValidateMorphsAndVocab.java
 */
 public class ValidateMorphsAndVocab {
 
