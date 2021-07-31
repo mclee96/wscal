@@ -59,7 +59,7 @@ class Data {
               Data.morphs.length > 0 &&
               Object.keys(Data.esv).length > 0 &&
               Object.keys(Data.na28).length > 0) {
-            callback(Data.full)
+            callback(Data.getRecords({}))
           }
         },
       });
@@ -85,7 +85,7 @@ class Data {
               Data.morphs.length > 0 &&
               Object.keys(Data.esv).length > 0 &&
               Object.keys(Data.na28).length > 0) {
-            callback(Data.full)
+            callback(Data.getRecords({}))
           }
         },
       });
@@ -102,7 +102,7 @@ class Data {
               Data.morphs.length > 0 &&
               Object.keys(Data.esv).length > 0 &&
               Object.keys(Data.na28).length > 0) {
-            callback(Data.full)
+            callback(Data.getRecords({}))
           }
         }
       });
@@ -119,7 +119,7 @@ class Data {
               Data.morphs.length > 0 &&
               Object.keys(Data.esv).length > 0 &&
               Object.keys(Data.na28).length > 0) {
-            callback(Data.full)
+            callback(Data.getRecords({}))
           }
         }
       });
