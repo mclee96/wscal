@@ -89,12 +89,24 @@ class App extends React.Component {
           </p>
         </header>
         <Container>
+          {/* filter selection */}
+          <Row style={{justifyContent: 'space-between'}}>
+            {Object.keys(ALL).map(filterType => (
+                <ToggleButtonGroup id={filterType} key={filterType} defaultValue={ALL[filterType]} type="checkbox" size="sm" >
+                  {ALL[filterType].map(filterValue => (
+                    <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.updateFilters(filterType, filterValue, e)}>
+                      {filterValue}
+                    </ToggleButton>
+                  ))}
+                </ToggleButtonGroup>
+            ))}
+          </Row>
+          {/*
           <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
             <Offcanvas.Header closeButton>
               <Offcanvas.Title>Adjust filters</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-              {/* filter selection */}
               <Container>
                 {Object.keys(ALL).map(filterType => (
                   <Row style={ { margin: '1rem' } }>
@@ -113,6 +125,7 @@ class App extends React.Component {
               </Container>
             </Offcanvas.Body>
           </Offcanvas>
+          */}
 
           {/* header section */}
           <Row>
