@@ -90,7 +90,8 @@ class App extends React.Component {
         </header>
         <Container>
           {/* filter selection */}
-          <Row style={{justifyContent: 'space-between'}}>
+            <ButtonToolbar style={{justifyContent: 'space-between'}}>
+
             {Object.keys(ALL).map(filterType => (
               <Container>
                 <ToggleButtonGroup id={filterType} key={filterType} defaultValue={ALL[filterType]} type="checkbox" size="sm" >
@@ -102,7 +103,7 @@ class App extends React.Component {
                 </ToggleButtonGroup>
               </Container>
             ))}
-          </Row>
+            </ButtonToolbar>
           {/*
           <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
             <Offcanvas.Header closeButton>
