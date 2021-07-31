@@ -1,5 +1,6 @@
 {
   "name": "wscal",
+  "homepage": "https://mclee96.github.io/wscal",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
