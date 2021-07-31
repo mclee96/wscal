@@ -92,6 +92,7 @@ class App extends React.Component {
           {/* filter selection */}
           <Row style={{justifyContent: 'space-between'}}>
             {Object.keys(ALL).map(filterType => (
+              <Container>
                 <ToggleButtonGroup id={filterType} key={filterType} defaultValue={ALL[filterType]} type="checkbox" size="sm" >
                   {ALL[filterType].map(filterValue => (
                     <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.updateFilters(filterType, filterValue, e)}>
@@ -99,6 +100,7 @@ class App extends React.Component {
                     </ToggleButton>
                   ))}
                 </ToggleButtonGroup>
+              </Container>
             ))}
           </Row>
           {/*
