@@ -14,6 +14,7 @@ import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { saveAs } from 'file-saver';
 
 
 import {ALL, ADVERB, RESULT, LEMMA, CASE, GENDER, NUMBER, MOOD, PART, PERSON, TENSE, VOICE, CHAPTER, GLOSS, REFERENCE, ESV, NA28} from './backend/Filters.js'
@@ -23,8 +24,9 @@ class App extends React.Component {
     super(props);
     this.state = { 
       records: [],
+      display: [],
       filters: {},
-      fields: [LEMMA, RESULT, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, REFERENCE, ESV, NA28],
+      fields: [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, REFERENCE, ESV, NA28],
       showOffcanvas: false,
       limit: 20,
     };
@@ -34,10 +36,11 @@ class App extends React.Component {
     this.updateFields = this.updateFields.bind(this)
     this.updateRecords = this.updateRecords.bind(this)
     this.setOffcanvas = this.setOffcanvas.bind(this)
+    this.downloadRecords = this.downloadRecords.bind(this)
   }
 
   static fields = 
-    [LEMMA, RESULT, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB, REFERENCE, ESV, NA28]
+    [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB, REFERENCE, ESV, NA28]
 
   componentDidMount() {
     Data.loadData((records) => this.setState({ records: records }));
@@ -56,6 +59,7 @@ class App extends React.Component {
 
       return { filters: Object.assign({}, state.filters, { [type]: newFilters }) }
     })
+    // TODO: refresh here?
   }
 
   updateFields(value) {
@@ -72,7 +76,20 @@ class App extends React.Component {
   }
 
   updateRecords() {
-    this.setState({ records: Data.getRecords(this.state.filters) })
+    let records = Data.getRecords(this.state.filters)
+    const index = Math.floor(Math.random() * records.length - this.state.limit)
+    this.setState(
+    { 
+      records: records,
+      display: records.slice(index, index + this.state.limit),
+    })
+  }
+
+  downloadRecords() {
+    var text = App.fields.filter(field => this.state.fields.includes(field)).join('\t') + '\n' +
+      this.state.records.map(row => App.fields.filter(field => this.state.fields.includes(field)).map(field => row[field]).join('\t')).join ('\n')
+    var blob = new Blob([ text ], { type: "text/plain;charset=utf-8" })
+    saveAs(blob, "hello.txt")
   }
 
   setOffcanvas(value) {
@@ -80,7 +97,6 @@ class App extends React.Component {
   }
 
   render() {
-    const index = Math.floor(Math.random() * this.state.records.length - 10)
     return (
       <div className="App">
         <header className="App-header">
@@ -140,6 +156,11 @@ class App extends React.Component {
                 Refresh!
               </Button>
             </Col>
+            <Col>
+              <Button onClick={this.downloadRecords}>
+                Download Set ({this.state.records.length} rows)
+              </Button>
+            </Col>
           </Row>
           <Row style={ { marginTop: '1rem' } }>
             <Col>
@@ -171,7 +192,7 @@ class App extends React.Component {
                   </thead>
                   <tbody>
                     {
-                      this.state.records.slice(index, index + this.state.limit).map(record => (
+                      this.state.display.map(record => (
                         <tr key={'tr-' + record[RESULT]}>
                           {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
                             <td key={field} style={{whiteSpace: 'nowrap'}}>{record[field]}</td>
