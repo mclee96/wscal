@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React from 'react'
 import Data from './backend/Data.js'
@@ -19,12 +18,16 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      records: Data.getRecords({}),
+      records: [],
       filters: {},
     };
-    console.log(Data.getRecords({}))
+    console.log("constructor")
     this.updateFilters = this.updateFilters.bind(this)
     this.getRecords = this.getRecords.bind(this)
+  }
+
+  componentDidMount() {
+    Data.loadData((records) => this.setState({ records: records }));
   }
 
   updateFilters(type, filters) {
@@ -35,6 +38,7 @@ class App extends React.Component {
   }
 
   getRecords() {
+    console.log(Data.getRecords(this.state.filters))
     this.setState({ records: Data.getRecords(this.state.filters) })
   }
 

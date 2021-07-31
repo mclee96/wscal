@@ -14,89 +14,116 @@ class Data {
   static na28 = {}
   static full = []
 
-  /*
-  static loadDataIntoSessionStorage() {
-    sessionStorage.clear()
-    Papa.parse(vocabFile, {
-      complete: function(results) {
-        results.data.forEach(result => Data.vocab.push(result))
-        sessionStorage.setItem('vocab', JSON.stringify(results.data));
-      },
-      delimiter: '\t',
-      download: true,
-      header: true
-    });
-  }
-  */
-
   static loadFull() {
-    if (Data.vocab.length > 0 && Object.keys(Data.morphs).length > 0) {
-      let vocabMap = {}
-      Data.vocab.forEach(v => vocabMap[v[LEMMA]] = v)
+    let vocabMap = {}
+    Data.vocab.forEach(v => vocabMap[v[LEMMA]] = v)
 
-      Data.full = []
-      Data.morphs
-        .filter(morph => {
-          if (!vocabMap[morph[LEMMA]]) {
-            console.log("no vocab corresponding to morph for " + morph[LEMMA])
-          }
-          return vocabMap[morph[LEMMA]]
-        })
-        .forEach(
-          morph => 
-            Data.full.push(
-              Object.assign(
-                {}, 
-                morph, 
-                vocabMap[morph[LEMMA]],
-                { [CHAPTER]: parseInt(vocabMap[morph[LEMMA]][CHAPTER], 10) })))
-    }
+    let temp = []
+    Data.morphs
+      .filter(morph => {
+        if (!vocabMap[morph[LEMMA]]) {
+          console.log("no vocab corresponding to morph for " + morph[LEMMA])
+        }
+        return vocabMap[morph[LEMMA]]
+      })
+      .forEach(
+        morph => 
+          temp.push(
+            Object.assign(
+              {}, 
+              morph, 
+              vocabMap[morph[LEMMA]],
+              { [CHAPTER]: parseInt(vocabMap[morph[LEMMA]][CHAPTER], 10) })))
+    Data.full = temp
   }
 
-  static loadData() {
-    Data.vocab = []
-    Papa.parse(vocabFile, {
-      delimiter: '\t',
-      download: true,
-      header: true,
-      complete: results => {
-        results.data
-          .filter(result => result['Lemma'])
-          .forEach(result => Data.vocab.push(result))
-        Data.loadFull()
-      },
-    });
+  static loadData(callback) {
+    console.log("loadData")
+    if (Data.vocab.length === 0) {
+      Papa.parse(vocabFile, {
+        delimiter: '\t',
+        download: true,
+        header: true,
+        complete: results => {
+          let temp = []
+          results.data
+            .filter(result => result['Lemma'])
+            .forEach(result => temp.push(result))
+          Data.vocab = temp
 
-    Data.morphs = []
-    Papa.parse(morphsFile, {
-      delimiter: '\t',
-      download: true,
-      header: true,
-      complete: results => {
-        results.data
-          .filter(result => result['Lemma'])
-          .forEach(result => Data.morphs.push(result))
-        Data.loadFull()
-      },
-    });
+          // post-processing
+          if (Data.vocab.length > 0 && Data.morphs.length > 0) {
+            Data.loadFull()
+          }
+          if (Data.vocab.length > 0 && 
+              Data.morphs.length > 0 &&
+              Object.keys(Data.esv).length > 0 &&
+              Object.keys(Data.na28).length > 0) {
+            callback(Data.full)
+          }
+        },
+      });
+    }
 
-    Data.esv = {}
-    Papa.parse(esvFile, {
-      delimiter: '\t',
-      download: true,
-      header: true,
-      complete: results =>
-        results.data.forEach(result => Data.esv[result[REFERENCE]] = result[TEXT]),
-    });
+    if (Data.morphs.length === 0) {
+      Papa.parse(morphsFile, {
+        delimiter: '\t',
+        download: true,
+        header: true,
+        complete: results => {
+          let temp = []
+          results.data
+            .filter(result => result['Lemma'])
+            .forEach(result => temp.push(result))
+          Data.morphs = temp
 
-    Data.na28 = {}
-    Papa.parse(na28File, {
-      delimiter: '\t',
-      download: true,
-      header: true,
-      complete: results => 
-        results.data.forEach(result => Data.na28[result[REFERENCE]] = result[TEXT]),
-    });
+          // post-processing
+          if (Data.vocab.length > 0 && Data.morphs.length > 0) {
+            Data.loadFull()
+          }
+          if (Data.vocab.length > 0 &&
+              Data.morphs.length > 0 &&
+              Object.keys(Data.esv).length > 0 &&
+              Object.keys(Data.na28).length > 0) {
+            callback(Data.full)
+          }
+        },
+      });
+    }
+
+    if (Object.keys(Data.esv).length === 0) {
+      Papa.parse(esvFile, {
+        delimiter: '\t',
+        download: true,
+        header: true,
+        complete: results => {
+          results.data.forEach(result => Data.esv[result[REFERENCE]] = result[TEXT])
+          if (Data.vocab.length > 0 &&
+              Data.morphs.length > 0 &&
+              Object.keys(Data.esv).length > 0 &&
+              Object.keys(Data.na28).length > 0) {
+            callback(Data.full)
+          }
+        }
+      });
+    }
+
+    if (Object.keys(Data.na28).length === 0) {
+      Papa.parse(na28File, {
+        delimiter: '\t',
+        download: true,
+        header: true,
+        complete: results => {
+          results.data.forEach(result => Data.na28[result[REFERENCE]] = result[TEXT])
+          if (Data.vocab.length > 0 &&
+              Data.morphs.length > 0 &&
+              Object.keys(Data.esv).length > 0 &&
+              Object.keys(Data.na28).length > 0) {
+            callback(Data.full)
+          }
+        }
+      });
+    }
   }
 
   static getRecords(filters) {
