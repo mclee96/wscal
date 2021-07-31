@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/wscal/static/css/main.f66fc2d5.chunk.css",
+    "main.js": "/wscal/static/js/main.2efefa89.chunk.js",
+    "main.js.map": "/wscal/static/js/main.2efefa89.chunk.js.map",
+    "runtime-main.js": "/wscal/static/js/runtime-main.a4168e87.js",
+    "runtime-main.js.map": "/wscal/static/js/runtime-main.a4168e87.js.map",
+    "static/css/2.4be38407.chunk.css": "/wscal/static/css/2.4be38407.chunk.css",
+    "static/js/2.deed55b1.chunk.js": "/wscal/static/js/2.deed55b1.chunk.js",
+    "static/js/2.deed55b1.chunk.js.map": "/wscal/static/js/2.deed55b1.chunk.js.map",
+    "static/js/3.f114d395.chunk.js": "/wscal/static/js/3.f114d395.chunk.js",
+    "static/js/3.f114d395.chunk.js.map": "/wscal/static/js/3.f114d395.chunk.js.map",
+    "index.html": "/wscal/index.html",
+    "static/css/2.4be38407.chunk.css.map": "/wscal/static/css/2.4be38407.chunk.css.map",
+    "static/css/main.f66fc2d5.chunk.css.map": "/wscal/static/css/main.f66fc2d5.chunk.css.map",
+    "static/js/2.deed55b1.chunk.js.LICENSE.txt": "/wscal/static/js/2.deed55b1.chunk.js.LICENSE.txt",
+    "static/media/esv.f6ea5fd3.tsv": "/wscal/static/media/esv.f6ea5fd3.tsv",
+    "static/media/morphs.2386e766.tsv": "/wscal/static/media/morphs.2386e766.tsv",
+    "static/media/na28.2e06aedb.tsv": "/wscal/static/media/na28.2e06aedb.tsv",
+    "static/media/vocab.56686cfc.tsv": "/wscal/static/media/vocab.56686cfc.tsv"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a4168e87.js",
+    "static/css/2.4be38407.chunk.css",
+    "static/js/2.deed55b1.chunk.js",
+    "static/css/main.f66fc2d5.chunk.css",
+    "static/js/main.2efefa89.chunk.js"
+  ]
+}
