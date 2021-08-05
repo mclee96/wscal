@@ -26,7 +26,7 @@ class App extends React.Component {
       records: [],
       display: [],
       filters: {},
-      fields: [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, REFERENCE],
+      fields: [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER],
       showOffcanvas: false,
       limit: 20,
     };
@@ -40,7 +40,7 @@ class App extends React.Component {
   }
 
   static fields = 
-    [NA28, RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB, REFERENCE, ESV]
+    [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB, REFERENCE, ESV, NA28]
 
   componentDidMount() {
     Data.loadData((records) => this.setState({ records: records }));

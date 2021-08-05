@@ -1,65 +1,71 @@
 // case
 export const CASE = "Case" 
-export const NOMINATIVE = "nom"
-export const GENITIVE = "gen"
-export const DATIVE = "dat"
-export const ACCUSATIVE = "acc"
-export const VOCATIVE = "voc"
+export const NOMINATIVE = "nominative"
+export const GENITIVE = "genitive"
+export const DATIVE = "dative"
+export const ACCUSATIVE = "accusative"
+export const VOCATIVE = "vocative"
 
 // gender
 export const GENDER = "Gender";
-export const FEMININE = "fem"
-export const MASCULINE = "mas"
-export const NEUTER = "neu"
+export const FEMININE = "feminine"
+export const MASCULINE = "masculine"
+export const NEUTER = "neuter"
 
 // number
 export const NUMBER = "Number"
-export const SINGULAR = "sg"
-export const PLURAL = "pl"
+export const SINGULAR = "singular"
+export const PLURAL = "plural"
 
 // mood
 export const MOOD = "Mood"
+export const INDICATIVE = "indicative"
 
 // part of speech
-export const PART = "Part of Speech"
+export const PART = "Part"
 export const ADJECTIVE = "adjective"
 export const NOUN = "noun"
+export const PRONOUN = "pronoun"
 export const VERB = "verb"
 
 // person
 export const PERSON = "Person"
-export const FIRST = "1p"
-export const SECOND = "2p"
-export const THIRD = "3p"
+export const FIRST = "first person"
+export const SECOND = "second person"
+export const THIRD = "third person"
 
 // tense
 export const TENSE = "Tense"
-export const AORIST = "aor"
-export const PRESENT = "pres"
-export const FUTURE = "futr"
-export const IMPERFECT = "impft"
+export const AORIST = "aorist"
+export const PERFECT = "perfect"
+export const PRESENT = "present"
+export const FUTURE = "future"
+export const IMPERFECT = "imperfect"
 
 // voice
 export const VOICE = "Voice"
-export const MIDDLE = "mid"
-export const PASSIVE = "pass"
-export const ACTIVE = "actv"
+export const MIDDLE = "middle"
+export const PASSIVE = "passive"
+export const ACTIVE = "active"
 
 // other headers
 export const CHAPTER = "Chapter";
 export const GLOSS = "Gloss";
 export const LEMMA = "Lemma";
-export const REFERENCE = "Reference"
 export const RESULT = "Result"
 export const TEXT = "Text"
+export const ADVERB = "Adverb/particle Type"
+
+// bibles
 export const ESV = "Esv"
 export const NA28 = "Na28"
-export const ADVERB = "Adverb/particle Type"
+export const ABBR = "Abbr"
+export const REFERENCE = "Reference"
 
 export const ALL = {
   [GENDER]: [FEMININE, MASCULINE, NEUTER],
   [CASE]: [NOMINATIVE, GENITIVE, DATIVE, ACCUSATIVE, VOCATIVE],
-  [PART]: [ADJECTIVE, NOUN, VERB],
+  [PART]: [ADJECTIVE, NOUN, VERB, PRONOUN],
   [TENSE]: [PRESENT, IMPERFECT, FUTURE, AORIST],
   [VOICE]: [ACTIVE, MIDDLE, PASSIVE],
   [NUMBER]: [SINGULAR, PLURAL],
