@@ -112,6 +112,7 @@ class App extends React.Component {
 
     let chapters = []
     let specific = []
+    var allNumbers = true
     this.state.chapters.replaceAll('ch', '').split(',')
       .map(chapter => chapter.trim())
       .forEach(chapter => {
@@ -123,17 +124,19 @@ class App extends React.Component {
         } else if (!isNaN(chapter)) {
           chapters.push(chapter)
         } else {
+          allNumbers = false
           specific.push(chapter)
         }
       })
-    let allNumbers = this.state.chapters.replaceAll('ch', '').split(',')
-      .every(arg => !isNaN(arg))
+
     if (allNumbers) {
       filters[CHAPTER] = chapters
+      filters[LEMMA] = []
     } else {
       specific.push.apply(specific, 
           Data.getVocab(chapters)
             .map(row => row[LEMMA]))
+      filters[CHAPTER] = []
       filters[LEMMA] = specific
     }
 
