@@ -168,6 +168,9 @@ class App extends React.Component {
       outputFilename += '_'
       outputFilename += Object.values(this.state.filters).map(filterSet => filterSet.join(',')).join('_')
     }
+    if (outputFilename.length > 150) {
+      outputFilename = outputFilename.substr(0, 150) + ' (full name cut off)'
+    }
     outputFilename += '.tsv'
     saveAs(blob, outputFilename)
   }
