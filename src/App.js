@@ -108,7 +108,7 @@ class App extends React.Component {
   }
 
   updateRecords() {
-    let filters = this.state.filters
+    let filters = Object.assign({}, this.state.filters)
 
     let chapters = []
     let specific = []
@@ -159,7 +159,17 @@ class App extends React.Component {
   downloadRecords() {
     var text = this.state.flashcards.map(row => row[0] + '\t' + row[1]).join('\n')
     var blob = new Blob([ text ], { type: "text/plain;charset=utf-8" })
-    saveAs(blob, "hello.txt")
+
+    var outputFilename = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '.').replaceAll(':', '∶').replace(', ', '_') + '_flashcards_'
+    if (this.state.chapters !== null) {
+      outputFilename += this.state.chapters
+    }
+    if (Object.values(this.state.filters).some(filterSet => filterSet.length > 0)) {
+      outputFilename += '_'
+      outputFilename += Object.values(this.state.filters).map(filterSet => filterSet.join(',')).join('_')
+    }
+    outputFilename += '.tsv'
+    saveAs(blob, outputFilename)
   }
 
   setOffcanvas(value) {
