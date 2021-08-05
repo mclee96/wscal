@@ -15,47 +15,58 @@ class Data {
 
   // idempotent
   static loadData(callback) {
+    // legacy reset
+    if (Object.keys(localStorage).some(key => key.includes('/wscal/static/media'))) {
+      localStorage.clear()
+    }
+
     if (Data.vocab.length === 0) {
-      Data.loadFile(vocabFilepath, (contents) => {
+      Data.loadFile('vocab', vocabFilepath, (contents) => {
         let rows = []
-        Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
+        Papa.parse(contents, { delimiter: '\t', header: true }).data
           .forEach(row => rows.push(row))
         Data.vocab = rows
       })
     }
 
     if (Data.morphs.length === 0) {
-      Data.loadFile(morphFilepath, (contents) => {
+      Data.loadFile('morphs', morphFilepath, (contents) => {
           let rows = []
-          Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
+          Papa.parse(contents, { delimiter: '\t', header: true }).data
             .forEach(row => rows.push(row))
           Data.morphs = rows
       })
     }
 
     if (Object.keys(Data.esv).length === 0) {
-      Data.loadFile(esvFilepath, (contents) => {
-        Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
+      Data.loadFile('esv', esvFilepath, (contents) => {
+        Papa.parse(contents, { delimiter: '\t', header: true }).data
           .forEach(row => Data.esv[row[ABBR]] = row[TEXT])
       })
     }
 
     if (Object.keys(Data.na28).length === 0) {
-      Data.loadFile(na28Filepath, (contents) => {
-        Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
+      Data.loadFile('na28', na28Filepath, (contents) => {
+        Papa.parse(contents, { delimiter: '\t', header: true }).data
           .forEach(row => Data.na28[row[ABBR]] = row[TEXT])
       })
     }
   }
 
-  static loadFile(filepath, callback) {
-    if (localStorage.getItem(filepath) != null) {
-      callback(localStorage.getItem(filepath))
+  static loadFile(id, filepath, callback) {
+    if (localStorage.getItem(id) != null && localStorage.getItem(id + '_filepath') === filepath) {
+      // cached result
+      if (callback) {
+        callback(localStorage.getItem(id))
+      }
     } else {
+      localStorage.setItem(id + '_filepath', filepath)
       let req = new XMLHttpRequest();
       req.addEventListener("load", (e) => {
-        localStorage.setItem(filepath, req.responseText)
-        callback(req.responseText)
+        localStorage.setItem(id, req.responseText.trim())
+        if (callback) {
+          callback(req.responseText.trim())
+        }
       })
       req.open("GET", filepath);
       req.send();
