@@ -109,24 +109,40 @@ class App extends React.Component {
 
   updateRecords() {
     let filters = this.state.filters
+
     let chapters = []
+    let specific = []
     this.state.chapters.replaceAll('ch', '').split(',')
+      .map(chapter => chapter.trim())
       .forEach(chapter => {
         if (chapter.includes('-')) {
           let range = chapter.split('-')
           for (var i = parseInt(range[0]); i < parseInt(range[1]) + 1; i++) {
             chapters.push(i.toString())
           }
-        } else if (chapter) {
+        } else if (!isNaN(chapter)) {
           chapters.push(chapter)
+        } else {
+          specific.push(chapter)
         }
       })
-    filters[CHAPTER] = chapters
+    let allNumbers = this.state.chapters.replaceAll('ch', '').split(',')
+      .every(arg => !isNaN(arg))
+    if (allNumbers) {
+      filters[CHAPTER] = chapters
+    } else {
+      specific.push.apply(specific, 
+          Data.getVocab(chapters)
+            .map(row => row[LEMMA]))
+      filters[LEMMA] = specific
+    }
 
     let records = Data.getRecords(filters)
     let flashcards = Data.getFlashcards(filters, this.state.flashcardFields)
     const index = Math.floor(Math.random() * records.length - this.state.limit)
-    const flashcardsIndex = Math.floor(Math.random() * (flashcards.length - this.state.limit))
+    const flashcardsIndex = flashcards.length > this.state.limit
+      ?  Math.floor(Math.random() * (flashcards.length - this.state.limit))
+      : 0
 
     this.setState(
     { 
@@ -173,7 +189,7 @@ class App extends React.Component {
                 <Form.Control
                   aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                   aria-describedby="basic-addon1"
-                  placeholder="e.g. 'ch2,10-11,πᾶς,εἰμί'. Leave blank for any chapter/word."
+                  placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.'
                   onChange={this.updateChapter}
                 />
                 <ToggleButtonGroup type="checkbox" size="sm">
@@ -283,7 +299,7 @@ class App extends React.Component {
           </Alert>
           {/* header section */}
           <Alert variant="secondary" style={{ textAlign: 'left' }}>
-            <h5>(5) ...download!</h5>
+            <h5>(5) Download flashcards</h5>
             <Row>
               <Col>
                 <Button onClick={this.downloadRecords}>

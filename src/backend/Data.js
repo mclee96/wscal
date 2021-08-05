@@ -132,8 +132,13 @@ class Data {
           })
   }
 
-  static getVocab() {
-    return Data.vocab
+  static getVocab(chapters) {
+    if (chapters) {
+      return Data.vocab
+        .filter(row => chapters.includes(row[CHAPTER]))
+    } else {
+      return Data.vocab
+    }
   }
 }
 
