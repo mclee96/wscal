@@ -1,6 +1,5 @@
 import './App.css';
 import React from 'react'
-import Data from './backend/Data.js'
 
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
@@ -12,6 +11,8 @@ import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+
+import Data from './backend/Data.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { saveAs } from 'file-saver';
@@ -30,7 +31,6 @@ class App extends React.Component {
       showOffcanvas: false,
       limit: 20,
     };
-    console.log("constructor")
 
     this.updateFilters = this.updateFilters.bind(this)
     this.updateFields = this.updateFields.bind(this)
@@ -193,7 +193,7 @@ class App extends React.Component {
                   <tbody>
                     {
                       this.state.display.map(record => (
-                        <tr key={'tr-' + record[RESULT]}>
+                        <tr key={'tr-' + record[RESULT] + record[REFERENCE]}>
                           {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
                             <td key={field} style={{whiteSpace: 'nowrap'}}>{record[field]}</td>
                           ))}
