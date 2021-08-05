@@ -39,6 +39,7 @@ class App extends React.Component {
       flashcardFields: [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV],
       flashcards: [],
       flashcardsPreview: [],
+      vocab: Data.getVocab(),
     };
 
     this.toggleFilter = this.toggleFilter.bind(this)
@@ -143,7 +144,14 @@ class App extends React.Component {
   }
 
   setOffcanvas(value) {
-    this.setState({ showOffcanvas: value })
+    if (this.state.vocab.length > 0) {
+      this.setState({ showOffcanvas: value })
+    } else {
+      this.setState({ 
+        showOffcanvas: value,
+        vocab: Data.getVocab()
+      })
+    }
   }
 
   render() {
@@ -159,6 +167,9 @@ class App extends React.Component {
             <Row>
               <h5>(1) I want to study...</h5>
               <InputGroup size="sm">
+                <Button variant="primary" onClick={(e) => this.setOffcanvas(true, e)} className="me-2">
+                  Browse Vocab
+                </Button>
                 <Form.Control
                   aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                   aria-describedby="basic-addon1"
@@ -274,13 +285,6 @@ class App extends React.Component {
           <Alert variant="secondary" style={{ textAlign: 'left' }}>
             <h5>(5) ...download!</h5>
             <Row>
-              {/*
-              <Col>
-                <Button variant="primary" onClick={(e) => this.setOffcanvas(true, e)} className="me-2">
-                  Adjust filters
-                </Button>
-              </Col>
-              */}
               <Col>
                 <Button onClick={this.downloadRecords}>
                   Download Set ({this.state.flashcards.length} flashcards)
@@ -288,31 +292,37 @@ class App extends React.Component {
               </Col>
             </Row>
           </Alert>
-          {/*
           <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Adjust filters</Offcanvas.Title>
+              <Offcanvas.Title>Vocab</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
               <Container>
-                {Object.keys(ALL).map(filterType => (
-                  <Row style={ { margin: '1rem' } }>
-                    <ToggleButtonGroup id={filterType} key={filterType} defaultValue={ALL[filterType]} type="checkbox" size="sm" style={{justifyContent: 'space-between'}}>
-                      {ALL[filterType].map(filterValue => (
-                        <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
-                          {filterValue}
-                        </ToggleButton>
-                      ))}
-                    </ToggleButtonGroup>
-                  </Row>
-                ))}
-              <Button onClick={(e) => { this.updateRecords(e); this.setOffcanvas(false, e)} }>
-                Refresh!
-              </Button>
+                <Table responsive striped bordered hover size="sm">
+                  <thead>
+                    <tr>
+                      <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
+                      <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
+                      <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
+                      <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      this.state.vocab.map(row => (
+                        <tr key={'tr-' + row[0] + row[1]}>
+                          <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
+                          <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
+                          <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
+                          <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </Table>
               </Container>
             </Offcanvas.Body>
           </Offcanvas>
-          */}
         </Container>
       </div>
     );

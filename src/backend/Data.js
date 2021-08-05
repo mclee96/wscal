@@ -1,29 +1,35 @@
 import morphFilepath from './morphs.tsv'
 import esvFilepath from './esv.tsv'
 import na28Filepath from './na28.tsv'
+import vocabFilepath from './vocab.tsv'
 
 import { ABBR, CHAPTER, ESV, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, NA28, REFERENCE, TEXT } from './Filters.js'
 
 const Papa = require('papaparse');
 
 class Data {
+  static vocab = []
   static morphs = []
   static esv = {}
   static na28 = {}
 
   // idempotent
   static loadData(callback) {
+    if (Data.vocab.length === 0) {
+      Data.loadFile(vocabFilepath, (contents) => {
+        let rows = []
+        Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
+          .forEach(row => rows.push(row))
+        Data.vocab = rows
+      })
+    }
+
     if (Data.morphs.length === 0) {
       Data.loadFile(morphFilepath, (contents) => {
           let rows = []
           Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
             .forEach(row => rows.push(row))
           Data.morphs = rows
-          if (Data.morphs.length > 0 &&
-              Object.keys(Data.esv).length > 0 &&
-              Object.keys(Data.na28).length > 0) {
-            callback(Data.getRecords({}))
-          }
       })
     }
 
@@ -31,11 +37,6 @@ class Data {
       Data.loadFile(esvFilepath, (contents) => {
         Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
           .forEach(row => Data.esv[row[ABBR]] = row[TEXT])
-        if (Data.morphs.length > 0 &&
-            Object.keys(Data.esv).length > 0 &&
-            Object.keys(Data.na28).length > 0) {
-          callback(Data.getRecords({}))
-        }
       })
     }
 
@@ -43,11 +44,6 @@ class Data {
       Data.loadFile(na28Filepath, (contents) => {
         Papa.parse(contents.trimEnd(), { delimiter: '\t', header: true }).data
           .forEach(row => Data.na28[row[ABBR]] = row[TEXT])
-        if (Data.morphs.length > 0 &&
-            Object.keys(Data.esv).length > 0 &&
-            Object.keys(Data.na28).length > 0) {
-          callback(Data.getRecords({}))
-        }
       })
     }
   }
@@ -134,6 +130,10 @@ class Data {
               .join(" ")
             return [front, back]
           })
+  }
+
+  static getVocab() {
+    return Data.vocab
   }
 }
 
