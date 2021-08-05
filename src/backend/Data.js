@@ -2,7 +2,7 @@ import morphFilepath from './morphs.tsv'
 import esvFilepath from './esv.tsv'
 import na28Filepath from './na28.tsv'
 
-import { ABBR, ESV, LEMMA, NA28, REFERENCE, TEXT } from './Filters.js'
+import { ABBR, CHAPTER, ESV, NA28, REFERENCE, TEXT } from './Filters.js'
 
 const Papa = require('papaparse');
 
@@ -22,7 +22,6 @@ class Data {
           if (Data.morphs.length > 0 &&
               Object.keys(Data.esv).length > 0 &&
               Object.keys(Data.na28).length > 0) {
-            console.log('hit!')
             callback(Data.getRecords({}))
           }
       })
@@ -35,7 +34,6 @@ class Data {
         if (Data.morphs.length > 0 &&
             Object.keys(Data.esv).length > 0 &&
             Object.keys(Data.na28).length > 0) {
-            console.log('hit!')
           callback(Data.getRecords({}))
         }
       })
@@ -48,7 +46,6 @@ class Data {
         if (Data.morphs.length > 0 &&
             Object.keys(Data.esv).length > 0 &&
             Object.keys(Data.na28).length > 0) {
-            console.log('hit!')
           callback(Data.getRecords({}))
         }
       })
@@ -74,6 +71,7 @@ class Data {
       .filter(row => Object.keys(filters)
           .filter(field => filters[field].length !== 0)
           .every(field => row[field] === '-' || filters[field].includes(row[field])))
+      .filter(row => row[CHAPTER] !== '-')
       .map(row => {
         let references = row[REFERENCE].split(',')
         let reference = references[Math.floor((Math.random() * references.length))]

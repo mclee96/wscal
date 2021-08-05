@@ -7,6 +7,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Offcanvas from 'react-bootstrap/Offcanvas'
@@ -34,11 +35,13 @@ class App extends React.Component {
       fields: [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER],
       showOffcanvas: false,
       limit: 10,
+      chapters: '',
     };
 
     this.toggleFilter = this.toggleFilter.bind(this)
     this.updateFields = this.updateFields.bind(this)
     this.updateRecords = this.updateRecords.bind(this)
+    this.updateChapter = this.updateChapter.bind(this)
     this.setOffcanvas = this.setOffcanvas.bind(this)
     this.downloadRecords = this.downloadRecords.bind(this)
   }
@@ -66,6 +69,10 @@ class App extends React.Component {
     // TODO: refresh here?
   }
 
+  updateChapter(event) {
+    this.setState({ chapters: event.target.value })
+  }
+
   updateFields(value) {
     this.setState((state, props) => {
       let fields = (state.fields || []).slice()
@@ -80,6 +87,21 @@ class App extends React.Component {
   }
 
   updateRecords() {
+    let filters = this.state.filters
+    let chapters = []
+    this.state.chapters.replaceAll('ch', '').split(',')
+      .forEach(chapter => {
+        if (chapter.includes('-')) {
+          let range = chapter.split('-')
+          for (var i = parseInt(range[0]); i < parseInt(range[1]) + 1; i++) {
+            chapters.push(i.toString())
+          }
+        } else {
+          chapters.push(chapter)
+        }
+      })
+    filters[CHAPTER] = chapters
+
     let records = Data.getRecords(this.state.filters)
     const index = Math.floor(Math.random() * records.length - this.state.limit)
     this.setState(
@@ -112,9 +134,11 @@ class App extends React.Component {
           <Alert variant="success" style={{ textAlign: 'left' }}>
             <h5>(1) I want to study...</h5>
             <InputGroup size="sm">
-              <FormControl
+              <Form.Control
                 aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                 aria-describedby="basic-addon1"
+                placeholder="e.g. 'ch2,3,4' or '2-10'. Leave blank for any chapter."
+                onChange={this.updateChapter}
               />
               <ToggleButtonGroup type="checkbox" size="sm">
                 <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
@@ -174,7 +198,7 @@ class App extends React.Component {
                 </Col>
                 {/* refresh! */}
                 <Col style={{ textAlign: 'right' }}>
-                  <Button onClick={this.updateRecords} variant="secondary">
+                  <Button onClick={this.updateRecords} variant="primary">
                     Refresh!
                   </Button>
                 </Col>
