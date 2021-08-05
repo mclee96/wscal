@@ -36,12 +36,14 @@ class App extends React.Component {
       showOffcanvas: false,
       limit: 10,
       chapters: '',
+      flashcardFields: [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV],
       flashcards: [],
       flashcardsPreview: [],
     };
 
     this.toggleFilter = this.toggleFilter.bind(this)
     this.updateFields = this.updateFields.bind(this)
+    this.updateFlashcardFields = this.updateFlashcardFields.bind(this)
     this.updateRecords = this.updateRecords.bind(this)
     this.updateChapter = this.updateChapter.bind(this)
     this.setOffcanvas = this.setOffcanvas.bind(this)
@@ -50,6 +52,9 @@ class App extends React.Component {
 
   static fields = 
     [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB, REFERENCE, ESV, NA28]
+  static flashcardFields =
+    [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV]
+
 
   componentDidMount() {
     Data.loadData((records) => this.setState({ records: records }));
@@ -88,6 +93,19 @@ class App extends React.Component {
     })
   }
 
+  updateFlashcardFields(value) {
+    this.setState((state, props) => {
+      let flashcardFields = (state.flashcardFields || []).slice()
+      if (flashcardFields.includes(value)) {
+        flashcardFields.splice(flashcardFields.indexOf(value), 1)
+      } else {
+        flashcardFields.push(value)
+      }
+
+      return { flashcardFields: flashcardFields }
+    })
+  }
+
   updateRecords() {
     let filters = this.state.filters
     let chapters = []
@@ -105,7 +123,7 @@ class App extends React.Component {
     filters[CHAPTER] = chapters
 
     let records = Data.getRecords(filters)
-    let flashcards = Data.getFlashcards(filters)
+    let flashcards = Data.getFlashcards(filters, this.state.flashcardFields)
     const index = Math.floor(Math.random() * records.length - this.state.limit)
     const flashcardsIndex = Math.floor(Math.random() * (flashcards.length - this.state.limit))
 
@@ -189,15 +207,16 @@ class App extends React.Component {
               </ButtonToolbar>
             </Row>
           </Alert>
-          <Alert variant="danger" style={{ textAlign: 'left' }}>
-          </Alert>
           {/*
           <Alert variant="dark" style={{ textAlign: 'left' }}>
-            <h5>(3) ...adjust final fields...</h5>
+          </Alert>
+          */}
+          <Alert variant="danger" style={{ textAlign: 'left' }}>
+            <h5>(3) ...adjust flashcard fields...</h5>
             <Row>
-              <ButtonGroup defaultValue={this.state.fields} size="sm">
-                {App.fields.map(field => (
-                  <Button key={field} id={field} value={field} active={this.state.fields.includes(field)} variant='outline-secondary' onClick={(e) => this.updateFields(field, e)}>
+              <ButtonGroup defaultValue={this.state.flashcardFields} size="sm">
+                {App.flashcardFields.map(field => (
+                  <Button key={field} id={field} value={field} active={this.state.flashcardFields.includes(field)} variant='outline-secondary' onClick={(e) => this.updateFlashcardFields(field, e)}>
                     {field}
                   </Button>
                 ))
@@ -205,7 +224,6 @@ class App extends React.Component {
               </ButtonGroup>
             </Row>
           </Alert>
-          */}
           <Alert variant="info" style={{ textAlign: 'left' }}>
               <Row>
                 <Col>

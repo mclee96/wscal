@@ -86,8 +86,7 @@ class Data {
       })
   }
 
-  static getFlashcards(filters) {
-    console.log(filters)
+  static getFlashcards(filters, validFields) {
     return Object.values(
         Data.getRecords(filters)
           .map(row => {
@@ -110,7 +109,7 @@ class Data {
               default:
                 fields = [ RESULT ]; break;
             }
-            return [row, fields]
+            return [row, fields.filter(field => validFields.includes(field))]
           })
           .reduce((l, r) => {
             let groupby = r[1].filter(field => field !== ESV).map(field => r[0][field]).join()
