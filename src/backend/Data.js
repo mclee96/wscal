@@ -2,7 +2,7 @@ import morphFilepath from './morphs.tsv'
 import esvFilepath from './esv.tsv'
 import na28Filepath from './na28.tsv'
 
-import { ABBR, CHAPTER, ESV, NA28, REFERENCE, TEXT } from './Filters.js'
+import { ABBR, CHAPTER, ESV, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, NA28, REFERENCE, TEXT } from './Filters.js'
 
 const Papa = require('papaparse');
 
@@ -84,6 +84,57 @@ class Data {
               [NA28]: Data.na28[reference],
             })
       })
+  }
+
+  static getFlashcards(filters) {
+    console.log(filters)
+    return Object.values(
+        Data.getRecords(filters)
+          .map(row => {
+            var fields;
+            switch (row[PART]) {
+              case "noun":
+                fields = [ RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, ESV ]; break;
+              case "verb":
+                fields = [ RESULT, LEMMA, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, ESV ]; break;
+              case "adjective":
+                fields = [ RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, ESV ]; break;
+              case "conjunction":
+              case "preposition, adverb":
+              case "preposition":
+                fields = [ RESULT, LEMMA, GLOSS, ESV ]; break;
+              case "pronoun":
+              case "pronoun, adjective":
+              case "adjective, pronoun":
+                fields = [ RESULT, LEMMA, GENDER, CASE, PERSON, NUMBER, GLOSS, ESV ]; break;
+              default:
+                fields = [ RESULT ]; break;
+            }
+            return [row, fields]
+          })
+          .reduce((l, r) => {
+            let groupby = r[1].filter(field => field !== ESV).map(field => r[0][field]).join()
+            l[groupby] = (l[groupby] || r)
+            return l
+          }, {}))
+          .map(arr => {
+            let row = arr[0]
+            let fields = arr[1]
+
+            let front = row[RESULT]
+            let back = fields
+              .map(field => {
+                if (field === GLOSS) {
+                  return '"' + row[GLOSS] + '"'
+                } else if (field === ESV) {
+                  return "<> " + row[REFERENCE] + " " + row[ESV]
+                } else {
+                  return row[field]
+                }
+              })
+              .join(" ")
+            return [front, back]
+          })
   }
 }
 

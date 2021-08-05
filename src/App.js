@@ -36,6 +36,8 @@ class App extends React.Component {
       showOffcanvas: false,
       limit: 10,
       chapters: '',
+      flashcards: [],
+      flashcardsPreview: [],
     };
 
     this.toggleFilter = this.toggleFilter.bind(this)
@@ -96,24 +98,32 @@ class App extends React.Component {
           for (var i = parseInt(range[0]); i < parseInt(range[1]) + 1; i++) {
             chapters.push(i.toString())
           }
-        } else {
+        } else if (chapter) {
           chapters.push(chapter)
         }
       })
     filters[CHAPTER] = chapters
 
-    let records = Data.getRecords(this.state.filters)
+    let records = Data.getRecords(filters)
+    let flashcards = Data.getFlashcards(filters)
     const index = Math.floor(Math.random() * records.length - this.state.limit)
+    const flashcardsIndex = Math.floor(Math.random() * (flashcards.length - this.state.limit))
+
+    console.log(flashcards.length)
+    console.log(flashcardsIndex)
+    console.log(flashcards.slice(flashcardsIndex, flashcardsIndex + this.state.limit))
+
     this.setState(
     { 
       records: records,
       display: records.slice(index, index + this.state.limit),
+      flashcards: flashcards,
+      flashcardsPreview: flashcards.slice(flashcardsIndex, flashcardsIndex + this.state.limit),
     })
   }
 
   downloadRecords() {
-    var text = App.fields.filter(field => this.state.fields.includes(field)).join('\t') + '\n' +
-      this.state.records.map(row => App.fields.filter(field => this.state.fields.includes(field)).map(field => row[field]).join('\t')).join ('\n')
+    var text = this.state.flashcards.map(row => row[0] + '\t' + row[1]).join('\n')
     var blob = new Blob([ text ], { type: "text/plain;charset=utf-8" })
     saveAs(blob, "hello.txt")
   }
@@ -132,55 +142,59 @@ class App extends React.Component {
         </header>
         <Container>
           <Alert variant="success" style={{ textAlign: 'left' }}>
-            <h5>(1) I want to study...</h5>
-            <InputGroup size="sm">
-              <Form.Control
-                aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
-                aria-describedby="basic-addon1"
-                placeholder="e.g. 'ch2,3,4' or '2-10'. Leave blank for any chapter."
-                onChange={this.updateChapter}
-              />
-              <ToggleButtonGroup type="checkbox" size="sm">
-                <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
-                  nouns
-                </ToggleButton>
-                <ToggleButton variant="outline-secondary" value="verbs" id="verbs-filter" onClick={(e) => this.toggleFilter(PART, VERB, e)}>
-                  verbs
-                </ToggleButton>
-                <ToggleButton variant="outline-secondary" value="adjectives" id="adjectives-filter" onClick={(e) => this.toggleFilter(PART, ADJECTIVE, e)}>
-                  adjectives
-                </ToggleButton>
-                <ToggleButton variant="outline-secondary" value="prepositions" id="prepositions-filter" onClick={(e) => this.toggleFilter(PART, PREPOSITION, e)}>
-                  preps
-                </ToggleButton>
-                <ToggleButton variant="outline-secondary" value="pronouns" id="pronouns-filter" onClick={(e) => this.toggleFilter(PART, PRONOUN, e)}>
-                  pronouns
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </InputGroup>
+            <Row>
+              <h5>(1) I want to study...</h5>
+              <InputGroup size="sm">
+                <Form.Control
+                  aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
+                  aria-describedby="basic-addon1"
+                  placeholder="e.g. 'ch2,3,4' or '2-10'. Leave blank for any chapter."
+                  onChange={this.updateChapter}
+                />
+                <ToggleButtonGroup type="checkbox" size="sm">
+                  <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
+                    nouns
+                  </ToggleButton>
+                  <ToggleButton variant="outline-secondary" value="verbs" id="verbs-filter" onClick={(e) => this.toggleFilter(PART, VERB, e)}>
+                    verbs
+                  </ToggleButton>
+                  <ToggleButton variant="outline-secondary" value="adjectives" id="adjectives-filter" onClick={(e) => this.toggleFilter(PART, ADJECTIVE, e)}>
+                    adjectives
+                  </ToggleButton>
+                  <ToggleButton variant="outline-secondary" value="prepositions" id="prepositions-filter" onClick={(e) => this.toggleFilter(PART, PREPOSITION, e)}>
+                    preps
+                  </ToggleButton>
+                  <ToggleButton variant="outline-secondary" value="pronouns" id="pronouns-filter" onClick={(e) => this.toggleFilter(PART, PRONOUN, e)}>
+                    pronouns
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </InputGroup>
+            </Row>
+            <Row style={{ marginTop: '1rem' }}>
+              <h5>(1b) ...with filters...</h5>
+            {/* filter selection */}
+              <ButtonToolbar style={{justifyContent: 'space-between'}}>
+
+              {Object.keys(ALL)
+                .filter(field => field !== PART)
+                .map(filterType => (
+                <ToggleButtonGroup id={filterType} key={filterType} type="checkbox" size="sm" >
+                  {ALL[filterType].map(filterValue => (
+                    <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
+                      {filterValue}
+                    </ToggleButton>
+                  ))}
+                </ToggleButtonGroup>
+              ))}
+              </ButtonToolbar>
+            </Row>
           </Alert>
           <Alert variant="danger" style={{ textAlign: 'left' }}>
-            <h5>(2) ...with filters...</h5>
-          {/* filter selection */}
-            <ButtonToolbar style={{justifyContent: 'space-between'}}>
-
-            {Object.keys(ALL)
-              .filter(field => field !== PART)
-              .map(filterType => (
-              <ToggleButtonGroup id={filterType} key={filterType} type="checkbox" size="sm" >
-                {ALL[filterType].map(filterValue => (
-                  <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
-                    {filterValue}
-                  </ToggleButton>
-                ))}
-              </ToggleButtonGroup>
-            ))}
-            </ButtonToolbar>
           </Alert>
+          {/*
           <Alert variant="dark" style={{ textAlign: 'left' }}>
             <h5>(3) ...adjust final fields...</h5>
             <Row>
-              {/* select output */}
               <ButtonGroup defaultValue={this.state.fields} size="sm">
                 {App.fields.map(field => (
                   <Button key={field} id={field} value={field} active={this.state.fields.includes(field)} variant='outline-secondary' onClick={(e) => this.updateFields(field, e)}>
@@ -191,6 +205,7 @@ class App extends React.Component {
               </ButtonGroup>
             </Row>
           </Alert>
+          */}
           <Alert variant="info" style={{ textAlign: 'left' }}>
               <Row>
                 <Col>
@@ -208,18 +223,26 @@ class App extends React.Component {
                 <Table responsive striped bordered hover size="sm">
                   <thead>
                     <tr>
+                      <th key='front' style={{whiteSpace: 'nowrap'}}>Front</th>
+                      <th key='back' style={{whiteSpace: 'nowrap'}}>Back</th>
+                      {/*
                       {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
                           <th key={field} style={{whiteSpace: 'nowrap'}}>{field}</th>
                       ))}
+                      */}
                     </tr>
                   </thead>
                   <tbody>
                     {
-                      this.state.display.map(record => (
-                        <tr key={'tr-' + record[RESULT] + record[REFERENCE]}>
+                      this.state.flashcardsPreview.map(row => (
+                        <tr key={'tr-' + row[0] + row[1]}>
+                          <td key='front' style={{whiteSpace: 'nowrap'}}>{row[0]}</td>
+                          <td key='back' style={{whiteSpace: 'nowrap'}}>{row[1]}</td>
+                          {/*
                           {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
                             <td key={field} style={{whiteSpace: 'nowrap'}}>{record[field]}</td>
                           ))}
+                          */}
                         </tr>
                       ))
                     }
@@ -240,7 +263,7 @@ class App extends React.Component {
               */}
               <Col>
                 <Button onClick={this.downloadRecords}>
-                  Download Set ({this.state.records.length} rows)
+                  Download Set ({this.state.flashcards.length} flashcards)
                 </Button>
               </Col>
             </Row>
