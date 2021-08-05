@@ -1,11 +1,14 @@
 import './App.css';
 import React from 'react'
 
+import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+import FormControl from 'react-bootstrap/FormControl'
+import InputGroup from 'react-bootstrap/InputGroup'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
@@ -18,7 +21,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { saveAs } from 'file-saver';
 
 
-import {ALL, ADVERB, RESULT, LEMMA, CASE, GENDER, NUMBER, MOOD, PART, PERSON, TENSE, VOICE, CHAPTER, GLOSS, REFERENCE, ESV, NA28} from './backend/Filters.js'
+import {ALL, ADVERB, RESULT, LEMMA, CASE, GENDER, NUMBER, MOOD, PERSON, TENSE, VOICE, CHAPTER, GLOSS, REFERENCE, ESV, NA28} from './backend/Filters.js'
+import {PART, NOUN, VERB, ADJECTIVE, PREPOSITION, PRONOUN } from './backend/Filters.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -29,10 +33,10 @@ class App extends React.Component {
       filters: {},
       fields: [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER],
       showOffcanvas: false,
-      limit: 20,
+      limit: 10,
     };
 
-    this.updateFilters = this.updateFilters.bind(this)
+    this.toggleFilter = this.toggleFilter.bind(this)
     this.updateFields = this.updateFields.bind(this)
     this.updateRecords = this.updateRecords.bind(this)
     this.setOffcanvas = this.setOffcanvas.bind(this)
@@ -46,7 +50,7 @@ class App extends React.Component {
     Data.loadData((records) => this.setState({ records: records }));
   }
 
-  updateFilters(type, value) {
+  toggleFilter(type, value) {
     this.setState((state, props) => {
       let currFilters = state.filters[type] || []
       let newFilters = currFilters.slice()
@@ -105,80 +109,75 @@ class App extends React.Component {
           </p>
         </header>
         <Container>
+          <Alert variant="success" style={{ textAlign: 'left' }}>
+            <h5>(1) I want to study...</h5>
+            <InputGroup size="sm">
+              <FormControl
+                aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
+                aria-describedby="basic-addon1"
+              />
+              <ToggleButtonGroup type="checkbox" size="sm">
+                <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
+                  nouns
+                </ToggleButton>
+                <ToggleButton variant="outline-secondary" value="verbs" id="verbs-filter" onClick={(e) => this.toggleFilter(PART, VERB, e)}>
+                  verbs
+                </ToggleButton>
+                <ToggleButton variant="outline-secondary" value="adjectives" id="adjectives-filter" onClick={(e) => this.toggleFilter(PART, ADJECTIVE, e)}>
+                  adjectives
+                </ToggleButton>
+                <ToggleButton variant="outline-secondary" value="prepositions" id="prepositions-filter" onClick={(e) => this.toggleFilter(PART, PREPOSITION, e)}>
+                  preps
+                </ToggleButton>
+                <ToggleButton variant="outline-secondary" value="pronouns" id="pronouns-filter" onClick={(e) => this.toggleFilter(PART, PRONOUN, e)}>
+                  pronouns
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </InputGroup>
+          </Alert>
+          <Alert variant="danger" style={{ textAlign: 'left' }}>
+            <h5>(2) ...with filters...</h5>
           {/* filter selection */}
             <ButtonToolbar style={{justifyContent: 'space-between'}}>
 
-            {Object.keys(ALL).map(filterType => (
+            {Object.keys(ALL)
+              .filter(field => field !== PART)
+              .map(filterType => (
               <ToggleButtonGroup id={filterType} key={filterType} type="checkbox" size="sm" >
                 {ALL[filterType].map(filterValue => (
-                  <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.updateFilters(filterType, filterValue, e)}>
+                  <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
                     {filterValue}
                   </ToggleButton>
                 ))}
               </ToggleButtonGroup>
             ))}
             </ButtonToolbar>
-          {/*
-          <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
-            <Offcanvas.Header closeButton>
-              <Offcanvas.Title>Adjust filters</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-              <Container>
-                {Object.keys(ALL).map(filterType => (
-                  <Row style={ { margin: '1rem' } }>
-                    <ToggleButtonGroup id={filterType} key={filterType} defaultValue={ALL[filterType]} type="checkbox" size="sm" style={{justifyContent: 'space-between'}}>
-                      {ALL[filterType].map(filterValue => (
-                        <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.updateFilters(filterType, filterValue, e)}>
-                          {filterValue}
-                        </ToggleButton>
-                      ))}
-                    </ToggleButtonGroup>
-                  </Row>
-                ))}
-              <Button onClick={(e) => { this.updateRecords(e); this.setOffcanvas(false, e)} }>
-                Refresh!
-              </Button>
-              </Container>
-            </Offcanvas.Body>
-          </Offcanvas>
-          */}
-
-          {/* header section */}
-          <Row>
-            <Col>
-              <Button variant="primary" onClick={(e) => this.setOffcanvas(true, e)} className="me-2">
-                Adjust filters
-              </Button>
-            </Col>
-            <Col>
-              <Button onClick={this.updateRecords}>
-                Refresh!
-              </Button>
-            </Col>
-            <Col>
-              <Button onClick={this.downloadRecords}>
-                Download Set ({this.state.records.length} rows)
-              </Button>
-            </Col>
-          </Row>
-          <Row style={ { marginTop: '1rem' } }>
-            <Col>
-              {/* refresh! */}
+          </Alert>
+          <Alert variant="dark" style={{ textAlign: 'left' }}>
+            <h5>(3) ...adjust final fields...</h5>
+            <Row>
+              {/* select output */}
+              <ButtonGroup defaultValue={this.state.fields} size="sm">
+                {App.fields.map(field => (
+                  <Button key={field} id={field} value={field} active={this.state.fields.includes(field)} variant='outline-secondary' onClick={(e) => this.updateFields(field, e)}>
+                    {field}
+                  </Button>
+                ))
+                }
+              </ButtonGroup>
+            </Row>
+          </Alert>
+          <Alert variant="info" style={{ textAlign: 'left' }}>
               <Row>
-                <Container>
-                </Container>
-              </Row>
-              <Row>
-                {/* select output */}
-                <ButtonGroup defaultValue={this.state.fields} size="sm">
-                  {App.fields.map(field => (
-                    <Button key={field} id={field} value={field} active={this.state.fields.includes(field)} variant='outline-secondary' onClick={(e) => this.updateFields(field, e)}>
-                      {field}
-                    </Button>
-                  ))
-                  }
-                </ButtonGroup>
+                <Col>
+                  <h5>(4) ...preview!</h5>
+                </Col>
+                {/* refresh! */}
+                <Col style={{ textAlign: 'right' }}>
+                  <Button onClick={this.updateRecords} variant="secondary">
+                    Refresh!
+                  </Button>
+                </Col>
               </Row>
               {/* preview dataset */}
               <Row>
@@ -203,8 +202,50 @@ class App extends React.Component {
                   </tbody>
                 </Table>
               </Row>
-            </Col>
-          </Row>
+          </Alert>
+          {/* header section */}
+          <Alert variant="secondary" style={{ textAlign: 'left' }}>
+            <h5>(5) ...download!</h5>
+            <Row>
+              {/*
+              <Col>
+                <Button variant="primary" onClick={(e) => this.setOffcanvas(true, e)} className="me-2">
+                  Adjust filters
+                </Button>
+              </Col>
+              */}
+              <Col>
+                <Button onClick={this.downloadRecords}>
+                  Download Set ({this.state.records.length} rows)
+                </Button>
+              </Col>
+            </Row>
+          </Alert>
+          {/*
+          <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title>Adjust filters</Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Container>
+                {Object.keys(ALL).map(filterType => (
+                  <Row style={ { margin: '1rem' } }>
+                    <ToggleButtonGroup id={filterType} key={filterType} defaultValue={ALL[filterType]} type="checkbox" size="sm" style={{justifyContent: 'space-between'}}>
+                      {ALL[filterType].map(filterValue => (
+                        <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
+                          {filterValue}
+                        </ToggleButton>
+                      ))}
+                    </ToggleButtonGroup>
+                  </Row>
+                ))}
+              <Button onClick={(e) => { this.updateRecords(e); this.setOffcanvas(false, e)} }>
+                Refresh!
+              </Button>
+              </Container>
+            </Offcanvas.Body>
+          </Offcanvas>
+          */}
         </Container>
       </div>
     );

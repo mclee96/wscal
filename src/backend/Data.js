@@ -22,6 +22,7 @@ class Data {
           if (Data.morphs.length > 0 &&
               Object.keys(Data.esv).length > 0 &&
               Object.keys(Data.na28).length > 0) {
+            console.log('hit!')
             callback(Data.getRecords({}))
           }
       })
@@ -34,6 +35,7 @@ class Data {
         if (Data.morphs.length > 0 &&
             Object.keys(Data.esv).length > 0 &&
             Object.keys(Data.na28).length > 0) {
+            console.log('hit!')
           callback(Data.getRecords({}))
         }
       })
@@ -46,6 +48,7 @@ class Data {
         if (Data.morphs.length > 0 &&
             Object.keys(Data.esv).length > 0 &&
             Object.keys(Data.na28).length > 0) {
+            console.log('hit!')
           callback(Data.getRecords({}))
         }
       })

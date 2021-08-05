@@ -25,6 +25,7 @@ export const INDICATIVE = "indicative"
 export const PART = "Part"
 export const ADJECTIVE = "adjective"
 export const NOUN = "noun"
+export const PREPOSITION = "preposition"
 export const PRONOUN = "pronoun"
 export const VERB = "verb"
 
@@ -63,9 +64,9 @@ export const ABBR = "Abbr"
 export const REFERENCE = "Reference"
 
 export const ALL = {
+  [PART]: [ADJECTIVE, NOUN, VERB, PRONOUN],
   [GENDER]: [FEMININE, MASCULINE, NEUTER],
   [CASE]: [NOMINATIVE, GENITIVE, DATIVE, ACCUSATIVE, VOCATIVE],
-  [PART]: [ADJECTIVE, NOUN, VERB, PRONOUN],
   [TENSE]: [PRESENT, IMPERFECT, FUTURE, AORIST],
   [VOICE]: [ACTIVE, MIDDLE, PASSIVE],
   [NUMBER]: [SINGULAR, PLURAL],
