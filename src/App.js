@@ -22,8 +22,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { saveAs } from 'file-saver';
 
 
-import {ALL, ADVERB, RESULT, LEMMA, CASE, GENDER, NUMBER, MOOD, PERSON, TENSE, VOICE, CHAPTER, GLOSS, REFERENCE, ESV, NA28} from './backend/Filters.js'
-import {PART, NOUN, VERB, ADJECTIVE, PREPOSITION, PRONOUN } from './backend/Filters.js'
+import {ALL, ADVERB_TYPE, RESULT, LEMMA, CASE, GENDER, NUMBER, MOOD, PERSON, TENSE, VOICE, CHAPTER, GLOSS, REFERENCE, ESV, NA28} from './backend/Filters.js'
+import {PART, NOUN, VERB, ADJECTIVE, PREPOSITION, PRONOUN, ADVERB, CONJUNCTION } from './backend/Filters.js'
 
 class App extends React.Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class App extends React.Component {
   }
 
   static fields = 
-    [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB, REFERENCE, ESV, NA28]
+    [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB_TYPE, REFERENCE, ESV, NA28]
   static flashcardFields =
     [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV]
 
@@ -127,10 +127,6 @@ class App extends React.Component {
     const index = Math.floor(Math.random() * records.length - this.state.limit)
     const flashcardsIndex = Math.floor(Math.random() * (flashcards.length - this.state.limit))
 
-    console.log(flashcards.length)
-    console.log(flashcardsIndex)
-    console.log(flashcards.slice(flashcardsIndex, flashcardsIndex + this.state.limit))
-
     this.setState(
     { 
       records: records,
@@ -166,7 +162,7 @@ class App extends React.Component {
                 <Form.Control
                   aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                   aria-describedby="basic-addon1"
-                  placeholder="e.g. 'ch2,3,4' or '2-10'. Leave blank for any chapter."
+                  placeholder="e.g. 'ch2,10-11,πᾶς,εἰμί'. Leave blank for any chapter/word."
                   onChange={this.updateChapter}
                 />
                 <ToggleButtonGroup type="checkbox" size="sm">
@@ -185,11 +181,17 @@ class App extends React.Component {
                   <ToggleButton variant="outline-secondary" value="pronouns" id="pronouns-filter" onClick={(e) => this.toggleFilter(PART, PRONOUN, e)}>
                     pronouns
                   </ToggleButton>
+                  <ToggleButton variant="outline-secondary" value="adverb" id="adverbs-filter" onClick={(e) => this.toggleFilter(PART, ADVERB, e)}>
+                    adverbs
+                  </ToggleButton>
+                  <ToggleButton variant="outline-secondary" value="conjunctions" id="conjunctions-filter" onClick={(e) => this.toggleFilter(PART, CONJUNCTION, e)}>
+                    conjunctions
+                  </ToggleButton>
                 </ToggleButtonGroup>
               </InputGroup>
             </Row>
             <Row style={{ marginTop: '1rem' }}>
-              <h5>(1b) ...with filters...</h5>
+              <h5>(2) ...with filters...</h5>
             {/* filter selection */}
               <ButtonToolbar style={{justifyContent: 'space-between'}}>
 

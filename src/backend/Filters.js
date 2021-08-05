@@ -20,10 +20,16 @@ export const PLURAL = "plural"
 // mood
 export const MOOD = "Mood"
 export const INDICATIVE = "indicative"
+export const IMPERATIVE = "imperative"
+export const INFINITIVE = "infinitive"
+export const SUBJUNCTIVE = "subjunctive"
+export const PARTICIPLE = "participle"
 
 // part of speech
 export const PART = "Part"
 export const ADJECTIVE = "adjective"
+export const ADVERB = "adverb"
+export const CONJUNCTION = "conjunction"
 export const NOUN = "noun"
 export const PREPOSITION = "preposition"
 export const PRONOUN = "pronoun"
@@ -55,7 +61,7 @@ export const GLOSS = "Gloss";
 export const LEMMA = "Lemma";
 export const RESULT = "Result"
 export const TEXT = "Text"
-export const ADVERB = "Adverb/particle Type"
+export const ADVERB_TYPE = "Adverb/particle Type"
 
 // bibles
 export const ESV = "Esv"
@@ -70,6 +76,7 @@ export const ALL = {
   [TENSE]: [PRESENT, IMPERFECT, FUTURE, AORIST],
   [VOICE]: [ACTIVE, MIDDLE, PASSIVE],
   [NUMBER]: [SINGULAR, PLURAL],
+  [MOOD]: [INDICATIVE, IMPERATIVE, INFINITIVE, SUBJUNCTIVE, PARTICIPLE]
 }
 
 export default ALL
