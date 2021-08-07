@@ -100,11 +100,11 @@ class Data {
             var fields;
             switch (row[PART]) {
               case "noun":
-                fields = [ RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ESV ]; break;
               case "verb":
-                fields = [ RESULT, LEMMA, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, PERSON, NUMBER, ESV ]; break;
               case "adjective":
-                fields = [ RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ESV ]; break;
               case "conjunction":
               case "preposition, adverb":
               case "preposition":
@@ -112,7 +112,7 @@ class Data {
               case "pronoun":
               case "pronoun, adjective":
               case "adjective, pronoun":
-                fields = [ RESULT, LEMMA, GENDER, CASE, PERSON, NUMBER, GLOSS, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, PERSON, NUMBER, ESV ]; break;
               default:
                 fields = [ RESULT ]; break;
             }
@@ -131,7 +131,7 @@ class Data {
             let back = fields
               .map(field => {
                 if (field === GLOSS) {
-                  return '"' + row[GLOSS] + '"'
+                  return '("' + row[GLOSS]+ '")';
                 } else if (field === ESV) {
                   return "<> " + row[REFERENCE] + " " + row[ESV]
                 } else {
