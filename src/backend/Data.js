@@ -3,7 +3,7 @@ import esvFilepath from './esv.tsv'
 import na28Filepath from './na28.tsv'
 import vocabFilepath from './vocab.tsv'
 
-import { ABBR, CHAPTER, ESV, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, NA28, REFERENCE, TEXT } from './Filters.js'
+import { ABBR, CHAPTER, ESV, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, NA28, REFERENCE, TEXT, PARTICIPLE } from './Filters.js'
 
 const Papa = require('papaparse');
 
@@ -102,7 +102,10 @@ class Data {
               case "noun":
                 fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ESV ]; break;
               case "verb":
-                fields = [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, PERSON, NUMBER, ESV ]; break;
+                fields = (row[MOOD] === PARTICIPLE)
+                  ? [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, GENDER, CASE, NUMBER, ESV ]
+                  : [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, PERSON, NUMBER, ESV ]; 
+                break;
               case "adjective":
                 fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ESV ]; break;
               case "conjunction":
