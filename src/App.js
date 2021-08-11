@@ -121,6 +121,8 @@ class App extends React.Component {
           for (var i = parseInt(range[0]); i < parseInt(range[1]) + 1; i++) {
             chapters.push(i.toString())
           }
+        } else if (chapter === '') {
+          // skip
         } else if (!isNaN(chapter)) {
           chapters.push(chapter)
         } else {
