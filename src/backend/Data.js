@@ -115,7 +115,7 @@ class Data {
               case "pronoun":
               case "pronoun, adjective":
               case "adjective, pronoun":
-                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, PERSON, NUMBER, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, PERSON, GENDER, CASE, NUMBER, ESV ]; break;
               default:
                 fields = [ RESULT ]; break;
             }
