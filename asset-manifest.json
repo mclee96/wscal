@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/wscal/static/css/main.5fc83d6a.chunk.css",
-    "main.js": "/wscal/static/js/main.e6b8471c.chunk.js",
-    "main.js.map": "/wscal/static/js/main.e6b8471c.chunk.js.map",
+    "main.js": "/wscal/static/js/main.26778f92.chunk.js",
+    "main.js.map": "/wscal/static/js/main.26778f92.chunk.js.map",
     "runtime-main.js": "/wscal/static/js/runtime-main.b940178d.js",
     "runtime-main.js.map": "/wscal/static/js/runtime-main.b940178d.js.map",
     "static/css/2.4be38407.chunk.css": "/wscal/static/css/2.4be38407.chunk.css",
@@ -15,7 +15,7 @@
     "static/css/main.5fc83d6a.chunk.css.map": "/wscal/static/css/main.5fc83d6a.chunk.css.map",
     "static/js/2.c47ff160.chunk.js.LICENSE.txt": "/wscal/static/js/2.c47ff160.chunk.js.LICENSE.txt",
     "static/media/esv.fe2ed14b.tsv": "/wscal/static/media/esv.fe2ed14b.tsv",
-    "static/media/morphs.3ca3d137.tsv": "/wscal/static/media/morphs.3ca3d137.tsv",
+    "static/media/morphs.a3e99ace.tsv": "/wscal/static/media/morphs.a3e99ace.tsv",
     "static/media/na28.19940234.tsv": "/wscal/static/media/na28.19940234.tsv",
     "static/media/vocab.238ff455.tsv": "/wscal/static/media/vocab.238ff455.tsv"
   },
@@ -24,6 +24,6 @@
     "static/css/2.4be38407.chunk.css",
     "static/js/2.c47ff160.chunk.js",
     "static/css/main.5fc83d6a.chunk.css",
-    "static/js/main.e6b8471c.chunk.js"
+    "static/js/main.26778f92.chunk.js"
   ]
 }
