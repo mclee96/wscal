@@ -54,9 +54,9 @@ Lemma	Gloss	Part	Chapter
 ἀκολουθέω	I follow (direct object in dative case)	verb	7
 ἅπτομαι	I touch	verb	7
 ἄρχομαι	I begin	verb	7
-διώκω	i pursue; i persecute	verb	7
+διώκω	I pursue; I persecute	verb	7
 δοξάζω	I glorify	verb	7
-εὐαγγελίζω	i preach the gospel, announce good news	verb	7
+εὐαγγελίζω	I preach the gospel, announce good news	verb	7
 κηρύσσω	I announce, proclaim	verb	7
 κόπτω	I cut	verb	7
 πέμπω	I send	verb	7
@@ -212,7 +212,7 @@ Lemma	Gloss	Part	Chapter
 γάρ	for, because (postpositive)	conjunction	21
 εὐθύς	immediately	conjunction	21
 οὖν	therefore, then (continuation of an argument) (postpositive)	conjunction	21
-ἀμήν	truly	indeclinable	22
+ἀμήν	truly	interjection	22
 ἄν	(not usually translated; indefinite particle) "ever"	conjunction	22
 ἐάν	if; if ever (combination of εἰ and ἀν)	conjunction	22
 ἐὰν μή	unless; if not	conjunction	22
@@ -296,23 +296,523 @@ Lemma	Gloss	Part	Chapter
 ἔτι	still, yet	adverb	29
 μακάριος	blessed	adjective	29
 μᾶλλον	more; rather; πολλῷ μάλλον, all the more, much more	adverb	29
-μέγας	greater; larger	adjective	29
+μέγας	great; large	adjective	29
 μείζων	greater; larger (comparative of μέγας)	adjective	29
 πάλιν	again	adverb	29
 πλείων	more; greater; πλεῖον, more, most (adv.) (comparative of πολύς)	adjective	29
 πολύς	much, many; often (adv.)	adjective	29
-πρεσβύτερος	older, elder	noun	29
-δύο	two (not declined)	indeclinable	30
-δώδεκα	twelve (not declined)	indeclinable	30
-εἷς	one	indeclinable	30
-μία	one	indeclinable	30
-ἕν	one	indeclinable	30
+πρεσβύτερος	older, elder	adjective	29
+δύο	two (not declined)	adjective	30
+δώδεκα	twelve (not declined)	adjective	30
+εἷς	one	adjective	30
+μία	one	adjective	30
+ἕν	one	adjective	30
 ἐλπίς	hope	noun	30
-ἑπτά	seven (not declined)	indeclinable	30
+ἑπτά	seven (not declined)	adjective	30
 ἔσχατος	last, final	adjective	30
 μηδείς	no one (= μή + εἷς – used with non-indicative verbs)	adjective	30
 μόνος	only, the single	adjective	30
 ὅλος	whole, entire	adjective	30
 οὐδείς	no one (= οὐ + εἷς – used with indicative verbs)	adjective	30
 πρῶτος	first (an ordinal number)	adverb	30
-τρεῖς	three	indeclinable	30
+τρεῖς	three	adjective	30
+ἁμαρτωλός	sinful	adjective	31
+ἀποδίδωμι	I am repaying, giving away	verb	31
+ἄρα	consequently, so then	conjunction	31
+ἄχρι	until (conj, prep +gen.)	conjunction	31
+ἔμπροσθεν	+gen., before, in the presence of	preposition	31
+ἔτος	year	noun	31
+ἡμέτερος	our	adjective	31
+θεάομαι	I am beholding, viewing	verb	31
+θηρίον	animal, wild beast	noun	31
+καθίζω	I am sitting (middle); I am causing to sit	verb	31
+κοινωνία	fellowship	noun	31
+κρατέω	I am seizing, grasping	verb	31
+κρίσις	judgment	noun	31
+μικρός	small, little	adjective	31
+οὐαί	woe, alas	interjection	31
+οὐκέτι	no longer, no more	adverb	31
+μηκέτι	no longer, no more	adverb	31
+παραλαμβάνω	I am taking; I am taking along	verb	31
+ποῦ	where, where?	adverb	31
+προσφέρω	I am offering, bringing to	verb	31
+σταυρόω	I am crucifying	noun	31
+φανερόω	I am revealing; I am appearing	verb	31
+φόβος	fear	noun	31
+φυλακή	guard, prison	noun	31
+χρεία	need, necessity	noun	31
+ψηλαφάω	I am touching, handling	verb	31
+ἀγγελία	message	noun	32
+ἀδικία	unrighteousness	noun	32
+ἀναγγέλλω	I am announcing, reporting	verb	32
+ἀνάστασις	resurrection	noun	32
+γενεά	generation; family	noun	32
+δεύτερος	second	adjective	32
+δέω	I am binding	verb	32
+διέρχομαι	I am going through; I am spreading	verb	32
+ἐπιγινώσκω	I understand, know well	verb	32
+εὐλογέω	I am blessing	verb	32
+θαυμάζω	I am amazed; I am surprised	verb	32
+θλῖψις	tribulation, affliction	noun	32
+καθαρίζω	I am cleansing	verb	32
+κατοικέω	I am living, dwelling	verb	32
+ναός	sanctuary, temple	noun	32
+ὅμοιος	similar, like	adjective	32
+ὁμολογέω	I am confessing, professing	verb	32
+πλανάω	I am deceiving	verb	32
+σκοτία	darkness	noun	32
+σκότος	darkness	noun	32
+σπέρμα	seed	noun	32
+σωτηρία	salvation; health	noun	32
+φωνέω	I am calling	verb	32
+ψεύδομαι	I am lying	verb	32
+ψεύστης	liar	noun	32
+ἀληθῶς	truly	adverb	33
+ἄξιος	worthy	adjective	33
+ἐργάζομαι	I am working	verb	33
+ἑτοιμάζω	I am preparing	verb	33
+ἱλασμός	propitiation	noun	33
+καινός	new, different	adjective	33
+κλαίω	I am weeping	verb	33
+μέρος	part, portion	noun	33
+μισέω	I hate	verb	33
+μνημεῖον	monument, grave	noun	33
+οἰκοδομέω	I am building; I am edifying	verb	33
+ὀλίγος	little, small, few	adjective	33
+ὀφείλω	I ought; I owe	verb	33
+πάντοτε	always	adverb	33
+παράκλητος	advocate; helper	noun	33
+παρίστημι	I am presenting, approaching	verb	33
+πάσχω	I am suffering, experiencing	verb	33
+σήμερον	today	adverb	33
+τεκνίον	dear child, little child	noun	33
+τελειόω	I am completing, fulfilling	verb	33
+τέλος	end, goal; tax	noun	33
+τέσσαρες	four	adjective	33
+τιμή	honor; value	noun	33
+χωρίς	+gen., apart from, besides	preposition	33
+ἀληθινός	true, genuine	adjective	34
+ἄρτι	now, just	adverb	34
+ἄρχων	ruler	noun	34
+βούλομαι	I want, wish	verb	34
+διάβολος	Devil	noun	34
+διακονέω	I am serving	verb	34
+δικαιόω	I am justifying; I am vindicating	verb	34
+ἐκεῖθεν	from there, thence	adverb	34
+ἐπιθυμία	lust; longing	noun	34
+ἐπιτίθημι	I am putting on; I am adding	verb	34
+εὐχαριστέω	I am giving thanks	verb	34
+θύρα	door	noun	34
+ἱκανός	enough; many	adjective	34
+ἰσχυρός	strong	adjective	34
+καλῶς	well	adverb	34
+καυχάομαι	I am boasting, glorifying in	verb	34
+νεανίσκος	young man	noun	34
+παλαιός	old, ancient	adjective	34
+παράγω	I am introducing; I am passing away (passive)	verb	34
+πειράζω	I am tempting, testing, trying	verb	34
+πέντε	five	adjective	34
+πρόβατον	sheep	noun	34
+σκάνδαλον	offense, stumbling block	noun	34
+τυφλόω	I am blinding (someone); I am blind (passive)	verb	34
+φαίνω	I am shining, appearing	verb	34
+ἀγρός	field; farms	noun	35
+ἀλαζονεία	arrogance, pride	noun	35
+ἀντίχριστος	Antichrist	noun	35
+ἅπας	all, every	adjective	35
+ἀρνέομαι	I am denying	verb	35
+βιβλίον	book, scroll	noun	35
+βίος	life; belongings	noun	35
+βλασφημέω	I am blaspheming, reviling	verb	35
+διακονία	service, ministry	noun	35
+ἐπαγγέλλομαι	I am promising	verb	35
+ἐπιστρέφω	I am returning, turning	verb	35
+εὐθέως	immediately	adverb	35
+μαρτυρία	testimony, witness	noun	35
+μάρτυς	witness	noun	35
+ὅθεν	from where, whence	conjunction	35
+ὀπίσω	behind, after (adverb or prep +gen.)	preposition	35
+ὀργή	anger, wrath	noun	35
+οὖς	ear	noun	35
+παραγίνομαι	I am arriving, appearing	verb	35
+περιτομή	circumcision	noun	35
+προσευχή	prayer	noun	35
+ὑποστρέφω	I am turning back, returning	verb	35
+χρῖσμα	anointing	noun	35
+ψεῦδος	lie	noun	35
+ὥσπερ	as, just as	conjunction	35
+ἁγνίζω	I am purifying	verb	36
+ἁγνός	pure	noun	36
+αἰσχύνομαι	I am ashamed; I put to shame	verb	36
+ἀκάθαρτος	unclean	adjective	36
+ἀναγινώσκω	I am reading	verb	36
+ἀσθενέω	I am weak, sick	verb	36
+δείκνυμι	I am showing, proving	verb	36
+διαθήκη	covenant; last will	noun	36
+δυνατός	able; powerful	adjective	36
+ἐκπορεύομαι	I am going out	verb	36
+ἐχθρός	hostile; enemy	adjective	36
+ἥλιος	sun	noun	36
+μέλος	member, limb	noun	36
+μετανοέω	I am repenting	verb	36
+μήτε	neither...nor, and not	conjunction	36
+ναί	yes	particle	36
+οἶνος	wine	noun	36
+οὔπω	not yet	adverb	36
+παραγγέλλω	I am ordering, instructing	verb	36
+παρουσία	arrival, coming	noun	36
+παρρησία	boldness, confidence	noun	36
+ποῖος	what kind? what?	pronoun	36
+ποταπός	what kind, what manner	adjective	36
+πτωχός	poor	adjective	36
+ὑπομονή	endurance, perseverance; patience	noun	36
+ἀγοράζω	I am buying	verb	37
+ἄνεμος	wind	noun	37
+ἀνομία	lawlessness	noun	37
+ἀρνίον	lamb, sheep	noun	37
+γνῶσις	knowledge	noun	37
+διάκονος	servant; deacon	noun	37
+διδαχή	teaching	noun	37
+ἐγγύς	near	adverb	37
+ἐλεέω	I have mercy on	verb	37
+ἐλπίζω	I hope	verb	37
+ἔξεστι	it is lawful, allowed	verb	37
+ἐπικαλέω	I am calling; I am appealing	verb	37
+ἐπιτιμάω	I am rebuking, warning	verb	37
+ἴδε	look, behold	verb	37
+ἱερεύς	priest	noun	37
+μάχαιρα	knife; sword	noun	37
+ὁμοίως	likewise, similarly	adverb	37
+πλῆθος	crowd; quantity	noun	37
+πλήν	only, however	conjunction	37
+ποτήριον	cup	noun	37
+συνείδησις	conscience	noun	37
+συνέρχομαι	I am coming together	verb	37
+φανερός	clear, evident	adjective	37
+φυλάσσω	I am guarding	verb	37
+φυλή	tribe, people	noun	37
+ἁγιάζω	I am sanctifying, consecrating	verb	38
+ἀδικέω	I am doing wrong, harming	verb	38
+ἀνθρωποκτόνος	murderer	noun	38
+γαμέω	I am marrying	verb	38
+ἡγέομαι	I am leading, ruling; I am thinking	verb	38
+θυγάτηρ	daughter	noun	38
+θυσία	sacrifice, offering	noun	38
+ἰσχύω	I am able; I am strong	verb	38
+κλείω	I am shutting	verb	38
+μεταβαίνω	I am passing over, transferring	verb	38
+μισθός	wages, reward	noun	38
+μυστήριον	mystery	noun	38
+νικάω	I am conquering	verb	38
+παράκλησις	comfort, consolation	noun	38
+παρέρχομαι	I am passing by; I am neglecting	verb	38
+πάσχα	Passover	noun	38
+πόθεν	from where?	adverb	38
+ποτέ	once, formerly, ever	adverb	38
+προσκαλέω	I am summoning, calling (middle only)	verb	38
+σκανδαλίζω	I am making (someone) stumble	verb	38
+σπλάγχνον	compassion, feelings	noun	38
+σφάζω	I am slaying	verb	38
+φεύγω	I am fleeing, escaping	verb	38
+φίλος	friend (masc. or fem.); friendly (as adj.)	adjective	38
+χάριν	+gen., because of, for the sake of	preposition	38
+ἀδελφή	sister	noun	39
+ἀρεστός	pleasing	adjective	39
+ἀσθενής	weak, helpless	adjective	39
+βαστάζω	I am bearing, carrying; I am enduring	verb	39
+δοκιμάζω	I am testing, proving; I am tempting	verb	39
+ἐκχέω	I am pouring out, shedding	verb	39
+ἔλεος	mercy, compassion	noun	39
+ἐνδύω	I am dressing; I am putting on (middle)	verb	39
+ἕνεκα	+gen., because of, on account of	preposition	39
+ἐπεί	since, for	conjunction	39
+ἥκω	I have come; I am present	verb	39
+καθαρός	clean	adjective	39
+καταγινώσκω	I am condemning, blaming	verb	39
+καταργέω	I am abolishing, nullifying	verb	39
+κρίμα	judgement	noun	39
+κώμη	village	noun	39
+πλάνη	deception; error	noun	39
+πλούσιος	rich, wealthy	adjective	39
+πόσος	how many (?); how great (?) (sometimes interrogative)	pronoun	39
+προφητεύω	I am prophesying	verb	39
+σός	your (pronominal adjective like ἐμός)	adjective	39
+σταυρός	cross	noun	39
+τελέω	I am completing, fulfilling	verb	39
+ψευδοπροφήτης	false prophet	noun	39
+χώρα	field, rural area, countryside	noun	39
+ἀναβλέπω	I am receiving sight; I am looking up	verb	40
+γέ	indeed	particle	40
+γνωρίζω	I am making known	verb	40
+δέκα	ten	adjective	40
+δένδρον	tree	noun	40
+δουλεύω	I am enslaved; I am serving	verb	40
+ἑορτή	feast	noun	40
+ἰάομαι	I am healing	verb	40
+κελεύω	I am commanding	verb	40
+κόλασις	penalty, punishment	noun	40
+λευκός	white	adjective	40
+λυπέω	I am grieving, hurting	verb	40
+μανθάνω	I am learning	verb	40
+μήποτε	lest, otherwise; perhaps	conjunction	40
+μονογενής	only-begotten, unique	adjective	40
+νεφέλη	cloud	noun	40
+ὀμνύω	I swear an oath	verb	40
+πνευματικός	spiritual	adjective	40
+πώποτε	ever, at any time	adverb	40
+στρατιώτης	soldier	noun	40
+συνίημι	I understand	verb	40
+σωτήρ	savior, benefactor	noun	40
+τέλειος	complete, perfect	adjective	40
+φρονέω	I am thinking	verb	40
+χήρα	widow	noun	40
+ἀκοή	hearing; account	noun	41
+ἀμπελών	vineyard	noun	41
+ἀναιρέω	I take away, destroy; take up (middle)	verb	41
+ἄπιστος	unbelieving	adjective	41
+ἀσθένεια	weakness, sickness	noun	41
+ἀστήρ	star	noun	41
+αὐξάνω	I increase, grow	verb	41
+βαρύς	heavy, burdensome	adjective	41
+διότι	therefore; because	conjunction	41
+εἰκών	image	noun	41
+ἐλεύθερος	free	adjective	41
+ἐπιστολή	letter, epistle	noun	41
+ζῷον	living being, animal	noun	41
+θυσιαστήριον	altar	noun	41
+καταλείπω	I leave behind, abandon	verb	41
+κεῖμαι	I lie down; I exist	verb	41
+νίκη	victory	noun	41
+νοῦς	mind; thought	noun	41
+οὗ	where, to which	adverb	41
+παῖς	boy or girl, child; slave	noun	41
+πάρειμι	I am present	verb	41
+πίμπλημι	I fill, fulfill; come to pass (passive)	verb	41
+πορνεία	fornication, sexual immorality	noun	41
+προσέχω	I devote myself to	verb	41
+φιλέω	I love; I kiss	verb	41
+αἴτημα	request	noun	42
+ἀντί	instead of, on behalf of (prep. +gen.)	preposition	42
+γρηγορέω	I am watching, awake	verb	42
+δέομαι	I am begging, praying	verb	42
+διάνοια	understanding, insight; mind	noun	42
+ἀγνοέω	I am ignorant, do not know	verb	42
+εἴδωλον	idol	noun	42
+ἐκλέγομαι	I am choosing, electing	verb	42
+ἐκλεκτός	chosen, elect	adjective	42
+καθεύδω	I am sleeping	verb	42
+κατεργάζομαι	I am accomplishing, producing	verb	42
+κατηγορέω	I am accusing	verb	42
+κοιλία	stomach; womb	noun	42
+κοπιάω	I am laboring, working hard; bearing	verb	42
+κωλύω	I hinder	verb	42
+μετάνοια	repentance	noun	42
+μιμνῄσκομαι	I remember	verb	42
+νέος	new, young	adjective	42
+πεινάω	I am hungry	verb	42
+πέραν	other side; across (prep. +gen.)	preposition	42
+περιβάλλω	I am clothing, dressing	verb	42
+πληγή	blow (from hitting); plague	noun	42
+πλοῦτος	wealth	noun	42
+σκεῦος	vessel, jar	noun	42
+χαρίζομαι	I am granting; I am forgiving	verb	42
+εἶπον	I say, tell	verb	43
+εἶδον	I see	verb	43
+Ἰουδαῖος	Jew; Judean	noun	43
+Παῦλος	Paul	noun	43
+Πέτρος	Peter	noun	43
+ὅστις	rel. who, which	pronoun	43
+Φαρισαῖος	Pharisee	noun	43
+Μωϋσῆς	Moses	noun	43
+Ἰερουσαλήμ	Jerusalem	noun	43
+Σίμων	Simon	noun	43
+Ἀβραάμ	Abraham	noun	43
+Ἰσραήλ	Israel	noun	43
+Ἱεροσόλυμα	Jerusalem	noun	43
+Γαλιλαία	Galilee	noun	43
+Δαυίδ	David	noun	43
+τρίτος	third	adjective	43
+Πιλᾶτος	Pilate	noun	43
+Ἰούδας	Judas; Judah	noun	43
+Ἡρῴδης	Herod	noun	43
+Ἰουδαία	Judea	noun	43
+Ἰάκωβος	James	noun	43
+Σατανᾶς	Satan	noun	43
+Φίλιππος	Phillip	noun	43
+Ἰωσήφ	Joseph	noun	43
+Καῖσαρ	Caesar; emperor	noun	43
+Ἠλίας	Elijah	noun	44
+Βαρναβᾶς	Barnabas	noun	44
+Μαρία	Mary	noun	44
+Ἰακώβ	Jacob	noun	44
+Μαριάμ	Mary	noun	44
+Αἴγυπτος	Egypt	noun	44
+Τιμόθεος	Timothy	noun	44
+χιλιάς	thousand	adjective	44
+Μακεδονία	Macedonia	noun	44
+τεσσεράκοντα	forty	adjective	44
+κἀκεῖνος	and + that one	pronoun	44
+Ἠσαΐας	Isaiah	noun	44
+συνέδριον	council; Sanhedrin	noun	44
+ὑπακούω	I obey	verb	44
+μνημονεύω	I remember	verb	44
+ὡσεί	about, like, as	conjunction	44
+εὐδοκέω	I take delight; I am well pleased	verb	44
+ἐνεργέω	I work; I am at work	verb	44
+τελώνης	tax collector	noun	44
+διδασκαλία	instruction, teaching	noun	44
+χιλίαρχος	military tribune	noun	44
+καθίστημι	I appoint, put in charge	verb	44
+θερίζω	I reap	verb	44
+πειρασμός	temptation, test, trial	noun	44
+τιμάω	I honor	verb	44
+στρέφω	I turn, turn around	verb	45
+ἰχθύς	fish	noun	45
+ἑκατοντάρχης	centurion	noun	45
+σοφός	wise	adjective	45
+ὑπηρέτης	servant, officer, assistant	noun	45
+ἀργύριον	silver; money	noun	45
+Ἰσαάκ	Isaac	noun	45
+ξύλον	tree, wood; club, cudgel	noun	45
+ἀκροβυστία	uncircumcision	noun	45
+αἰτία	cause, reason, charge	noun	45
+νυνί	now	adverb	45
+γονεύς	parent	noun	45
+γένος	nation, people; class, kind	noun	45
+ἐπίγνωσις	knowledge; recognition	noun	45
+παρατίθημι	I set before; I place beside	verb	45
+κριτής	judge	noun	45
+κτίσις	creation	noun	45
+διακρίνω	I waver, doubt	verb	45
+μαρτύριον	testimony, witness	noun	45
+παράπτωμα	sin, trespass	noun	45
+βάπτισμα	baptism	noun	45
+πότε	when	adverb	45
+ἐπάνω	+gen., above, over, on	preposition	45
+ἐπαίρω	I lift up, raise up	verb	45
+ἀπέχω	I abstain; I am distant	verb	45
+προφητεία	prophecy	noun	46
+ἐπουράνιος	heavenly	adjective	46
+δῶρον	gift, offering	noun	46
+παραχρῆμα	at once, immediately	adverb	46
+κληρονομέω	I inherit	verb	46
+μήν 2	month	noun	46
+δεσμός	bond, fetter, bonds	noun	46
+δέησις	prayer, supplication	noun	46
+κενός	vain, empty, empty-handed	adjective	46
+μήτι	not, surely not, perhaps	particle	46
+χρυσοῦς	gold, golden	adjective	46
+ἀποκάλυψις	revelation	noun	46
+Ἀντιόχεια	Antioch	noun	46
+ἐπιβάλλω	I put on; I lay a hand on	verb	46
+ἐπιτρέπω	I allow, permit	verb	46
+προστίθημι	I add, put to; I proceed, go on	verb	46
+ποιμήν	shepherd	noun	46
+στέφανος	crown	noun	46
+οἰκοδομή	edification, building	noun	46
+ἀριθμός	number	noun	46
+πυλών	gateway, gate	noun	46
+θυμός	anger, wrath, indignation	noun	46
+πόλεμος	war, battle	noun	46
+ἀπώλεια	destruction, waste	noun	46
+Ἀσία	Asia	noun	46
+βλασφημία	blasphemy, slander	noun	47
+κρύπτω	I hide, conceal	verb	47
+πολλάκις	many times, often	adverb	47
+ἑκατόν	hundred	adjective	47
+ἐπαύριον	on the next day	adverb	47
+πλησίον	neighbor	noun	47
+ὡσαύτως	likewise, similarly, the same	adverb	47
+ὑποκριτής	hypocrite	noun	47
+θησαυρός	treasure, treasury	noun	47
+ἀνάγκη	necessity; pressure, distress	noun	47
+ἐλέγχω	I expose, reprove, convict	verb	47
+κἂν	and if, even if (καί + ἐάν)	conjunction	47
+ῥίζα	root	noun	47
+ἕτοιμος	prepared, ready	adjective	47
+μέχρι	+gen., until, the point of	preposition	47
+βρῶμα	food	noun	47
+ἵππος	horse	noun	47
+Καισάρεια	Caesarea	noun	47
+ἄφεσις	pardon, forgiveness	noun	47
+πλήρωμα	fullness	noun	47
+χάρισμα	gift	noun	47
+κρυπτός	secret, hidden	adjective	47
+ἐξίστημι	I amaze, astound, astonish	verb	47
+ὦ	O (exclamation)	interjection	47
+περισσότερος	more, far more, greater	adjective	47
+συλλαμβάνω	I seize, apprehend, arrest	verb	48
+σφραγίς	seal	noun	48
+κλέπτης	thief	noun	48
+διαλογίζομαι	I consider, ponder, reason	verb	48
+δεῖπνον	banquet, dinner, feast	noun	48
+ἔπειτα	then	adverb	48
+διατάσσω	I order, give orders, direct	verb	48
+πλήρης	full	adjective	48
+χορτάζω	I fill; I am satisfied	verb	48
+δέσμιος	prisoner	noun	48
+Ἔφεσος	Ephesus	noun	48
+συκῆ	fig tree	noun	48
+λύπη	grief, sorrow	noun	48
+νυμφίος	bridegroom	noun	48
+οὐδέποτε	never	adverb	48
+τροφή	food, provisions	noun	48
+ἐργάτης	worker	noun	48
+τέρας	wonder, marvel	noun	48
+γάμος	wedding celebration, wedding	noun	48
+ζῆλος	jealousy, zeal, ardor	noun	48
+πάθημα	suffering	noun	48
+κακῶς	badly, severely, wrongly	adverb	48
+ἐκτείνω	I stretch out, extend	verb	48
+Καφαρναούμ	Capernaum	noun	48
+ταχέως	quickly, soon, shortly	adverb	48
+χόρτος	grass, hay	noun	49
+Ἰορδάνης	Jordan	noun	49
+τράπεζα	table	noun	49
+Δαμασκός	Damascus	noun	49
+κτίζω	I create	verb	49
+ἐλαία	olive tree, olive	noun	49
+ὑπακοή	obedience	noun	49
+Λάζαρος	Lazarus	noun	49
+νήπιος	infant, child	noun	49
+εὐσέβεια	piety, godliness	noun	49
+κληρονόμος	heir	noun	49
+ὁμοιόω	I compare, make like	verb	49
+οἰκουμένη	inhabited earth, world	noun	49
+κρείττων	better	adjective	49
+Σαῦλος	Saul	noun	49
+εὐχαριστία	thanksgiving, thankfulness	noun	49
+καταλαμβάνω	I grasp, lay hold of	verb	49
+εἶτα	then	adverb	49
+γεύομαι	I taste, experience, partake of	verb	49
+τύπος	example, type, pattern	noun	49
+ἀπάγω	I lead away, lead off	verb	49
+παρθένος	virgin	noun	49
+ἆρα	then, as a result	conjunction	49
+ξηραίνω	I dry up, wither	verb	49
+συμφέρω	I am profitable	verb	49
+ῥαββί	rabbi, teacher	noun	50
+μοιχεύω	I commit adultery	verb	50
+γνωστός	known	adjective	50
+ὄψιος	evening	adjective	50
+λῃστής	robber, highwayman, bandit	noun	50
+ἀνέχομαι	I endure, bear with	verb	50
+ἐντέλλω	I command, order	verb	50
+κληρονομία	inheritance	noun	50
+μέτρον	measure	noun	50
+κλάω	I break	verb	50
+ἐνιαυτός	year	noun	50
+μακρόθεν	from far away	adverb	50
+ταπεινόω	I humble, make humble	verb	50
+ἀφίστημι	I depart from, depart, go away	verb	50
+φρόνιμος	prudent, wise	adjective	50
+φύσις	nature, species	noun	50
+μερίζω	I divide, deal out, apportion	verb	50
+πετεινόν	bird	noun	50
+διαλογισμός	reasoning, thought	noun	50
+προσδέχομαι	I look forward to, wait for	verb	50
+τάλαντον	talent	noun	50
+μύρον	ointment, perfume	noun	50
+ἀμφότεροι	both	adjective	50
+ἀτενίζω	I look intently at, stare at	verb	50
+νοέω	I understand	verb	50
