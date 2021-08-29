@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Alert from 'react-bootstrap/Alert'
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
@@ -69,77 +70,78 @@ class Vocab extends React.Component {
 
     return (
       <div style={{ maxWidth: '19em' }}>
-        <Row className="me-1">
-          <Col>
-            <Form onSubmit={(e) => this.search(e.target[0].value, e)}>
-              <InputGroup size="sm">
-                <Form.Control
-                  type="text"
-                  id="wat"
-                  aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
-                  aria-describedby="basic-addon1"
-                  placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.' 
-                  onChange={(e) => this.search(e.target.value, e)} />
-                <Button
-                  size="sm"
-                  type="submit">Add All</Button>
-              </InputGroup>
-            </Form>
-          </Col>
-        </Row>
-        <Row className="mt-3">
-          <Col>
-            <VariableSizeGrid
-              height={480}
-              width={300}
-              columnCount={5}
-              columnWidth={index => columnWidths[index]}
-              rowCount={this.state.display.length}
-              rowHeight={index => 30}>
-              {({ columnIndex, rowIndex, style }) => (
-                <div style={Object.assign({}, style, { textAlign: 'left' })}>
-                  {columnIndex === 0
-                    ? <ToggleButton
-                        id={rowIndex}
-                        type="checkbox"
-                        value={rowIndex}
-                        variant="outline-primary"
-                        size="sm"
-                        checked={this.state.selected.includes(rowIndex)}
-                        onClick={ () => this.toggleSelect(rowIndex) }
-                        text="primary"
-                        style={{ lineHeight: 1, 
-                                 fontSize: '.75em', 
-                                 padding: '.35em .65em',
-                                 fontWeight: 700 }}>
-                        +
-                      </ToggleButton>
-                    : this.state.display[rowIndex][vocabHeadings[columnIndex - 1]]
-                  }
-                </div>
-              )}
-            </VariableSizeGrid>
-          </Col>
-        </Row>
-        <div>
-          <hr />
-        </div>
-        <Row>
-          <Col>
-            {this.state.selected.map(index => (
-                <Badge pill
-                  key={index}
-                  className='me-1'
-                  bg="primary"
-                  as="button" 
-                  style={{ borderWidth: 'thin' }}
-                  onClick={ () => this.toggleSelect(index) }>
-                  { this.state.vocab[index][LEMMA] }
-                </Badge>
-              ))
-            }
-          </Col>
-        </Row>
+        <Alert variant='light' style={{ textAlign: 'left' }}>
+          <h5>(1) vocab</h5>
+          <Row className="me-1">
+            <Col>
+              <Form onSubmit={(e) => this.search(e.target[0].value, e)}>
+                <InputGroup size="sm">
+                  <Form.Control
+                    type="text"
+                    id="wat"
+                    aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
+                    aria-describedby="basic-addon1"
+                    placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.' 
+                    onChange={(e) => this.search(e.target.value, e)} />
+                  <Button
+                    size="sm"
+                    type="submit">Add All</Button>
+                </InputGroup>
+              </Form>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            <Col>
+              <VariableSizeGrid
+                height={480}
+                width={300}
+                columnCount={5}
+                columnWidth={index => columnWidths[index]}
+                rowCount={this.state.display.length}
+                rowHeight={index => 30}>
+                {({ columnIndex, rowIndex, style }) => (
+                  <div style={Object.assign({}, style, { textAlign: 'left' })}>
+                    {columnIndex === 0
+                      ? <ToggleButton
+                          id={rowIndex}
+                          type="checkbox"
+                          value={rowIndex}
+                          variant="outline-primary"
+                          checked={this.state.selected.includes(rowIndex)}
+                          onClick={ () => this.toggleSelect(rowIndex) }
+                          style={{ lineHeight: 1, 
+                                   fontSize: '.75em', 
+                                   padding: '.35em .65em',
+                                   fontWeight: 700 }}>
+                          +
+                        </ToggleButton>
+                      : this.state.display[rowIndex][vocabHeadings[columnIndex - 1]]
+                    }
+                  </div>
+                )}
+              </VariableSizeGrid>
+            </Col>
+          </Row>
+          <div>
+            <hr />
+          </div>
+          <Row>
+            <Col>
+              {this.state.selected.map(index => (
+                  <Badge pill
+                    key={index}
+                    className='me-1'
+                    bg="primary"
+                    as="button" 
+                    style={{ borderWidth: 'thin' }}
+                    onClick={ () => this.toggleSelect(index) }>
+                    { this.state.vocab[index][LEMMA] }
+                  </Badge>
+                ))
+              }
+            </Col>
+          </Row>
+        </Alert>
       </div>
     );
   }

@@ -195,7 +195,6 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <p>
-            "SM Baugh A Greek Primer"
           </p>
         </header>
         <Container fluid>
@@ -276,25 +275,6 @@ class App extends React.Component {
               <Alert variant="dark" style={{ textAlign: 'left' }}>
               </Alert>
               */}
-              <Alert variant="danger" style={{ textAlign: 'left' }}>
-                <h5>showVocab showVocab showVocab</h5>
-                <Row>
-                  <div>
-                    <Badge pill className='me-1' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
-                      feminine
-                    </Badge>
-                    <Badge pill className='me-2' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
-                      masculine
-                    </Badge>
-                    <Badge pill className='me-1' bg="secondary" as="button" style={{ borderWidth: 'thin' }}>
-                      Primary
-                    </Badge>
-                    <Badge pill className='me-2' bg="info" as="button" style={{ borderWidth: 'thin' }}>
-                      Primary
-                    </Badge>
-                  </div>
-                </Row>
-              </Alert>
               <Alert variant="danger" style={{ textAlign: 'left' }}>
                 <h5>(3) ...adjust flashcard fields...</h5>
                 <Row>
