@@ -75,14 +75,22 @@ class Vocab extends React.Component {
           }
 
           // handle number searching
-          if (!isNaN(crit.replaceAll('ch', ''))) {
-            search = crit.replaceAll('ch', '')
-            return this.vocab
-                .filter(row => Object.values(row)
-                    .join()
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, "")
-                    .endsWith(',' + search.normalize('NFD')))
+          var range = crit.replaceAll('ch', '').split('-')
+          if (range.every(num => !isNaN(num))) {
+            if (range.length < 2) {
+              range.push(parseInt(range[0]))
+            }
+            var rows = []
+            for (var i = parseInt(range[0]); i < parseInt(range[1]) + 1; i++) {
+              rows = rows.concat(
+                this.vocab
+                    .filter(row => Object.values(row)
+                        .join()
+                        .normalize('NFD')
+                        .replace(/[\u0300-\u036f]/g, "")
+                        .endsWith(',' + i.toString())))
+            }
+            return rows
           }
 
           // handle plural and abbreviations
@@ -179,8 +187,8 @@ class Vocab extends React.Component {
                           variant="outline-primary"
                           checked={this.state.selected.includes(this.state.display[rowIndex])}
                           onClick={ () => this.onSelect(
-                              this.vocab[rowIndex][LEMMA], 
-                              [this.vocab[rowIndex]],
+                              this.state.display[rowIndex][LEMMA], 
+                              [this.state.display[rowIndex]],
                               'toggle') }
                           style={{ lineHeight: 1, 
                                    fontSize: '.75em', 
