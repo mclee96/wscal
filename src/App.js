@@ -9,14 +9,11 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Col from 'react-bootstrap/Col'
 import Collapse from 'react-bootstrap/Collapse'
 import Container from 'react-bootstrap/Container'
-import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
-
-import { VariableSizeGrid } from 'react-window'
 
 import Data from './backend/Data.js'
 import Vocab from './Vocab.js'
@@ -87,24 +84,24 @@ class App extends React.Component {
 
   toggleSelect(vocabIndex) {
     this.setState((state, props) => { 
-      if (!state.selected.includes(vocabIndex)) {
+      if (!state.selected.includes(this.vocab[vocabIndex])) {
         // select vocab
-        let selected = state.selected.concat([vocabIndex])
+        let selected = state.selected.concat([this.vocab[vocabIndex]])
         return { 
           selected: selected,
           chapters: selected
-            .map(index => this.vocab[index][LEMMA])
+            .map(row => row[LEMMA])
             .join()
         }
       } else {
         // deselect vocab
-        let sliceIndex = state.selected.indexOf(vocabIndex)
+        let sliceIndex = state.selected.indexOf(this.vocab[vocabIndex])
         let selected = state.selected.slice(0, sliceIndex)
                .concat(state.selected.slice(sliceIndex + 1))
         return { 
           selected: selected,
           chapters: selected
-            .map(index => this.vocab[index][LEMMA])
+            .map(row => row[LEMMA])
             .join()
         }
       }
@@ -207,8 +204,6 @@ class App extends React.Component {
   }
 
   render() {
-    const vocabHeadings = [LEMMA, CHAPTER, PART, GLOSS]
-    const columnWidths = [70, 100, 20, 50]
     return (
       <div className="App">
         <header className="App-header">

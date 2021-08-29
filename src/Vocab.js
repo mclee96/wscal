@@ -1,7 +1,6 @@
 import React from 'react'
 
 import Alert from 'react-bootstrap/Alert'
-import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
@@ -26,10 +25,10 @@ class Vocab extends React.Component {
       selected: props.selected,
     }
 
+    this.searchTimeout = 0
     this.vocab = []
     this.onSelect = props.onSelect.bind(this)
 
-    this.toggleSelect = this.toggleSelect.bind(this)
     this.search = this.search.bind(this)
     this.addAll = this.addAll.bind(this)
   }
@@ -47,24 +46,48 @@ class Vocab extends React.Component {
     }
   }
 
-  toggleSelect(vocabIndex) {
-    this.onSelect(vocabIndex)
-  }
-
-  search(text, e) {
+  search(criteria, e) {
     e.preventDefault()
 
-    this.setState({
-      display: this.vocab
-        .filter(row => Object.values(row)
-            .join()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, "")
-            .includes(text.normalize('NFD')))
-    })
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout)
+    }
+
+    this.searchTimeout = 
+      setTimeout(() => this.setState({ display: this.filter(criteria) }), 100)
   }
 
-  addAll() {
+  addAll(criteria) {
+    this.onSelect(criteria)
+  }
+
+  filter(criteria) {
+    var search = criteria.trim()
+
+    // reset if no search
+    if (!search) {
+      return this.vocab
+    }
+
+    if (!isNaN(criteria.replaceAll('ch', ''))) {
+      search = criteria.replaceAll('ch', '')
+    }
+
+    if (!isNaN(search)) {
+      return this.vocab
+          .filter(row => Object.values(row)
+              .join()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, "")
+              .endsWith(',' + search.normalize('NFD')))
+    } else {
+      return this.vocab
+          .filter(row => Object.values(row)
+              .join()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, "")
+              .includes(search.normalize('NFD')))
+    }
   }
 
   render() {
@@ -111,8 +134,8 @@ class Vocab extends React.Component {
                           type="checkbox"
                           value={rowIndex}
                           variant="outline-primary"
-                          checked={this.state.selected.includes(rowIndex)}
-                          onClick={ () => this.toggleSelect(rowIndex) }
+                          checked={this.state.selected.includes(this.vocab[rowIndex])}
+                          onClick={ () => this.onSelect(rowIndex) }
                           style={{ lineHeight: 1, 
                                    fontSize: '.75em', 
                                    padding: '.35em .65em',
