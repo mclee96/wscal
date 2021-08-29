@@ -57,37 +57,80 @@ class Vocab extends React.Component {
       setTimeout(() => this.setState({ display: this.filter(criteria) }), 100)
   }
 
-  addAll(criteria) {
-    this.onSelect(criteria)
+  addAll(criteria, e) {
+    e.preventDefault()
+
+    this.onSelect(criteria, this.filter(criteria), 'add')
   }
 
   filter(criteria) {
-    var search = criteria.trim()
+    let filtered = []
+    criteria.trim().split(',')
+      .map(crit => {
+          var search = crit.trim()
 
-    // reset if no search
-    if (!search) {
-      return this.vocab
-    }
+          // reset if no search
+          if (!search) {
+            return this.vocab
+          }
 
-    if (!isNaN(criteria.replaceAll('ch', ''))) {
-      search = criteria.replaceAll('ch', '')
-    }
+          // handle number searching
+          if (!isNaN(crit.replaceAll('ch', ''))) {
+            search = crit.replaceAll('ch', '')
+            return this.vocab
+                .filter(row => Object.values(row)
+                    .join()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .endsWith(',' + search.normalize('NFD')))
+          }
 
-    if (!isNaN(search)) {
-      return this.vocab
-          .filter(row => Object.values(row)
-              .join()
-              .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, "")
-              .endsWith(',' + search.normalize('NFD')))
-    } else {
-      return this.vocab
-          .filter(row => Object.values(row)
-              .join()
-              .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, "")
-              .includes(search.normalize('NFD')))
-    }
+          // handle plural and abbreviations
+          switch (search) {
+            case 'nouns':
+            case 'nns':
+            case 'nn': search = 'noun'; break;
+            case 'verbs':
+            case 'vbs':
+            case 'vb': search = 'verb'; break;
+            case 'adjectives':
+            case 'adjs':
+            case 'adj': search = 'adjective'; break;
+            case 'prepositions':
+            case 'preps':
+            case 'prep': search = 'preposition'; break;
+            case 'conjunctions':
+            case 'conjs':
+            case 'conj': search = 'conjunction'; break;
+            case 'adverbs':
+            case 'advbs':
+            case 'advb':
+            case 'adv': search = 'adverb'; break;
+          }
+
+          let parts = ['noun', 'verb', 'adjective', 'preposition', 'conjunction', 'adverb']
+
+          // handle part searching
+          if (parts.includes(search)) {
+            return this.vocab
+                .filter(row => Object.values(row)
+                    .join()
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .includes(',' + search.normalize('NFD') + ','))
+          }
+
+          // default search
+          return this.vocab
+              .filter(row => Object.values(row)
+                  .join()
+                  .normalize('NFD')
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .includes(search.normalize('NFD')))
+      })
+      .forEach(arr => filtered = filtered.concat(arr))
+
+    return filtered
   }
 
   render() {
@@ -100,7 +143,7 @@ class Vocab extends React.Component {
           <h5>(1) vocab</h5>
           <Row className="me-1">
             <Col>
-              <Form onSubmit={(e) => this.search(e.target[0].value, e)}>
+              <Form onSubmit={(e) => this.addAll(e.target[0].value, e)}>
                 <InputGroup size="sm">
                   <Form.Control
                     type="text"
@@ -134,8 +177,11 @@ class Vocab extends React.Component {
                           type="checkbox"
                           value={rowIndex}
                           variant="outline-primary"
-                          checked={this.state.selected.includes(this.vocab[rowIndex])}
-                          onClick={ () => this.onSelect(rowIndex) }
+                          checked={this.state.selected.includes(this.state.display[rowIndex])}
+                          onClick={ () => this.onSelect(
+                              this.vocab[rowIndex][LEMMA], 
+                              [this.vocab[rowIndex]],
+                              'toggle') }
                           style={{ lineHeight: 1, 
                                    fontSize: '.75em', 
                                    padding: '.35em .65em',

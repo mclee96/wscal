@@ -38,8 +38,9 @@ class App extends React.Component {
       flashcardFields: [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV],
       flashcards: [],
       flashcardsPreview: [],
-      selected: [],
+
       showVocab: true,
+      selected: {},   // map of (criteria -> array of vocab rows)
     };
 
     this.vocab = []
@@ -51,6 +52,7 @@ class App extends React.Component {
     this.updateChapter = this.updateChapter.bind(this)
     this.toggleSelect = this.toggleSelect.bind(this)
     this.downloadRecords = this.downloadRecords.bind(this)
+    this.getSelected = this.getSelected.bind(this)
   }
 
   static fields = 
@@ -82,30 +84,28 @@ class App extends React.Component {
     this.setState({ chapters: value })
   }
 
-  toggleSelect(vocabIndex) {
-    this.setState((state, props) => { 
-      if (!state.selected.includes(this.vocab[vocabIndex])) {
-        // select vocab
-        let selected = state.selected.concat([this.vocab[vocabIndex]])
-        return { 
-          selected: selected,
-          chapters: selected
-            .map(row => row[LEMMA])
-            .join()
+  toggleSelect(display, rows, mode) {
+    if (mode === 'toggle') {
+      mode = (Object.keys(this.state.selected).some(disp => disp === display))
+        ? 'remove'
+        : 'add'
+    }
+
+    if (mode === 'add') {
+      this.setState((state, props) => {
+        return {
+          selected: Object.assign({}, state.selected, { [display]: rows })
         }
-      } else {
-        // deselect vocab
-        let sliceIndex = state.selected.indexOf(this.vocab[vocabIndex])
-        let selected = state.selected.slice(0, sliceIndex)
-               .concat(state.selected.slice(sliceIndex + 1))
-        return { 
-          selected: selected,
-          chapters: selected
-            .map(row => row[LEMMA])
-            .join()
-        }
-      }
-    })
+      })
+    }
+
+    if (mode === 'remove') {
+      let select = Object.assign({}, this.state.selected)
+      delete select[display]
+      this.setState((state, props) => {
+        return { selected: select }
+      })
+    }
   }
 
   updateFields(value) { this.setState((state, props) => {
@@ -203,6 +203,13 @@ class App extends React.Component {
     saveAs(blob, outputFilename)
   }
 
+  getSelected() {
+    var flattened = []
+    Object.values(this.state.selected)
+      .forEach(arr => flattened = flattened.concat(arr))
+    return flattened
+  }
+
   render() {
     return (
       <div className="App">
@@ -228,7 +235,9 @@ class App extends React.Component {
             <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto" className="pe-0">
               <Collapse in={this.state.showVocab} dimension="width">
                 <div>
-                  <Vocab selected={this.state.selected} onSelect={this.toggleSelect}/>
+                  <Vocab 
+                    selected={this.getSelected()}
+                    onSelect={this.toggleSelect}/>
                 </div>
               </Collapse>
             </Col>
@@ -238,14 +247,15 @@ class App extends React.Component {
                   <h5>(1) I want to study...</h5>
                   <Row>
                     <Col>
-                      {this.state.chapters.split(',').map(word => (
+                      {Object.keys(this.state.selected).map(display => (
                           <Badge pill
-                            key={word}
+                            key={display}
                             className='me-1'
                             bg="primary"
                             as="button" 
-                            style={{ borderWidth: 'thin' }}>
-                            {word}
+                            style={{ borderWidth: 'thin' }}
+                            onClick={() => this.toggleSelect(display, [], 'remove')}>
+                            {display}
                           </Badge>
                         ))
                       }
