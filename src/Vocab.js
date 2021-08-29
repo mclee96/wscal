@@ -99,6 +99,7 @@ class Vocab extends React.Component {
             </VariableSizeGrid>
           </Col>
         </Row>
+        <hr />
         <Row>
           <Col>
             {this.state.selected.map(index => (
