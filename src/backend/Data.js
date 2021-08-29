@@ -29,6 +29,8 @@ class Data {
           Data.vocab = rows
           resolve(Data.vocab)
         })
+      } else {
+        resolve(Data.vocab)
       }
 
       if (Data.morphs.length === 0) {

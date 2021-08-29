@@ -22,10 +22,12 @@ class Vocab extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      vocab: [],
-      display:[],
-      selected: [],
+      display: [],
+      selected: props.selected,
     }
+
+    this.vocab = []
+    this.onSelect = props.onSelect.bind(this)
 
     this.toggleSelect = this.toggleSelect.bind(this)
     this.search = this.search.bind(this)
@@ -33,31 +35,32 @@ class Vocab extends React.Component {
   }
 
   componentDidMount() {
-    Data.loadData().then((vocab) => this.setState({ vocab: vocab, display: vocab }));
+    Data.loadData().then((vocab) => {
+      this.vocab = vocab
+      this.setState({ display: vocab })
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.selected !== this.props.selected) {
+      this.setState({ selected: this.props.selected })
+    }
   }
 
   toggleSelect(vocabIndex) {
-    this.setState((state, props) => { 
-      if (!state.selected.includes(vocabIndex)) {
-        // select vocab
-        return { selected: state.selected.concat([vocabIndex]) }
-      } else {
-        // deselect vocab
-        let sliceIndex = state.selected.indexOf(vocabIndex)
-        return { selected: state.selected.slice(0, sliceIndex)
-                   .concat(state.selected.slice(sliceIndex + 1)) }
-      }
-    })
+    this.onSelect(vocabIndex)
   }
 
   search(text, e) {
     e.preventDefault()
 
-    this.setState((state, props) => {
-      return {
-        display: state.vocab
-          .filter(row => Object.values(row).join().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(text.normalize('NFD')))
-      }
+    this.setState({
+      display: this.vocab
+        .filter(row => Object.values(row)
+            .join()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, "")
+            .includes(text.normalize('NFD')))
     })
   }
 
@@ -70,7 +73,7 @@ class Vocab extends React.Component {
 
     return (
       <div style={{ maxWidth: '19em' }}>
-        <Alert variant='light' style={{ textAlign: 'left' }}>
+        <Alert variant='light' style={{ textAlign: 'left', borderColor: 'lightgrey' }}>
           <h5>(1) vocab</h5>
           <Row className="me-1">
             <Col>
@@ -103,6 +106,7 @@ class Vocab extends React.Component {
                   <div style={Object.assign({}, style, { textAlign: 'left' })}>
                     {columnIndex === 0
                       ? <ToggleButton
+                          className="ms-2"
                           id={rowIndex}
                           type="checkbox"
                           value={rowIndex}
@@ -125,22 +129,15 @@ class Vocab extends React.Component {
           <div>
             <hr />
           </div>
-          <Row>
-            <Col>
-              {this.state.selected.map(index => (
-                  <Badge pill
-                    key={index}
-                    className='me-1'
-                    bg="primary"
-                    as="button" 
-                    style={{ borderWidth: 'thin' }}
-                    onClick={ () => this.toggleSelect(index) }>
-                    { this.state.vocab[index][LEMMA] }
-                  </Badge>
-                ))
-              }
-            </Col>
-          </Row>
+        <div>
+        * chapters 1-30 cover S.M. Baugh's "A Greek Primer"
+        </div>
+        <div>
+        * chapters  31-42 cover S.M. Baugh's "First John Reader"
+        </div>
+        <div>
+        * so-called "chapters" beyond that are just...
+        </div>
         </Alert>
       </div>
     );

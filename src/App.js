@@ -11,7 +11,6 @@ import Collapse from 'react-bootstrap/Collapse'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
-import Offcanvas from 'react-bootstrap/Offcanvas'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 import ToggleButton from 'react-bootstrap/ToggleButton'
@@ -37,22 +36,23 @@ class App extends React.Component {
       display: [],
       filters: {},
       fields: [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER],
-      showOffcanvas: false,
       limit: 10,
       chapters: '',
       flashcardFields: [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV],
       flashcards: [],
       flashcardsPreview: [],
-      vocab: [],
+      selected: [],
       showVocab: true,
     };
+
+    this.vocab = []
 
     this.toggleFilter = this.toggleFilter.bind(this)
     this.updateFields = this.updateFields.bind(this)
     this.updateFlashcardFields = this.updateFlashcardFields.bind(this)
     this.updateRecords = this.updateRecords.bind(this)
     this.updateChapter = this.updateChapter.bind(this)
-    this.setOffcanvas = this.setOffcanvas.bind(this)
+    this.toggleSelect = this.toggleSelect.bind(this)
     this.downloadRecords = this.downloadRecords.bind(this)
   }
 
@@ -60,6 +60,10 @@ class App extends React.Component {
     [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB_TYPE, REFERENCE, ESV, NA28]
   static flashcardFields =
     [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV]
+
+  componentDidMount() {
+    Data.loadData().then((vocab) => { this.vocab = vocab })
+  }
 
   toggleFilter(type, value) {
     this.setState((state, props) => {
@@ -77,12 +81,37 @@ class App extends React.Component {
     // TODO: refresh here?
   }
 
-  updateChapter(event) {
-    this.setState({ chapters: event.target.value })
+  updateChapter(value) {
+    this.setState({ chapters: value })
   }
 
-  updateFields(value) {
-    this.setState((state, props) => {
+  toggleSelect(vocabIndex) {
+    this.setState((state, props) => { 
+      if (!state.selected.includes(vocabIndex)) {
+        // select vocab
+        let selected = state.selected.concat([vocabIndex])
+        return { 
+          selected: selected,
+          chapters: selected
+            .map(index => this.vocab[index][LEMMA])
+            .join()
+        }
+      } else {
+        // deselect vocab
+        let sliceIndex = state.selected.indexOf(vocabIndex)
+        let selected = state.selected.slice(0, sliceIndex)
+               .concat(state.selected.slice(sliceIndex + 1))
+        return { 
+          selected: selected,
+          chapters: selected
+            .map(index => this.vocab[index][LEMMA])
+            .join()
+        }
+      }
+    })
+  }
+
+  updateFields(value) { this.setState((state, props) => {
       let fields = (state.fields || []).slice()
       if (fields.includes(value)) {
         fields.splice(fields.indexOf(value), 1)
@@ -177,39 +206,34 @@ class App extends React.Component {
     saveAs(blob, outputFilename)
   }
 
-  setOffcanvas(value) {
-    if (this.state.vocab.length > 0) {
-      this.setState({ showOffcanvas: value })
-    } else {
-      this.setState({ 
-        showOffcanvas: value,
-        vocab: Data.getVocab()
-      })
-    }
-  }
-
   render() {
     const vocabHeadings = [LEMMA, CHAPTER, PART, GLOSS]
     const columnWidths = [70, 100, 20, 50]
     return (
       <div className="App">
         <header className="App-header">
-          <p>
-          </p>
+          <p></p>
         </header>
         <Container fluid>
           <Row>
             <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
-              <Button onClick={() => this.setState({ showVocab: !this.state.showVocab })}>
+              <ToggleButton 
+                id="show-vocab"
+                value="show-vocab"
+                type="checkbox"
+                variant="outline-primary"
+                size="sm"
+                checked={this.state.showVocab}
+                onClick={() => this.setState({ showVocab: !this.state.showVocab })}>
                 >
-              </Button>
+              </ToggleButton>
             </Col>
           </Row>
           <Row className="mt-3">
             <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto" className="pe-0">
               <Collapse in={this.state.showVocab} dimension="width">
                 <div>
-                  <Vocab />
+                  <Vocab selected={this.state.selected} onSelect={this.toggleSelect}/>
                 </div>
               </Collapse>
             </Col>
@@ -217,16 +241,22 @@ class App extends React.Component {
               <Alert variant="success" style={{ textAlign: 'left' }}>
                 <Row>
                   <h5>(1) I want to study...</h5>
+                  <Row>
+                    <Col>
+                      {this.state.chapters.split(',').map(word => (
+                          <Badge pill
+                            key={word}
+                            className='me-1'
+                            bg="primary"
+                            as="button" 
+                            style={{ borderWidth: 'thin' }}>
+                            {word}
+                          </Badge>
+                        ))
+                      }
+                    </Col>
+                  </Row>
                   <InputGroup size="sm">
-                    <Button variant="primary" onClick={(e) => this.setOffcanvas(true, e)} className="me-2">
-                      Browse Vocab
-                    </Button>
-                    <Form.Control
-                      aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
-                      aria-describedby="basic-addon1"
-                      placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.'
-                      onChange={this.updateChapter}
-                    />
                     <ToggleButtonGroup type="checkbox" size="sm">
                       <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
                         nouns
@@ -343,37 +373,6 @@ class App extends React.Component {
                   </Col>
                 </Row>
               </Alert>
-              <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
-                <Offcanvas.Header closeButton>
-                  <Offcanvas.Title>Vocab</Offcanvas.Title>
-                </Offcanvas.Header>
-                <Offcanvas.Body>
-                  <Container>
-                    <Table responsive striped bordered hover size="sm">
-                      <thead>
-                        <tr>
-                          <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
-                          <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
-                          <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
-                          <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {
-                          this.state.vocab.map(row => (
-                            <tr key={'tr-' + row[0] + row[1]}>
-                              <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
-                              <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
-                              <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
-                              <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
-                            </tr>
-                          ))
-                        }
-                      </tbody>
-                    </Table>
-                  </Container>
-                </Offcanvas.Body>
-              </Offcanvas>
             </Col>
           </Row>
         </Container>
