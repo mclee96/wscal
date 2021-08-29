@@ -53,7 +53,7 @@ class Vocab extends React.Component {
 
     return (
       <div style={{ maxWidth: '19em' }}>
-        <Row>
+        <Row className="me-1">
           <Col>
             <InputGroup size="sm">
               <InputGroup.Text>Search</InputGroup.Text>
@@ -99,7 +99,9 @@ class Vocab extends React.Component {
             </VariableSizeGrid>
           </Col>
         </Row>
-        <hr />
+        <div>
+          <hr />
+        </div>
         <Row>
           <Col>
             {this.state.selected.map(index => (

@@ -200,199 +200,201 @@ class App extends React.Component {
         </header>
         <Container fluid>
           <Row>
-          <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
-            <Button onClick={() => this.setState({ blah: !this.state.blah })}>
-              >
-            </Button>
-          </Col>
-          <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
-            <Collapse in={this.state.blah} dimension="width">
-              <div>
-                <Vocab />
-              </div>
-            </Collapse>
-          </Col>
-          <Col>
-            <Alert variant="success" style={{ textAlign: 'left' }}>
-              <Row>
-                <h5>(1) I want to study...</h5>
-                <InputGroup size="sm">
-                  <Button variant="primary" onClick={(e) => this.setOffcanvas(true, e)} className="me-2">
-                    Browse Vocab
-                  </Button>
-                  <Form.Control
-                    aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
-                    aria-describedby="basic-addon1"
-                    placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.'
-                    onChange={this.updateChapter}
-                  />
-                  <ToggleButtonGroup type="checkbox" size="sm">
-                    <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
-                      nouns
-                    </ToggleButton>
-                    <ToggleButton variant="outline-secondary" value="verbs" id="verbs-filter" onClick={(e) => this.toggleFilter(PART, VERB, e)}>
-                      verbs
-                    </ToggleButton>
-                    <ToggleButton variant="outline-secondary" value="adjectives" id="adjectives-filter" onClick={(e) => this.toggleFilter(PART, ADJECTIVE, e)}>
-                      adjectives
-                    </ToggleButton>
-                    <ToggleButton variant="outline-secondary" value="prepositions" id="prepositions-filter" onClick={(e) => this.toggleFilter(PART, PREPOSITION, e)}>
-                      preps
-                    </ToggleButton>
-                    <ToggleButton variant="outline-secondary" value="pronouns" id="pronouns-filter" onClick={(e) => this.toggleFilter(PART, PRONOUN, e)}>
-                      pronouns
-                    </ToggleButton>
-                    <ToggleButton variant="outline-secondary" value="adverb" id="adverbs-filter" onClick={(e) => this.toggleFilter(PART, ADVERB, e)}>
-                      adverbs
-                    </ToggleButton>
-                    <ToggleButton variant="outline-secondary" value="conjunctions" id="conjunctions-filter" onClick={(e) => this.toggleFilter(PART, CONJUNCTION, e)}>
-                      conjunctions
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-                </InputGroup>
-              </Row>
-              <Row style={{ marginTop: '1rem' }}>
-                <h5>(2) ...with filters...</h5>
-              {/* filter selection */}
-                <ButtonToolbar style={{justifyContent: 'space-between'}}>
-
-                {Object.keys(ALL)
-                  .filter(field => field !== PART)
-                  .map(filterType => (
-                  <ToggleButtonGroup id={filterType} key={filterType} type="checkbox" size="sm" >
-                    {ALL[filterType].map(filterValue => (
-                      <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
-                        {filterValue}
-                      </ToggleButton>
-                    ))}
-                  </ToggleButtonGroup>
-                ))}
-                </ButtonToolbar>
-              </Row>
-            </Alert>
-            {/*
-            <Alert variant="dark" style={{ textAlign: 'left' }}>
-            </Alert>
-            */}
-            <Alert variant="danger" style={{ textAlign: 'left' }}>
-              <h5>blah blah blah</h5>
-              <Row>
+            <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
+              <Button onClick={() => this.setState({ blah: !this.state.blah })}>
+                >
+              </Button>
+            </Col>
+          </Row>
+          <Row className="mt-3">
+            <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto" className="pe-0">
+              <Collapse in={this.state.blah} dimension="width">
                 <div>
-                  <Badge pill className='me-1' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
-                    feminine
-                  </Badge>
-                  <Badge pill className='me-2' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
-                    masculine
-                  </Badge>
-                  <Badge pill className='me-1' bg="secondary" as="button" style={{ borderWidth: 'thin' }}>
-                    Primary
-                  </Badge>
-                  <Badge pill className='me-2' bg="info" as="button" style={{ borderWidth: 'thin' }}>
-                    Primary
-                  </Badge>
+                  <Vocab />
                 </div>
-              </Row>
-            </Alert>
-            <Alert variant="danger" style={{ textAlign: 'left' }}>
-              <h5>(3) ...adjust flashcard fields...</h5>
-              <Row>
-                <ButtonGroup defaultValue={this.state.flashcardFields} size="sm">
-                  {App.flashcardFields.map(field => (
-                    <Button key={field} id={field} value={field} active={this.state.flashcardFields.includes(field)} variant='outline-secondary' onClick={(e) => this.updateFlashcardFields(field, e)}>
-                      {field}
+              </Collapse>
+            </Col>
+            <Col className="ps-0">
+              <Alert variant="success" style={{ textAlign: 'left' }}>
+                <Row>
+                  <h5>(1) I want to study...</h5>
+                  <InputGroup size="sm">
+                    <Button variant="primary" onClick={(e) => this.setOffcanvas(true, e)} className="me-2">
+                      Browse Vocab
                     </Button>
-                  ))
-                  }
-                </ButtonGroup>
-              </Row>
-            </Alert>
-            <Alert variant="info" style={{ textAlign: 'left' }}>
+                    <Form.Control
+                      aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
+                      aria-describedby="basic-addon1"
+                      placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.'
+                      onChange={this.updateChapter}
+                    />
+                    <ToggleButtonGroup type="checkbox" size="sm">
+                      <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
+                        nouns
+                      </ToggleButton>
+                      <ToggleButton variant="outline-secondary" value="verbs" id="verbs-filter" onClick={(e) => this.toggleFilter(PART, VERB, e)}>
+                        verbs
+                      </ToggleButton>
+                      <ToggleButton variant="outline-secondary" value="adjectives" id="adjectives-filter" onClick={(e) => this.toggleFilter(PART, ADJECTIVE, e)}>
+                        adjectives
+                      </ToggleButton>
+                      <ToggleButton variant="outline-secondary" value="prepositions" id="prepositions-filter" onClick={(e) => this.toggleFilter(PART, PREPOSITION, e)}>
+                        preps
+                      </ToggleButton>
+                      <ToggleButton variant="outline-secondary" value="pronouns" id="pronouns-filter" onClick={(e) => this.toggleFilter(PART, PRONOUN, e)}>
+                        pronouns
+                      </ToggleButton>
+                      <ToggleButton variant="outline-secondary" value="adverb" id="adverbs-filter" onClick={(e) => this.toggleFilter(PART, ADVERB, e)}>
+                        adverbs
+                      </ToggleButton>
+                      <ToggleButton variant="outline-secondary" value="conjunctions" id="conjunctions-filter" onClick={(e) => this.toggleFilter(PART, CONJUNCTION, e)}>
+                        conjunctions
+                      </ToggleButton>
+                    </ToggleButtonGroup>
+                  </InputGroup>
+                </Row>
+                <Row style={{ marginTop: '1rem' }}>
+                  <h5>(2) ...with filters...</h5>
+                {/* filter selection */}
+                  <ButtonToolbar style={{justifyContent: 'space-between'}}>
+
+                  {Object.keys(ALL)
+                    .filter(field => field !== PART)
+                    .map(filterType => (
+                    <ToggleButtonGroup id={filterType} key={filterType} type="checkbox" size="sm" >
+                      {ALL[filterType].map(filterValue => (
+                        <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
+                          {filterValue}
+                        </ToggleButton>
+                      ))}
+                    </ToggleButtonGroup>
+                  ))}
+                  </ButtonToolbar>
+                </Row>
+              </Alert>
+              {/*
+              <Alert variant="dark" style={{ textAlign: 'left' }}>
+              </Alert>
+              */}
+              <Alert variant="danger" style={{ textAlign: 'left' }}>
+                <h5>blah blah blah</h5>
+                <Row>
+                  <div>
+                    <Badge pill className='me-1' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
+                      feminine
+                    </Badge>
+                    <Badge pill className='me-2' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
+                      masculine
+                    </Badge>
+                    <Badge pill className='me-1' bg="secondary" as="button" style={{ borderWidth: 'thin' }}>
+                      Primary
+                    </Badge>
+                    <Badge pill className='me-2' bg="info" as="button" style={{ borderWidth: 'thin' }}>
+                      Primary
+                    </Badge>
+                  </div>
+                </Row>
+              </Alert>
+              <Alert variant="danger" style={{ textAlign: 'left' }}>
+                <h5>(3) ...adjust flashcard fields...</h5>
+                <Row>
+                  <ButtonGroup defaultValue={this.state.flashcardFields} size="sm">
+                    {App.flashcardFields.map(field => (
+                      <Button key={field} id={field} value={field} active={this.state.flashcardFields.includes(field)} variant='outline-secondary' onClick={(e) => this.updateFlashcardFields(field, e)}>
+                        {field}
+                      </Button>
+                    ))
+                    }
+                  </ButtonGroup>
+                </Row>
+              </Alert>
+              <Alert variant="info" style={{ textAlign: 'left' }}>
+                  <Row>
+                    <Col>
+                      <h5>(4) ...preview!</h5>
+                    </Col>
+                    {/* refresh! */}
+                    <Col style={{ textAlign: 'right' }}>
+                      <Button onClick={this.updateRecords} variant="primary">
+                        Refresh!
+                      </Button>
+                    </Col>
+                  </Row>
+                  {/* preview dataset */}
+                  <Row>
+                    <Table responsive striped bordered hover size="sm">
+                      <thead>
+                        <tr>
+                          <th key='front' style={{whiteSpace: 'nowrap'}}>Front</th>
+                          <th key='back' style={{whiteSpace: 'nowrap'}}>Back</th>
+                          {/*
+                          {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
+                              <th key={field} style={{whiteSpace: 'nowrap'}}>{field}</th>
+                          ))}
+                          */}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          this.state.flashcardsPreview.map(row => (
+                            <tr key={'tr-' + row[0] + row[1]}>
+                              <td key='front' style={{whiteSpace: 'nowrap'}}>{row[0]}</td>
+                              <td key='back' style={{whiteSpace: 'nowrap'}}>{row[1]}</td>
+                              {/*
+                              {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
+                                <td key={field} style={{whiteSpace: 'nowrap'}}>{record[field]}</td>
+                              ))}
+                              */}
+                            </tr>
+                          ))
+                        }
+                      </tbody>
+                    </Table>
+                  </Row>
+              </Alert>
+              {/* header section */}
+              <Alert variant="secondary" style={{ textAlign: 'left' }}>
+                <h5>(5) Download flashcards</h5>
                 <Row>
                   <Col>
-                    <h5>(4) ...preview!</h5>
-                  </Col>
-                  {/* refresh! */}
-                  <Col style={{ textAlign: 'right' }}>
-                    <Button onClick={this.updateRecords} variant="primary">
-                      Refresh!
+                    <Button onClick={this.downloadRecords}>
+                      Download Set ({this.state.flashcards.length} flashcards)
                     </Button>
                   </Col>
                 </Row>
-                {/* preview dataset */}
-                <Row>
-                  <Table responsive striped bordered hover size="sm">
-                    <thead>
-                      <tr>
-                        <th key='front' style={{whiteSpace: 'nowrap'}}>Front</th>
-                        <th key='back' style={{whiteSpace: 'nowrap'}}>Back</th>
-                        {/*
-                        {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
-                            <th key={field} style={{whiteSpace: 'nowrap'}}>{field}</th>
-                        ))}
-                        */}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {
-                        this.state.flashcardsPreview.map(row => (
-                          <tr key={'tr-' + row[0] + row[1]}>
-                            <td key='front' style={{whiteSpace: 'nowrap'}}>{row[0]}</td>
-                            <td key='back' style={{whiteSpace: 'nowrap'}}>{row[1]}</td>
-                            {/*
-                            {App.fields.filter(field => this.state.fields.includes(field)).map(field => (
-                              <td key={field} style={{whiteSpace: 'nowrap'}}>{record[field]}</td>
-                            ))}
-                            */}
-                          </tr>
-                        ))
-                      }
-                    </tbody>
-                  </Table>
-                </Row>
-            </Alert>
-            {/* header section */}
-            <Alert variant="secondary" style={{ textAlign: 'left' }}>
-              <h5>(5) Download flashcards</h5>
-              <Row>
-                <Col>
-                  <Button onClick={this.downloadRecords}>
-                    Download Set ({this.state.flashcards.length} flashcards)
-                  </Button>
-                </Col>
-              </Row>
-            </Alert>
-            <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
-              <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Vocab</Offcanvas.Title>
-              </Offcanvas.Header>
-              <Offcanvas.Body>
-                <Container>
-                  <Table responsive striped bordered hover size="sm">
-                    <thead>
-                      <tr>
-                        <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
-                        <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
-                        <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
-                        <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {
-                        this.state.vocab.map(row => (
-                          <tr key={'tr-' + row[0] + row[1]}>
-                            <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
-                            <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
-                            <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
-                            <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
-                          </tr>
-                        ))
-                      }
-                    </tbody>
-                  </Table>
-                </Container>
-              </Offcanvas.Body>
-            </Offcanvas>
-          </Col>
+              </Alert>
+              <Offcanvas show={this.state.showOffcanvas} onHide={(e) => this.setOffcanvas(false, e)} placement="start" scoll="true">
+                <Offcanvas.Header closeButton>
+                  <Offcanvas.Title>Vocab</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body>
+                  <Container>
+                    <Table responsive striped bordered hover size="sm">
+                      <thead>
+                        <tr>
+                          <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
+                          <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
+                          <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
+                          <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {
+                          this.state.vocab.map(row => (
+                            <tr key={'tr-' + row[0] + row[1]}>
+                              <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
+                              <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
+                              <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
+                              <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
+                            </tr>
+                          ))
+                        }
+                      </tbody>
+                    </Table>
+                  </Container>
+                </Offcanvas.Body>
+              </Offcanvas>
+            </Col>
           </Row>
         </Container>
       </div>
