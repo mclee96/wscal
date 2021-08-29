@@ -2,11 +2,14 @@ import './App.css';
 import React from 'react'
 
 import Alert from 'react-bootstrap/Alert'
+import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Col from 'react-bootstrap/Col'
+import Collapse from 'react-bootstrap/Collapse'
 import Container from 'react-bootstrap/Container'
+import Fade from 'react-bootstrap/Fade'
 import Form from 'react-bootstrap/Form'
 import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
@@ -40,6 +43,7 @@ class App extends React.Component {
       flashcards: [],
       flashcardsPreview: [],
       vocab: Data.getVocab(),
+      blah: false,
     };
 
     this.toggleFilter = this.toggleFilter.bind(this)
@@ -127,7 +131,7 @@ class App extends React.Component {
           chapters.push(chapter)
         } else {
           allNumbers = false
-          specific.push(chapter)
+          specific.push(chapter) 
         }
       })
 
@@ -197,6 +201,39 @@ class App extends React.Component {
           </p>
         </header>
         <Container>
+          <Row>
+          <Col sm md lg xl xxl="auto">
+            <Row>
+              <Button onClick={() => this.setState({ blah: !this.state.blah })}>hi!</Button>
+            </Row>
+            <Collapse in={this.state.blah} dimension="width">
+              <Container>
+                <Table responsive striped bordered hover size="sm">
+                  <thead>
+                    <tr>
+                      <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
+                      <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
+                      <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
+                      <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      this.state.vocab.map(row => (
+                        <tr key={'tr-' + row[0] + row[1]}>
+                          <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
+                          <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
+                          <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
+                          <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </Table>
+              </Container>
+            </Collapse>
+          </Col>
+          <Col>
           <Alert variant="success" style={{ textAlign: 'left' }}>
             <Row>
               <h5>(1) I want to study...</h5>
@@ -258,6 +295,25 @@ class App extends React.Component {
           <Alert variant="dark" style={{ textAlign: 'left' }}>
           </Alert>
           */}
+          <Alert variant="danger" style={{ textAlign: 'left' }}>
+            <h5>blah blah blah</h5>
+            <Row>
+              <div>
+                <Badge pill className='me-1' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
+                  feminine
+                </Badge>
+                <Badge pill className='me-2' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
+                  masculine
+                </Badge>
+                <Badge pill className='me-1' bg="secondary" as="button" style={{ borderWidth: 'thin' }}>
+                  Primary
+                </Badge>
+                <Badge pill className='me-2' bg="info" as="button" style={{ borderWidth: 'thin' }}>
+                  Primary
+                </Badge>
+              </div>
+            </Row>
+          </Alert>
           <Alert variant="danger" style={{ textAlign: 'left' }}>
             <h5>(3) ...adjust flashcard fields...</h5>
             <Row>
@@ -357,6 +413,8 @@ class App extends React.Component {
               </Container>
             </Offcanvas.Body>
           </Offcanvas>
+          </Col>
+          </Row>
         </Container>
       </div>
     );
