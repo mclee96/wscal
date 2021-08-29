@@ -20,6 +20,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 import { VariableSizeGrid } from 'react-window'
 
 import Data from './backend/Data.js'
+import Vocab from './Vocab.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { saveAs } from 'file-saver';
@@ -42,7 +43,7 @@ class App extends React.Component {
       flashcardFields: [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV],
       flashcards: [],
       flashcardsPreview: [],
-      vocab: Data.getVocab(),
+      vocab: [],
       blah: false,
     };
 
@@ -59,10 +60,6 @@ class App extends React.Component {
     [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER, ADVERB_TYPE, REFERENCE, ESV, NA28]
   static flashcardFields =
     [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV]
-
-  componentDidMount() {
-    Data.loadData().then((vocab) => this.setState({ vocab: vocab }));
-  }
 
   toggleFilter(type, value) {
     this.setState((state, props) => {
@@ -192,8 +189,8 @@ class App extends React.Component {
   }
 
   render() {
-    const vocabHeadings = [LEMMA, PART, CHAPTER, GLOSS]
-    const columnWidths = [70, 100, 50, 20]
+    const vocabHeadings = [LEMMA, CHAPTER, PART, GLOSS]
+    const columnWidths = [70, 100, 20, 50]
     return (
       <div className="App">
         <header className="App-header">
@@ -211,57 +208,7 @@ class App extends React.Component {
           <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
             <Collapse in={this.state.blah} dimension="width">
               <div>
-              <Container className="wat">
-                <InputGroup size="sm">
-                  <Form.Control
-                    aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
-                    aria-describedby="basic-addon1"
-                    placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.'
-                    onChange={this.updateChapter}
-                  />
-                </InputGroup>
-                <VariableSizeGrid 
-                  height={500}
-                  width={300}
-                  columnCount={4}
-                  columnWidth={index => columnWidths[index]}
-                  rowCount={this.state.vocab.length} 
-                  rowHeight={index => 40}>
-                  {({ columnIndex, rowIndex, style }) => (
-                    <div style={Object.assign({}, style, { textAlign: 'left' })}>
-                      {columnIndex === 0 
-                        ?  <Badge bg="primary" as="Button" style={{ borderWidth: 'thin' }}>+ add</Badge>
-                        : this.state.vocab[rowIndex][vocabHeadings[columnIndex - 1]]
-                      }
-                    </div>
-                  )}
-                </VariableSizeGrid>
-
-              {/*
-                <Table responsive striped bordered hover size="sm">
-                  <thead>
-                    <tr>
-                      <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
-                      <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
-                      <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
-                      <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      this.state.vocab.map(row => (
-                        <tr key={'tr-' + row[0] + row[1]}>
-                          <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
-                          <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
-                          <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
-                          <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
-                        </tr>
-                      ))
-                    }
-                  </tbody>
-                </Table>
-                */}
-              </Container>
+                <Vocab />
               </div>
             </Collapse>
           </Col>
