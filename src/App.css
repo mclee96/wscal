@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.table-responsive {
+  overflow-y:scroll;
+  height:200px;
+  /* max-height:300px; */
+}
+
+.wat {
+  height:300px;
+}

@@ -60,9 +60,8 @@ class App extends React.Component {
   static flashcardFields =
     [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV]
 
-
   componentDidMount() {
-    Data.loadData((records) => this.setState({ records: records }));
+    Data.loadData().then((vocab) => this.setState({ vocab: vocab }));
   }
 
   toggleFilter(type, value) {
@@ -202,19 +201,20 @@ class App extends React.Component {
         </header>
         <Container>
           <Row>
-          <Col sm md lg xl xxl="auto">
+          <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
             <Row>
               <Button onClick={() => this.setState({ blah: !this.state.blah })}>hi!</Button>
             </Row>
             <Collapse in={this.state.blah} dimension="width">
-              <Container>
+              <div>
+              <Container className="wat">
                 <Table responsive striped bordered hover size="sm">
                   <thead>
                     <tr>
                       <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
                       <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
                       <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
-                      <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
+                      {/*<th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>*/}
                     </tr>
                   </thead>
                   <tbody>
@@ -224,13 +224,14 @@ class App extends React.Component {
                           <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
                           <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
                           <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
-                          <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
+                          {/*<td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>*/}
                         </tr>
                       ))
                     }
                   </tbody>
                 </Table>
               </Container>
+              </div>
             </Collapse>
           </Col>
           <Col>

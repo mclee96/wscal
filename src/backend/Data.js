@@ -14,43 +14,46 @@ class Data {
   static na28 = {}
 
   // idempotent
-  static loadData(callback) {
-    // legacy reset
-    if (Object.keys(localStorage).some(key => key.includes('/wscal/static/media'))) {
-      localStorage.clear()
-    }
+  static loadData() {
+    return new Promise((resolve, reject) => {
+      // legacy reset
+      if (Object.keys(localStorage).some(key => key.includes('/wscal/static/media'))) {
+        localStorage.clear()
+      }
 
-    if (Data.vocab.length === 0) {
-      Data.loadFile('vocab', vocabFilepath, (contents) => {
-        let rows = []
-        Papa.parse(contents, { delimiter: '\t', header: true }).data
-          .forEach(row => rows.push(row))
-        Data.vocab = rows
-      })
-    }
-
-    if (Data.morphs.length === 0) {
-      Data.loadFile('morphs', morphFilepath, (contents) => {
+      if (Data.vocab.length === 0) {
+        Data.loadFile('vocab', vocabFilepath, (contents) => {
           let rows = []
           Papa.parse(contents, { delimiter: '\t', header: true }).data
             .forEach(row => rows.push(row))
-          Data.morphs = rows
-      })
-    }
+          Data.vocab = rows
+          resolve(Data.vocab)
+        })
+      }
 
-    if (Object.keys(Data.esv).length === 0) {
-      Data.loadFile('esv', esvFilepath, (contents) => {
-        Papa.parse(contents, { delimiter: '\t', header: true }).data
-          .forEach(row => Data.esv[row[ABBR]] = row[TEXT])
-      })
-    }
+      if (Data.morphs.length === 0) {
+        Data.loadFile('morphs', morphFilepath, (contents) => {
+            let rows = []
+            Papa.parse(contents, { delimiter: '\t', header: true }).data
+              .forEach(row => rows.push(row))
+            Data.morphs = rows
+        })
+      }
 
-    if (Object.keys(Data.na28).length === 0) {
-      Data.loadFile('na28', na28Filepath, (contents) => {
-        Papa.parse(contents, { delimiter: '\t', header: true }).data
-          .forEach(row => Data.na28[row[ABBR]] = row[TEXT])
-      })
-    }
+      if (Object.keys(Data.esv).length === 0) {
+        Data.loadFile('esv', esvFilepath, (contents) => {
+          Papa.parse(contents, { delimiter: '\t', header: true }).data
+            .forEach(row => Data.esv[row[ABBR]] = row[TEXT])
+        })
+      }
+
+      if (Object.keys(Data.na28).length === 0) {
+        Data.loadFile('na28', na28Filepath, (contents) => {
+          Papa.parse(contents, { delimiter: '\t', header: true }).data
+            .forEach(row => Data.na28[row[ABBR]] = row[TEXT])
+        })
+      }
+    })
   }
 
   static loadFile(id, filepath, callback) {
