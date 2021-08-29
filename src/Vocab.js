@@ -28,6 +28,7 @@ class Vocab extends React.Component {
 
     this.toggleSelect = this.toggleSelect.bind(this)
     this.search = this.search.bind(this)
+    this.addAll = this.addAll.bind(this)
   }
 
   componentDidMount() {
@@ -48,9 +49,8 @@ class Vocab extends React.Component {
     })
   }
 
-  search(e) {
+  search(text, e) {
     e.preventDefault()
-    let text = e.target[0].value
 
     this.setState((state, props) => {
       return {
@@ -58,6 +58,9 @@ class Vocab extends React.Component {
           .filter(row => Object.values(row).join().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(text.normalize('NFD')))
       }
     })
+  }
+
+  addAll() {
   }
 
   render() {
@@ -68,17 +71,18 @@ class Vocab extends React.Component {
       <div style={{ maxWidth: '19em' }}>
         <Row className="me-1">
           <Col>
-            <Form onSubmit={this.search}>
+            <Form onSubmit={(e) => this.search(e.target[0].value, e)}>
               <InputGroup size="sm">
                 <Form.Control
                   type="text"
                   id="wat"
                   aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                   aria-describedby="basic-addon1"
-                  placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.' />
+                  placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.' 
+                  onChange={(e) => this.search(e.target.value, e)} />
                 <Button
                   size="sm"
-                  type="submit">Search</Button>
+                  type="submit">Add All</Button>
               </InputGroup>
             </Form>
           </Col>
@@ -91,7 +95,7 @@ class Vocab extends React.Component {
               columnCount={5}
               columnWidth={index => columnWidths[index]}
               rowCount={this.state.display.length}
-              rowHeight={index => 40}>
+              rowHeight={index => 30}>
               {({ columnIndex, rowIndex, style }) => (
                 <div style={Object.assign({}, style, { textAlign: 'left' })}>
                   {columnIndex === 0

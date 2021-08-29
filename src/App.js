@@ -44,7 +44,7 @@ class App extends React.Component {
       flashcards: [],
       flashcardsPreview: [],
       vocab: [],
-      blah: false,
+      showVocab: true,
     };
 
     this.toggleFilter = this.toggleFilter.bind(this)
@@ -201,14 +201,14 @@ class App extends React.Component {
         <Container fluid>
           <Row>
             <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
-              <Button onClick={() => this.setState({ blah: !this.state.blah })}>
+              <Button onClick={() => this.setState({ showVocab: !this.state.showVocab })}>
                 >
               </Button>
             </Col>
           </Row>
           <Row className="mt-3">
             <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto" className="pe-0">
-              <Collapse in={this.state.blah} dimension="width">
+              <Collapse in={this.state.showVocab} dimension="width">
                 <div>
                   <Vocab />
                 </div>
@@ -277,7 +277,7 @@ class App extends React.Component {
               </Alert>
               */}
               <Alert variant="danger" style={{ textAlign: 'left' }}>
-                <h5>blah blah blah</h5>
+                <h5>showVocab showVocab showVocab</h5>
                 <Row>
                   <div>
                     <Badge pill className='me-1' bg="primary" as="button" style={{ borderWidth: 'thin' }}>
