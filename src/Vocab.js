@@ -3,11 +3,11 @@ import React from 'react'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col'
-import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Row from 'react-bootstrap/Row'
 import ToggleButton from 'react-bootstrap/ToggleButton'
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
 import { VariableSizeGrid } from 'react-window'
 
@@ -16,6 +16,7 @@ import Data from './backend/Data.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {LEMMA, CHAPTER, GLOSS, PART } from './backend/Filters.js'
+import {NOUN, VERB, ADJECTIVE, PREPOSITION, PRONOUN, ADVERB, CONJUNCTION } from './backend/Filters.js'
 
 class Vocab extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Vocab extends React.Component {
     this.state = { 
       display: [],
       selected: props.selected,
+      parts: [],
     }
 
     this.searchTimeout = 0
@@ -31,6 +33,7 @@ class Vocab extends React.Component {
 
     this.search = this.search.bind(this)
     this.addAll = this.addAll.bind(this)
+    this.togglePart = this.togglePart.bind(this)
   }
 
   componentDidMount() {
@@ -44,6 +47,19 @@ class Vocab extends React.Component {
     if (prevProps.selected !== this.props.selected) {
       this.setState({ selected: this.props.selected })
     }
+  }
+
+  togglePart(part) {
+    this.setState((state, props) => {
+      let partIndex = state.parts.indexOf(part)
+      return {
+        parts: (partIndex > -1) 
+          // remove
+          ?  state.parts.slice(0, partIndex).concat(state.parts.slice(partIndex + 1))
+          // add
+          :  [...state.parts].concat([part])
+      }
+    })
   }
 
   search(criteria, e) {
@@ -60,7 +76,11 @@ class Vocab extends React.Component {
   addAll(criteria, e) {
     e.preventDefault()
 
-    this.onSelect(criteria, this.filter(criteria), 'add')
+    criteria = criteria ? criteria : 'all'
+    let display = this.state.parts
+      ? criteria + ' ' + this.state.parts.map(part => part + 's').join()
+      : criteria
+    this.onSelect(display, this.filter(criteria), 'add')
   }
 
   filter(criteria) {
@@ -114,6 +134,7 @@ class Vocab extends React.Component {
             case 'advbs':
             case 'advb':
             case 'adv': search = 'adverb'; break;
+            default:
           }
 
           let parts = ['noun', 'verb', 'adjective', 'preposition', 'conjunction', 'adverb']
@@ -158,20 +179,85 @@ class Vocab extends React.Component {
                     id="wat"
                     aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                     aria-describedby="basic-addon1"
-                    placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.' 
+                    placeholder='e.g. "ch2-7 verbs" or "πας"'
                     onChange={(e) => this.search(e.target.value, e)} />
                   <Button
+                    disabled={this.state.display.length <= 0}
                     size="sm"
-                    type="submit">Add All</Button>
+                    type="submit">Add All ({this.state.display.length})</Button>
                 </InputGroup>
               </Form>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <InputGroup size="sm">
+                <ToggleButtonGroup type="checkbox" size="sm">
+                  <ToggleButton 
+                    variant="outline-secondary" 
+                    value="nouns" 
+                    id="nouns-filter" 
+                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    onClick={(e) => this.togglePart(NOUN, e)}>
+                    n.
+                  </ToggleButton>
+                  <ToggleButton 
+                    variant="outline-secondary" 
+                    value="verbs" 
+                    id="verbs-filter" 
+                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    onClick={(e) => this.togglePart(VERB, e)}>
+                    v.
+                  </ToggleButton>
+                  <ToggleButton 
+                    variant="outline-secondary" 
+                    value="adjectives" 
+                    id="adjectives-filter" 
+                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    onClick={(e) => this.togglePart(ADJECTIVE, e)}>
+                    adj.
+                  </ToggleButton>
+                  <ToggleButton 
+                    variant="outline-secondary" 
+                    value="prepositions" 
+                    id="prepositions-filter" 
+                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    onClick={(e) => this.togglePart(PREPOSITION, e)}>
+                    prep.
+                  </ToggleButton>
+                  <ToggleButton 
+                    variant="outline-secondary" 
+                    value="pronouns" 
+                    id="pronouns-filter" 
+                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    onClick={(e) => this.togglePart(PRONOUN, e)}>
+                    pron.
+                  </ToggleButton>
+                  <ToggleButton 
+                    variant="outline-secondary" 
+                    value="adverb" 
+                    id="adverbs-filter" 
+                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    onClick={(e) => this.togglePart(ADVERB, e)}>
+                    adv.
+                  </ToggleButton>
+                  <ToggleButton 
+                    variant="outline-secondary" 
+                    value="conjunctions" 
+                    id="conjunctions-filter" 
+                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    onClick={(e) => this.togglePart(CONJUNCTION, e)}>
+                    conj.
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </InputGroup>
             </Col>
           </Row>
           <Row className="mt-3">
             <Col>
               <VariableSizeGrid
                 height={480}
-                width={300}
+                width={280}
                 columnCount={5}
                 columnWidth={index => columnWidths[index]}
                 rowCount={this.state.display.length}
