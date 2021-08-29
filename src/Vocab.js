@@ -27,6 +27,7 @@ class Vocab extends React.Component {
       parts: [],
     }
 
+    this.criteria = ''
     this.searchTimeout = 0
     this.vocab = []
     this.onSelect = props.onSelect.bind(this)
@@ -52,17 +53,20 @@ class Vocab extends React.Component {
   togglePart(part) {
     this.setState((state, props) => {
       let partIndex = state.parts.indexOf(part)
-      return {
-        parts: (partIndex > -1) 
+      let parts = (partIndex > -1) 
           // remove
           ?  state.parts.slice(0, partIndex).concat(state.parts.slice(partIndex + 1))
           // add
           :  [...state.parts].concat([part])
+      return {
+        parts: parts,
+        display: this.filter(this.criteria, parts)
       }
     })
   }
 
   search(criteria, e) {
+    this.criteria = criteria
     e.preventDefault()
 
     if (this.searchTimeout) {
@@ -70,7 +74,7 @@ class Vocab extends React.Component {
     }
 
     this.searchTimeout = 
-      setTimeout(() => this.setState({ display: this.filter(criteria) }), 100)
+      setTimeout(() => this.setState({ display: this.filter(criteria, this.state.parts) }), 100)
   }
 
   addAll(criteria, e) {
@@ -80,10 +84,10 @@ class Vocab extends React.Component {
     let display = this.state.parts
       ? criteria + ' ' + this.state.parts.map(part => part + 's').join()
       : criteria
-    this.onSelect(display, this.filter(criteria), 'add')
+    this.onSelect(display, this.filter(criteria, this.state.parts), 'add')
   }
 
-  filter(criteria) {
+  filter(criteria, parts) {
     let filtered = []
     criteria.trim().split(',')
       .map(crit => {
@@ -104,11 +108,14 @@ class Vocab extends React.Component {
             for (var i = parseInt(range[0]); i < parseInt(range[1]) + 1; i++) {
               rows = rows.concat(
                 this.vocab
-                    .filter(row => Object.values(row)
+                    .filter(row => {
+                      let normalized = Object.values(row)
                         .join()
                         .normalize('NFD')
                         .replace(/[\u0300-\u036f]/g, "")
-                        .endsWith(',' + i.toString())))
+                      return normalized.endsWith(',' + i.toString())
+                          && (parts.length === 0 || parts.some(part => normalized.includes(',' + part + ',')))
+                    }))
             }
             return rows
           }
@@ -137,10 +144,10 @@ class Vocab extends React.Component {
             default:
           }
 
-          let parts = ['noun', 'verb', 'adjective', 'preposition', 'conjunction', 'adverb']
+          let partsArr = ['noun', 'verb', 'adjective', 'preposition', 'conjunction', 'adverb']
 
           // handle part searching
-          if (parts.includes(search)) {
+          if (partsArr.includes(search)) {
             return this.vocab
                 .filter(row => Object.values(row)
                     .join()
@@ -151,11 +158,14 @@ class Vocab extends React.Component {
 
           // default search
           return this.vocab
-              .filter(row => Object.values(row)
+              .filter(row => {
+                let normalized = Object.values(row)
                   .join()
                   .normalize('NFD')
                   .replace(/[\u0300-\u036f]/g, "")
-                  .includes(search.normalize('NFD')))
+                return normalized.includes(search.normalize('NFD'))
+                    && (parts.length === 0 || parts.some(part => normalized.includes(',' + part + ',')))
+              })
       })
       .forEach(arr => filtered = filtered.concat(arr))
 
