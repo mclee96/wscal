@@ -9,15 +9,15 @@ import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import Col from 'react-bootstrap/Col'
 import Collapse from 'react-bootstrap/Collapse'
 import Container from 'react-bootstrap/Container'
-import Fade from 'react-bootstrap/Fade'
 import Form from 'react-bootstrap/Form'
-import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Row from 'react-bootstrap/Row'
 import Table from 'react-bootstrap/Table'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
+
+import { VariableSizeGrid } from 'react-window'
 
 import Data from './backend/Data.js'
 
@@ -192,6 +192,8 @@ class App extends React.Component {
   }
 
   render() {
+    const vocabHeadings = [LEMMA, PART, CHAPTER, GLOSS]
+    const columnWidths = [70, 100, 50, 20]
     return (
       <div className="App">
         <header className="App-header">
@@ -199,22 +201,50 @@ class App extends React.Component {
             "SM Baugh A Greek Primer"
           </p>
         </header>
-        <Container>
+        <Container fluid>
           <Row>
           <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
-            <Row>
-              <Button onClick={() => this.setState({ blah: !this.state.blah })}>hi!</Button>
-            </Row>
+            <Button onClick={() => this.setState({ blah: !this.state.blah })}>
+              >
+            </Button>
+          </Col>
+          <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
             <Collapse in={this.state.blah} dimension="width">
               <div>
               <Container className="wat">
+                <InputGroup size="sm">
+                  <Form.Control
+                    aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
+                    aria-describedby="basic-addon1"
+                    placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.'
+                    onChange={this.updateChapter}
+                  />
+                </InputGroup>
+                <VariableSizeGrid 
+                  height={500}
+                  width={300}
+                  columnCount={4}
+                  columnWidth={index => columnWidths[index]}
+                  rowCount={this.state.vocab.length} 
+                  rowHeight={index => 40}>
+                  {({ columnIndex, rowIndex, style }) => (
+                    <div style={Object.assign({}, style, { textAlign: 'left' })}>
+                      {columnIndex === 0 
+                        ?  <Badge bg="primary" as="Button" style={{ borderWidth: 'thin' }}>+ add</Badge>
+                        : this.state.vocab[rowIndex][vocabHeadings[columnIndex - 1]]
+                      }
+                    </div>
+                  )}
+                </VariableSizeGrid>
+
+              {/*
                 <Table responsive striped bordered hover size="sm">
                   <thead>
                     <tr>
                       <th key='lemma' style={{whiteSpace: 'nowrap'}}>Lemma</th>
                       <th key='part' style={{whiteSpace: 'nowrap'}}>Part</th>
                       <th key='chapter' style={{whiteSpace: 'nowrap'}}>Ch</th>
-                      {/*<th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>*/}
+                      <th key='gloss' style={{whiteSpace: 'nowrap'}}>Gloss</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -224,12 +254,13 @@ class App extends React.Component {
                           <td key='lemma' style={{whiteSpace: 'nowrap'}}>{row[LEMMA]}</td>
                           <td key='part' style={{whiteSpace: 'nowrap'}}>{row[PART]}</td>
                           <td key='chapter' style={{whiteSpace: 'nowrap'}}>{row[CHAPTER]}</td>
-                          {/*<td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>*/}
+                          <td key='gloss' style={{whiteSpace: 'nowrap'}}>{row[GLOSS]}</td>
                         </tr>
                       ))
                     }
                   </tbody>
                 </Table>
+                */}
               </Container>
               </div>
             </Collapse>
