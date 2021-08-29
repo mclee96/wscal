@@ -22,14 +22,16 @@ class Vocab extends React.Component {
     super(props)
     this.state = { 
       vocab: [],
+      display:[],
       selected: [],
     }
 
     this.toggleSelect = this.toggleSelect.bind(this)
+    this.search = this.search.bind(this)
   }
 
   componentDidMount() {
-    Data.loadData().then((vocab) => this.setState({ vocab: vocab }));
+    Data.loadData().then((vocab) => this.setState({ vocab: vocab, display: vocab }));
   }
 
   toggleSelect(vocabIndex) {
@@ -44,25 +46,41 @@ class Vocab extends React.Component {
                    .concat(state.selected.slice(sliceIndex + 1)) }
       }
     })
-    console.log(this.state.selected)
+  }
+
+  search(e) {
+    e.preventDefault()
+    let text = e.target[0].value
+
+    this.setState((state, props) => {
+      return {
+        display: state.vocab
+          .filter(row => Object.values(row).join().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(text.normalize('NFD')))
+      }
+    })
   }
 
   render() {
     const vocabHeadings = [LEMMA, CHAPTER, PART, GLOSS]
-    const columnWidths = [70, 120, 30, 50]
+    const columnWidths = [50, 120, 30, 100, 500]
 
     return (
       <div style={{ maxWidth: '19em' }}>
         <Row className="me-1">
           <Col>
-            <InputGroup size="sm">
-              <InputGroup.Text>Search</InputGroup.Text>
-              <Form.Control
-                aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
-                aria-describedby="basic-addon1"
-                placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.'
-                onChange={this.updateChapter} />
-            </InputGroup>
+            <Form onSubmit={this.search}>
+              <InputGroup size="sm">
+                <Form.Control
+                  type="text"
+                  id="wat"
+                  aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
+                  aria-describedby="basic-addon1"
+                  placeholder='e.g. "ch2,10-11,πᾶς,εἰμί". Leave blank for any chapter/word.' />
+                <Button
+                  size="sm"
+                  type="submit">Search</Button>
+              </InputGroup>
+            </Form>
           </Col>
         </Row>
         <Row className="mt-3">
@@ -70,9 +88,9 @@ class Vocab extends React.Component {
             <VariableSizeGrid
               height={480}
               width={300}
-              columnCount={4}
+              columnCount={5}
               columnWidth={index => columnWidths[index]}
-              rowCount={this.state.vocab.length}
+              rowCount={this.state.display.length}
               rowHeight={index => 40}>
               {({ columnIndex, rowIndex, style }) => (
                 <div style={Object.assign({}, style, { textAlign: 'left' })}>
@@ -92,7 +110,7 @@ class Vocab extends React.Component {
                                  fontWeight: 700 }}>
                         +
                       </ToggleButton>
-                    : this.state.vocab[rowIndex][vocabHeadings[columnIndex - 1]]
+                    : this.state.display[rowIndex][vocabHeadings[columnIndex - 1]]
                   }
                 </div>
               )}
