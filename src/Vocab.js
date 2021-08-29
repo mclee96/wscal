@@ -52,10 +52,11 @@ class Vocab extends React.Component {
     const columnWidths = [70, 120, 30, 50]
 
     return (
-      <Container>
+      <div style={{ maxWidth: '19em' }}>
         <Row>
           <Col>
             <InputGroup size="sm">
+              <InputGroup.Text>Search</InputGroup.Text>
               <Form.Control
                 aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                 aria-describedby="basic-addon1"
@@ -64,7 +65,7 @@ class Vocab extends React.Component {
             </InputGroup>
           </Col>
         </Row>
-        <Row>
+        <Row className="mt-3">
           <Col>
             <VariableSizeGrid
               height={480}
@@ -114,7 +115,7 @@ class Vocab extends React.Component {
             }
           </Col>
         </Row>
-      </Container>
+      </div>
     );
   }
 }
