@@ -299,18 +299,20 @@ class Vocab extends React.Component {
               </VariableSizeGrid>
             </Col>
           </Row>
+          {/*
           <div>
             <hr />
           </div>
-        <div>
-        * chapters 1-30 cover S.M. Baugh's "A Greek Primer"
-        </div>
-        <div>
-        * chapters  31-42 cover S.M. Baugh's "First John Reader"
-        </div>
-        <div>
-        * so-called "chapters" beyond that are just...
-        </div>
+          <div>
+          * chapters 1-30 cover S.M. Baugh's "A Greek Primer"
+          </div>
+          <div>
+          * chapters  31-42 cover S.M. Baugh's "First John Reader"
+          </div>
+          <div>
+          * so-called "chapters" beyond that are just...
+          </div>
+          */}
         </Alert>
       </div>
     );

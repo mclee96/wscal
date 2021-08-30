@@ -261,31 +261,6 @@ class App extends React.Component {
                       }
                     </Col>
                   </Row>
-                  <InputGroup size="sm">
-                    <ToggleButtonGroup type="checkbox" size="sm">
-                      <ToggleButton variant="outline-secondary" value="nouns" id="nouns-filter" onClick={(e) => this.toggleFilter(PART, NOUN, e)}>
-                        nouns
-                      </ToggleButton>
-                      <ToggleButton variant="outline-secondary" value="verbs" id="verbs-filter" onClick={(e) => this.toggleFilter(PART, VERB, e)}>
-                        verbs
-                      </ToggleButton>
-                      <ToggleButton variant="outline-secondary" value="adjectives" id="adjectives-filter" onClick={(e) => this.toggleFilter(PART, ADJECTIVE, e)}>
-                        adjectives
-                      </ToggleButton>
-                      <ToggleButton variant="outline-secondary" value="prepositions" id="prepositions-filter" onClick={(e) => this.toggleFilter(PART, PREPOSITION, e)}>
-                        preps
-                      </ToggleButton>
-                      <ToggleButton variant="outline-secondary" value="pronouns" id="pronouns-filter" onClick={(e) => this.toggleFilter(PART, PRONOUN, e)}>
-                        pronouns
-                      </ToggleButton>
-                      <ToggleButton variant="outline-secondary" value="adverb" id="adverbs-filter" onClick={(e) => this.toggleFilter(PART, ADVERB, e)}>
-                        adverbs
-                      </ToggleButton>
-                      <ToggleButton variant="outline-secondary" value="conjunctions" id="conjunctions-filter" onClick={(e) => this.toggleFilter(PART, CONJUNCTION, e)}>
-                        conjunctions
-                      </ToggleButton>
-                    </ToggleButtonGroup>
-                  </InputGroup>
                 </Row>
                 <Row style={{ marginTop: '1rem' }}>
                   <h5>(2) ...with filters...</h5>
