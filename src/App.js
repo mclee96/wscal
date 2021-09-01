@@ -34,7 +34,6 @@ class App extends React.Component {
       filters: {},
       fields: [RESULT, LEMMA, GENDER, CASE, TENSE, VOICE, MOOD, PERSON, NUMBER, GLOSS, PART, CHAPTER],
       limit: 10,
-      chapters: '',
       flashcardFields: [RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, ESV],
       flashcards: [],
       flashcardsPreview: [],
@@ -49,7 +48,6 @@ class App extends React.Component {
     this.updateFields = this.updateFields.bind(this)
     this.updateFlashcardFields = this.updateFlashcardFields.bind(this)
     this.updateRecords = this.updateRecords.bind(this)
-    this.updateChapter = this.updateChapter.bind(this)
     this.toggleSelect = this.toggleSelect.bind(this)
     this.downloadRecords = this.downloadRecords.bind(this)
     this.getSelected = this.getSelected.bind(this)
@@ -78,10 +76,6 @@ class App extends React.Component {
       return { filters: Object.assign({}, state.filters, { [type]: newFilters }) }
     })
     // TODO: refresh here?
-  }
-
-  updateChapter(value) {
-    this.setState({ chapters: value })
   }
 
   toggleSelect(display, rows, mode) {
@@ -136,37 +130,10 @@ class App extends React.Component {
   updateRecords() {
     let filters = Object.assign({}, this.state.filters)
 
-    let chapters = []
-    let specific = []
-    var allNumbers = true
-    this.state.chapters.replaceAll('ch', '').split(',')
-      .map(chapter => chapter.trim())
-      .forEach(chapter => {
-        if (chapter.includes('-')) {
-          let range = chapter.split('-')
-          for (var i = parseInt(range[0]); i < parseInt(range[1]) + 1; i++) {
-            chapters.push(i.toString())
-          }
-        } else if (chapter === '') {
-          // skip
-        } else if (!isNaN(chapter)) {
-          chapters.push(chapter)
-        } else {
-          allNumbers = false
-          specific.push(chapter) 
-        }
-      })
-
-    if (allNumbers) {
-      filters[CHAPTER] = chapters
-      filters[LEMMA] = []
-    } else {
-      specific.push.apply(specific, 
-          Data.getVocab(chapters)
-            .map(row => row[LEMMA]))
-      filters[CHAPTER] = []
-      filters[LEMMA] = specific
-    }
+    var vocab = []
+    Object.values(this.state.selected)
+      .forEach(arr => vocab = vocab.concat(arr))
+    filters[LEMMA] = vocab.map(row => row[LEMMA])
 
     let records = Data.getRecords(filters)
     let flashcards = Data.getFlashcards(filters, this.state.flashcardFields)
@@ -189,8 +156,8 @@ class App extends React.Component {
     var blob = new Blob([ text ], { type: "text/plain;charset=utf-8" })
 
     var outputFilename = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '.').replaceAll(':', '∶').replace(', ', '_') + '_flashcards_'
-    if (this.state.chapters !== null) {
-      outputFilename += this.state.chapters
+    if (this.state.selected !== null) {
+      outputFilename += Object.keys(this.state.selected).join()
     }
     if (Object.values(this.state.filters).some(filterSet => filterSet.length > 0)) {
       outputFilename += '_'
