@@ -15,7 +15,8 @@ import Table from 'react-bootstrap/Table'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
-import Data from './backend/Data.js'
+import Data from './data/Data.js'
+import Engine from './backend/Engine.js'
 import Vocab from './Vocab.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -135,8 +136,8 @@ class App extends React.Component {
       .forEach(arr => vocab = vocab.concat(arr))
     filters[LEMMA] = vocab.map(row => row[LEMMA])
 
-    let records = Data.getRecords(filters)
-    let flashcards = Data.getFlashcards(filters, this.state.flashcardFields)
+    let records = Engine.getRecords(filters)
+    let flashcards = Engine.getFlashcards(filters, this.state.flashcardFields)
     const index = Math.floor(Math.random() * records.length - this.state.limit)
     const flashcardsIndex = flashcards.length > this.state.limit
       ?  Math.floor(Math.random() * (flashcards.length - this.state.limit))
@@ -184,6 +185,7 @@ class App extends React.Component {
           <p></p>
         </header>
         <Container fluid>
+          {/*
           <Row>
             <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto">
               <ToggleButton 
@@ -198,6 +200,7 @@ class App extends React.Component {
               </ToggleButton>
             </Col>
           </Row>
+          */}
           <Row className="mt-3">
             <Col sm="3" md="3" lg="3" xl="3" xxl="3" className="pe-0">
               <Collapse in={this.state.showVocab} dimension="width">

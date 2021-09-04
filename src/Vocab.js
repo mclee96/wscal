@@ -11,7 +11,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
 import { VariableSizeGrid } from 'react-window'
 
-import Data from './backend/Data.js'
+import Data from './data/Data.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
