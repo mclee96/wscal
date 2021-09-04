@@ -199,7 +199,7 @@ class App extends React.Component {
             </Col>
           </Row>
           <Row className="mt-3">
-            <Col sm="auto" md="auto" lg="auto" xl="auto" xxl="auto" className="pe-0">
+            <Col sm="3" md="3" lg="3" xl="3" xxl="3" className="pe-0">
               <Collapse in={this.state.showVocab} dimension="width">
                 <div>
                   <Vocab 
@@ -208,7 +208,7 @@ class App extends React.Component {
                 </div>
               </Collapse>
             </Col>
-            <Col className="ps-0">
+            <Col className="ps-0" sm="9" md="9" lg="9" xl="9" xxl="9">
               <Alert variant="success" style={{ textAlign: 'left' }}>
                 <Row>
                   <h5>(1) I want to study...</h5>

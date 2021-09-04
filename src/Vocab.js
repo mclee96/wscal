@@ -189,7 +189,7 @@ class Vocab extends React.Component {
                     id="wat"
                     aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                     aria-describedby="basic-addon1"
-                    placeholder='e.g. "ch2-7 verbs" or "πας"'
+                    placeholder='e.g. "ch2-7" or "πας"'
                     onChange={(e) => this.search(e.target.value, e)} />
                   <Button
                     disabled={this.state.display.length <= 0}
