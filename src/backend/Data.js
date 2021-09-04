@@ -1,23 +1,23 @@
 import morphFilepath from './morphs.tsv'
-import esvFilepath from './esv.tsv'
-import na28Filepath from './na28.tsv'
+import englishFilepath from './net.tsv'
+import greekFilepath from './na28.tsv'
 import vocabFilepath from './vocab.tsv'
 
-import { ABBR, CHAPTER, ESV, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, NA28, REFERENCE, TEXT, PARTICIPLE } from './Filters.js'
+import { ABBR, CHAPTER, ENGLISH, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, GREEK, REFERENCE, TEXT, PARTICIPLE } from './Filters.js'
 
 const Papa = require('papaparse');
 
 class Data {
   static vocab = []
   static morphs = []
-  static esv = {}
-  static na28 = {}
+  static english = {}
+  static greek = {}
 
   // idempotent
   static loadData() {
     return new Promise((resolve, reject) => {
       // legacy reset
-      if (Object.keys(localStorage).some(key => key.includes('/wscal/static/media'))) {
+      if (Object.keys(localStorage).some(key => key.includes('esv_filepath') || key.includes('na28_filepath'))) {
         localStorage.clear()
       }
 
@@ -42,17 +42,17 @@ class Data {
         })
       }
 
-      if (Object.keys(Data.esv).length === 0) {
-        Data.loadFile('esv', esvFilepath, (contents) => {
-          Papa.parse(contents, { delimiter: '\t', header: true }).data
-            .forEach(row => Data.esv[row[ABBR]] = row[TEXT])
+      if (Object.keys(Data.english).length === 0) {
+        Data.loadFile('english', englishFilepath, (contents) => {
+          Papa.parse(contents, { delimiter: '\t', header: true, quoteChar: '`' }).data
+            .forEach(row => Data.english[row[ABBR]] = row[TEXT])
         })
       }
 
-      if (Object.keys(Data.na28).length === 0) {
-        Data.loadFile('na28', na28Filepath, (contents) => {
+      if (Object.keys(Data.greek).length === 0) {
+        Data.loadFile('greek', greekFilepath, (contents) => {
           Papa.parse(contents, { delimiter: '\t', header: true }).data
-            .forEach(row => Data.na28[row[ABBR]] = row[TEXT])
+            .forEach(row => Data.greek[row[ABBR]] = row[TEXT])
         })
       }
     })
@@ -92,8 +92,8 @@ class Data {
             row, 
             { 
               [REFERENCE]: reference,
-              [ESV]: Data.esv[reference],
-              [NA28]: Data.na28[reference],
+              [ENGLISH]: Data.english[reference],
+              [GREEK]: Data.greek[reference],
             })
       })
   }
@@ -105,29 +105,29 @@ class Data {
             var fields;
             switch (row[PART]) {
               case "noun":
-                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ENGLISH ]; break;
               case "verb":
                 fields = (row[MOOD] === PARTICIPLE)
-                  ? [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, GENDER, CASE, NUMBER, ESV ]
-                  : [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, PERSON, NUMBER, ESV ]; 
+                  ? [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, GENDER, CASE, NUMBER, ENGLISH ]
+                  : [ RESULT, LEMMA, GLOSS, TENSE, VOICE, MOOD, PERSON, NUMBER, ENGLISH ]; 
                 break;
               case "adjective":
-                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, GENDER, CASE, NUMBER, ENGLISH ]; break;
               case "conjunction":
               case "preposition, adverb":
               case "preposition":
-                fields = [ RESULT, LEMMA, GLOSS, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, ENGLISH ]; break;
               case "pronoun":
               case "pronoun, adjective":
               case "adjective, pronoun":
-                fields = [ RESULT, LEMMA, GLOSS, PERSON, GENDER, CASE, NUMBER, ESV ]; break;
+                fields = [ RESULT, LEMMA, GLOSS, PERSON, GENDER, CASE, NUMBER, ENGLISH ]; break;
               default:
                 fields = [ RESULT ]; break;
             }
             return [row, fields.filter(field => validFields.includes(field))]
           })
           .reduce((l, r) => {
-            let groupby = r[1].filter(field => field !== ESV).map(field => r[0][field]).join()
+            let groupby = r[1].filter(field => field !== ENGLISH).map(field => r[0][field]).join()
             l[groupby] = (l[groupby] || r)
             return l
           }, {}))
@@ -140,8 +140,8 @@ class Data {
               .map(field => {
                 if (field === GLOSS) {
                   return '("' + row[GLOSS]+ '")';
-                } else if (field === ESV) {
-                  return "<> " + row[REFERENCE] + " " + row[ESV]
+                } else if (field === ENGLISH) {
+                  return "<> " + row[REFERENCE] + " " + row[ENGLISH]
                 } else {
                   return row[field]
                 }

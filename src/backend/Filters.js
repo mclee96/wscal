@@ -64,8 +64,8 @@ export const TEXT = "Text"
 export const ADVERB_TYPE = "Adverb/particle Type"
 
 // bibles
-export const ESV = "Esv"
-export const NA28 = "Na28"
+export const ENGLISH = "English"
+export const GREEK = "Greek"
 export const ABBR = "Abbr"
 export const REFERENCE = "Reference"
 
