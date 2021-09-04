@@ -18,7 +18,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {LEMMA, CHAPTER, GLOSS, PART } from './backend/Filters.js'
 import {NOUN, VERB, ADJECTIVE, PREPOSITION, PRONOUN, ADVERB, CONJUNCTION } from './backend/Filters.js'
 
-class Vocab extends React.Component {
+class VocabSelect extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
@@ -319,4 +319,4 @@ class Vocab extends React.Component {
   }
 }
 
-export default Vocab;
+export default VocabSelect;

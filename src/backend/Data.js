@@ -3,7 +3,7 @@ import englishFilepath from '../data/net.tsv'
 import greekFilepath from '../data/na28.tsv'
 import vocabFilepath from '../data/vocab.tsv'
 
-import { ABBR, CHAPTER, ENGLISH, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, GREEK, REFERENCE, TEXT, PARTICIPLE } from './Filters.js'
+import { ABBR, TEXT } from './Filters.js'
 
 const Papa = require('papaparse');
 

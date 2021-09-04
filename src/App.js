@@ -17,7 +17,7 @@ import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
 import Data from './backend/Data.js'
 import Engine from './backend/Engine.js'
-import Vocab from './Vocab.js'
+import VocabSelect from './VocabSelect.js'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { saveAs } from 'file-saver';
@@ -206,7 +206,7 @@ class App extends React.Component {
             <Col sm="3" md="3" lg="3" xl="3" xxl="3" className="pe-0">
               <Collapse in={this.state.showVocab} dimension="width">
                 <div>
-                  <Vocab 
+                  <VocabSelect
                     selected={this.getSelected()}
                     onSelect={this.toggleSelect}/>
                 </div>
@@ -278,6 +278,12 @@ class App extends React.Component {
                     <Col style={{ textAlign: 'right' }}>
                       <Button onClick={this.updateRecords} variant="primary">
                         Refresh!
+                      </Button>
+                      <Button onClick={this.updateRecords} variant="primary">
+                        Generate Translation Exercises
+                      </Button>
+                      <Button onClick={this.updateRecords} variant="primary">
+                        Flip
                       </Button>
                     </Col>
                   </Row>

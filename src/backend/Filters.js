@@ -62,6 +62,7 @@ export const LEMMA = "Lemma";
 export const RESULT = "Result"
 export const TEXT = "Text"
 export const ADVERB_TYPE = "Adverb/particle Type"
+export const SENSE = "Sense"
 
 // bibles
 export const ENGLISH = "English"

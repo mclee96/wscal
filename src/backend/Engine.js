@@ -1,14 +1,18 @@
 import Data from './Data.js'
 
-import { ABBR, CHAPTER, ENGLISH, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, GREEK, REFERENCE, TEXT, PARTICIPLE } from './Filters.js'
+import { ABBR, CHAPTER, ENGLISH, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, GREEK, REFERENCE, TEXT, PARTICIPLE, SENSE } from './Filters.js'
 
 class Engine {
+  static verseRecords = {}
+  static verseWords = {}
+
   static getRecords(filters) {
     return Data.morphs
-      .filter(row => Object.keys(filters)
-          .filter(field => filters[field].length !== 0)
-          .every(field => row[field] === '-' || filters[field].includes(row[field])))
-      .filter(row => row[CHAPTER] !== '-')
+      // filter
+      .filter(row => row[CHAPTER] !== '-' &&
+          Object.keys(filters)
+            .every(field => row[field] === '-' || filters[field].includes(row[field])))
+      // return only a single reference
       .map(row => {
         let references = row[REFERENCE].split(',')
         let reference = references[Math.floor((Math.random() * references.length))]
@@ -101,30 +105,36 @@ class Engine {
       "Βεελζεβούλ", "Χριστός", "Σαδδουκαῖος", "Ἰσραηλίτης", "Σιών",
       // familiar conjunctions
       "καί", "γάρ", "ὅτι", "δέ"
-      ]
+    ]
 
-    let verseRecords = {}
-    Data.morphs
-      .flatMap(row => row[REFERENCE].split(",")
-        .map(ref => Object.assign({}, row, { [REFERENCE]: ref })))
-      .forEach(row => {
-        if (!verseRecords[row[REFERENCE]]) {
-          verseRecords[row[REFERENCE]] = []
-        }
-        verseRecords[row[REFERENCE]].push(row)
-      })
+    // instantiate verseRecords if necessary
+    if (Object.keys(Engine.verseRecords).length === 0) {
+      Data.morphs
+        .flatMap(row => row[REFERENCE].split(",")
+          .map(ref => Object.assign({}, row, { [REFERENCE]: ref })))
+        .forEach(row => {
+          if (!Engine.verseRecords[row[REFERENCE]]) {
+            Engine.verseRecords[row[REFERENCE]] = []
+          }
+          Engine.verseRecords[row[REFERENCE]].push(row)
+        })
+    }
 
-    let verseWords = {}
-    Object.keys(verseRecords)
-      .map(ref => 
-        verseWords[ref] = Data.greek[ref].replaceAll(punctuation, "").split(" ").filter(word => word))
+    // instantiate verseWords if necessary
+    if (Object.keys(Engine.verseWords).length === 0) {
+      Object.keys(Engine.verseRecords)
+        .map(ref => 
+          Engine.verseWords[ref] = Data.greek[ref].replaceAll(punctuation, "").split(" ").filter(word => word))
+    }
 
     let testableVerses = []
-    Object.values(verseRecords)
+    Object.values(Engine.verseRecords)
+      // non-dictionary words condition
       .filter(rows => {
         let words = rows.map(row => row[RESULT])
-        return verseWords[rows[0][REFERENCE]].every(word => words.includes(word))
+        return Engine.verseWords[rows[0][REFERENCE]].every(word => words.includes(word))
       })
+      // testable words condition
       .filter(rows => {
         return rows
           .filter(row => !ignore.includes(row[LEMMA]))
@@ -134,6 +144,7 @@ class Engine {
               .every(field => row[field] === '-' || filters[field].includes(row[field])))
           .length >= 3
       })
+      // non-testable words condition
       .filter(rows => {
         let nontestableWords = rows
           .filter(row => !ignore.includes(row[LEMMA]))
@@ -144,16 +155,15 @@ class Engine {
                 .every(field => row[field] === '-' || filters[field].includes(row[field]))
           })
 
-        return nontestableWords.length <= 1 &&
-          nontestableWords
-            .every(row => !row['Sense'] === '-' || !row[GLOSS] === '-')
+        return nontestableWords.length <= 1 && nontestableWords
+            .every(row => row[SENSE] !== '-' || row[GLOSS] !== '-')
       })
       .map(rows => testableVerses.push(rows[0][REFERENCE]))
 
     let translations = []
     testableVerses
       .map(ref => {
-        let definitions = verseRecords[ref]
+        let definitions = Engine.verseRecords[ref]
           .filter(row => !ignore.includes(row[LEMMA]))
           .filter(row => {
             return row[CHAPTER] === '-' ||
@@ -162,11 +172,10 @@ class Engine {
                 .every(field => row[field] === '-' || filters[field].includes(row[field]))
           })
           .map(row => "<" + row[LEMMA] + ", " + Engine.abbrvPOS(row[PART]) + ": " + 
-              row[row['Sense'].includes("-") ? GLOSS : 'Sense'] + ">")
-          .join(" ")
+              row[row[SENSE].includes("-") ? GLOSS : SENSE] + ">")
 
-        let parsing = verseWords[ref]
-          .map(word => verseRecords[ref]
+        let parsing = Engine.verseWords[ref]
+          .map(word => Engine.verseRecords[ref]
               .filter(row => word === row[RESULT])[0])
           .filter(row => !ignore.includes(row[LEMMA]))
           .map(row => {
@@ -209,7 +218,11 @@ class Engine {
         let front = Data.greek[ref] + " " + definitions;
         let back = ref + " " + Data.english[ref] + " " + parsing;
 
-        return front + "\t" + back;
+        return {
+          ref: ref,
+          defs: definitions,
+          key: parsing,
+        }
       })
       .forEach(trans => translations.push(trans))
 
