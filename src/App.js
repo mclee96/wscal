@@ -15,7 +15,7 @@ import Table from 'react-bootstrap/Table'
 import ToggleButton from 'react-bootstrap/ToggleButton'
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup'
 
-import Data from './data/Data.js'
+import Data from './backend/Data.js'
 import Engine from './backend/Engine.js'
 import Vocab from './Vocab.js'
 

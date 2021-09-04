@@ -1,9 +1,9 @@
-import morphFilepath from './morphs.tsv'
-import englishFilepath from './net.tsv'
-import greekFilepath from './na28.tsv'
-import vocabFilepath from './vocab.tsv'
+import morphFilepath from '../data/morphs.tsv'
+import englishFilepath from '../data/net.tsv'
+import greekFilepath from '../data/na28.tsv'
+import vocabFilepath from '../data/vocab.tsv'
 
-import { ABBR, CHAPTER, ENGLISH, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, GREEK, REFERENCE, TEXT, PARTICIPLE } from '../backend/Filters.js'
+import { ABBR, CHAPTER, ENGLISH, PART, RESULT, LEMMA, GENDER, CASE, NUMBER, GLOSS, TENSE, VOICE, MOOD, PERSON, GREEK, REFERENCE, TEXT, PARTICIPLE } from './Filters.js'
 
 const Papa = require('papaparse');
 
