@@ -136,6 +136,7 @@ class App extends React.Component {
       .forEach(arr => vocab = vocab.concat(arr))
     filters[LEMMA] = vocab.map(row => row[LEMMA])
 
+    Engine.getTranslations(filters)
     let records = Engine.getRecords(filters)
     let flashcards = Engine.getFlashcards(filters, this.state.flashcardFields)
     const index = Math.floor(Math.random() * records.length - this.state.limit)
