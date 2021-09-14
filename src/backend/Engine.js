@@ -287,18 +287,18 @@ class Engine {
         return "noun";
       case "indeclinable, adjective":
       case "adjective": 
-        return "adj";
+        return "adj.";
       case "adverb, particle": 
       case "adverb": 
-        return "adv";
+        return "adv.";
       case "preposition": 
-        return "prep";
+        return "prep.";
       case "conjunction": 
-        return "conj";
+        return "conj.";
       case "verb": 
         return "verb";
       case "pronoun":
-        return "pron";
+        return "pron.";
       default: 
         return pos;
     }

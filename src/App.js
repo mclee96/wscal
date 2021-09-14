@@ -203,7 +203,7 @@ class App extends React.Component {
           </Row>
           */}
           <Row className="mt-3">
-            <Col sm="3" md="3" lg="3" xl="3" xxl="3" className="pe-0">
+            <Col sm="6" md="6" lg="6" xl="6" xxl="6" className="pe-0">
               <Collapse in={this.state.showVocab} dimension="width">
                 <div>
                   <VocabSelect
@@ -237,13 +237,162 @@ class App extends React.Component {
                   <h5>(2) ...with filters...</h5>
                 {/* filter selection */}
                   <ButtonToolbar style={{justifyContent: 'space-between'}}>
+                    <ToggleButtonGroup
+                      id='Gender'
+                      key='Gender'
+                      type='checkbox'
+                      size='sm'>
+                        <ToggleButton 
+                          key='feminine'
+                          id='feminine'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='feminine'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Gender', 'feminine', e)}>
+                          fem.
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='masculine'
+                          id='masculine'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='masculine'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Gender', 'masculine', e)}>
+                          mas.
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='neuter'
+                          id='neuter'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='neuter'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Gender', 'neuter', e)}>
+                          neu.
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                    <ToggleButtonGroup
+                      id='Case'
+                      key='Case'
+                      type='checkbox'
+                      size='sm'>
+                        <ToggleButton 
+                          key='nominative'
+                          id='nominative'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='nominative'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Case', 'nominative', e)}>
+                          nom.
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='genitive'
+                          id='genitive'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='genitive'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Case', 'genitive', e)}>
+                          gen.
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='dative'
+                          id='dative'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='dative'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Case', 'dative', e)}>
+                          dat.
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='accusative'
+                          id='accusative'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='accusative'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Case', 'accusative', e)}>
+                          acc.
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='vocative'
+                          id='vocative'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='vocative'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Case', 'vocative', e)}>
+                          voc.
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                    <ToggleButtonGroup
+                      id='Person'
+                      key='Person'
+                      type='checkbox'
+                      size='sm'>
+                        <ToggleButton 
+                          key='first person'
+                          id='first person'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='first person'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Person', 'first person', e)}>
+                          1p
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='second person'
+                          id='second person'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='second person'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Person', 'second person', e)}>
+                          2p
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='third person'
+                          id='third person'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='third person'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Person', 'third person', e)}>
+                          3p
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                    <ToggleButtonGroup
+                      id='Number'
+                      key='Number'
+                      type='checkbox'
+                      size='sm'>
+                        <ToggleButton 
+                          key='singular'
+                          id='singular'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='singular'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Number', 'singular', e)}>
+                          sg.
+                        </ToggleButton>
+                        <ToggleButton 
+                          key='pl.'
+                          id='pl.'
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value='pl.'
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter('Number', 'pl.', e)}>
+                          pl.
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                  </ButtonToolbar>
 
+                  <ButtonToolbar style={{justifyContent: 'space-between'}}>
                   {Object.keys(ALL)
                     .filter(field => field !== PART)
                     .map(filterType => (
                     <ToggleButtonGroup id={filterType} key={filterType} type="checkbox" size="sm" >
                       {ALL[filterType].map(filterValue => (
-                        <ToggleButton key={filterValue} id={filterValue} value={filterValue} variant='outline-success' onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
+                        <ToggleButton 
+                          key={filterValue} 
+                          id={filterValue} 
+                          style={{ lineHeight: 1, fontSize: '.75em' }}
+                          value={filterValue} 
+                          variant='outline-success' 
+                          onClick={(e) => this.toggleFilter(filterType, filterValue, e)}>
                           {filterValue}
                         </ToggleButton>
                       ))}

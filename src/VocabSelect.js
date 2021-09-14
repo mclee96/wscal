@@ -30,8 +30,8 @@ class VocabSelect extends React.Component {
     this.criteria = ''
     this.searchTimeout = 0
     this.vocab = []
-    this.onSelect = props.onSelect.bind(this)
 
+    this.onSelect = props.onSelect.bind(this)
     this.search = this.search.bind(this)
     this.addAll = this.addAll.bind(this)
     this.togglePart = this.togglePart.bind(this)
@@ -177,7 +177,7 @@ class VocabSelect extends React.Component {
     const columnWidths = [50, 120, 30, 100, 500]
 
     return (
-      <div style={{ maxWidth: '19em' }}>
+      <div>
         <Alert variant='light' style={{ textAlign: 'left', borderColor: 'lightgrey' }}>
           <h5>(1) vocab</h5>
           <Row className="me-1">
@@ -189,7 +189,7 @@ class VocabSelect extends React.Component {
                     id="wat"
                     aria-label="chapter restrictions (e.g. 2 or 2,3 or 2-4)"
                     aria-describedby="basic-addon1"
-                    placeholder='e.g. "ch2-7" or "πας"'
+                    placeholder='try "ch7-9" or "πας"'
                     onChange={(e) => this.search(e.target.value, e)} />
                   <Button
                     disabled={this.state.display.length <= 0}
@@ -207,23 +207,23 @@ class VocabSelect extends React.Component {
                     variant="outline-secondary" 
                     value="nouns" 
                     id="nouns-filter" 
-                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    style={{ lineHeight: 1, fontSize: '.75em', width: '4em' }}
                     onClick={(e) => this.togglePart(NOUN, e)}>
-                    n.
+                    noun
                   </ToggleButton>
                   <ToggleButton 
                     variant="outline-secondary" 
                     value="verbs" 
                     id="verbs-filter" 
-                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    style={{ lineHeight: 1, fontSize: '.75em', width: '4em' }}
                     onClick={(e) => this.togglePart(VERB, e)}>
-                    v.
+                    verb
                   </ToggleButton>
                   <ToggleButton 
                     variant="outline-secondary" 
                     value="adjectives" 
                     id="adjectives-filter" 
-                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    style={{ lineHeight: 1, fontSize: '.75em', width: '4em' }}
                     onClick={(e) => this.togglePart(ADJECTIVE, e)}>
                     adj.
                   </ToggleButton>
@@ -231,7 +231,7 @@ class VocabSelect extends React.Component {
                     variant="outline-secondary" 
                     value="prepositions" 
                     id="prepositions-filter" 
-                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    style={{ lineHeight: 1, fontSize: '.75em', width: '4em' }}
                     onClick={(e) => this.togglePart(PREPOSITION, e)}>
                     prep.
                   </ToggleButton>
@@ -239,7 +239,7 @@ class VocabSelect extends React.Component {
                     variant="outline-secondary" 
                     value="pronouns" 
                     id="pronouns-filter" 
-                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    style={{ lineHeight: 1, fontSize: '.75em', width: '4em' }}
                     onClick={(e) => this.togglePart(PRONOUN, e)}>
                     pron.
                   </ToggleButton>
@@ -247,7 +247,7 @@ class VocabSelect extends React.Component {
                     variant="outline-secondary" 
                     value="adverb" 
                     id="adverbs-filter" 
-                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    style={{ lineHeight: 1, fontSize: '.75em', width: '4em' }}
                     onClick={(e) => this.togglePart(ADVERB, e)}>
                     adv.
                   </ToggleButton>
@@ -255,7 +255,7 @@ class VocabSelect extends React.Component {
                     variant="outline-secondary" 
                     value="conjunctions" 
                     id="conjunctions-filter" 
-                    style={{ lineHeight: 1, fontSize: '.75em' }}
+                    style={{ lineHeight: 1, fontSize: '.75em', width: '4em' }}
                     onClick={(e) => this.togglePart(CONJUNCTION, e)}>
                     conj.
                   </ToggleButton>
@@ -267,7 +267,7 @@ class VocabSelect extends React.Component {
             <Col>
               <VariableSizeGrid
                 height={480}
-                width={280}
+                width={480}
                 columnCount={5}
                 columnWidth={index => columnWidths[index]}
                 rowCount={this.state.display.length}
