@@ -1,29 +1,29 @@
 {
   "files": {
     "main.css": "/wscal/static/css/main.5fc83d6a.chunk.css",
-    "main.js": "/wscal/static/js/main.319bf81b.chunk.js",
-    "main.js.map": "/wscal/static/js/main.319bf81b.chunk.js.map",
+    "main.js": "/wscal/static/js/main.754e1d58.chunk.js",
+    "main.js.map": "/wscal/static/js/main.754e1d58.chunk.js.map",
     "runtime-main.js": "/wscal/static/js/runtime-main.4ff629c4.js",
     "runtime-main.js.map": "/wscal/static/js/runtime-main.4ff629c4.js.map",
     "static/css/2.4be38407.chunk.css": "/wscal/static/css/2.4be38407.chunk.css",
-    "static/js/2.5fac28e5.chunk.js": "/wscal/static/js/2.5fac28e5.chunk.js",
-    "static/js/2.5fac28e5.chunk.js.map": "/wscal/static/js/2.5fac28e5.chunk.js.map",
+    "static/js/2.bd80de9c.chunk.js": "/wscal/static/js/2.bd80de9c.chunk.js",
+    "static/js/2.bd80de9c.chunk.js.map": "/wscal/static/js/2.bd80de9c.chunk.js.map",
     "static/js/3.b675e079.chunk.js": "/wscal/static/js/3.b675e079.chunk.js",
     "static/js/3.b675e079.chunk.js.map": "/wscal/static/js/3.b675e079.chunk.js.map",
     "index.html": "/wscal/index.html",
     "static/css/2.4be38407.chunk.css.map": "/wscal/static/css/2.4be38407.chunk.css.map",
     "static/css/main.5fc83d6a.chunk.css.map": "/wscal/static/css/main.5fc83d6a.chunk.css.map",
-    "static/js/2.5fac28e5.chunk.js.LICENSE.txt": "/wscal/static/js/2.5fac28e5.chunk.js.LICENSE.txt",
-    "static/media/esv.fe2ed14b.tsv": "/wscal/static/media/esv.fe2ed14b.tsv",
-    "static/media/morphs.8d5cd39d.tsv": "/wscal/static/media/morphs.8d5cd39d.tsv",
-    "static/media/na28.19940234.tsv": "/wscal/static/media/na28.19940234.tsv",
-    "static/media/vocab.830e3c37.tsv": "/wscal/static/media/vocab.830e3c37.tsv"
+    "static/js/2.bd80de9c.chunk.js.LICENSE.txt": "/wscal/static/js/2.bd80de9c.chunk.js.LICENSE.txt",
+    "static/media/morphs.77bb1744.tsv": "/wscal/static/media/morphs.77bb1744.tsv",
+    "static/media/na28.13d3a11b.tsv": "/wscal/static/media/na28.13d3a11b.tsv",
+    "static/media/net.eaad620a.tsv": "/wscal/static/media/net.eaad620a.tsv",
+    "static/media/vocab.88e2c3c1.tsv": "/wscal/static/media/vocab.88e2c3c1.tsv"
   },
   "entrypoints": [
     "static/js/runtime-main.4ff629c4.js",
     "static/css/2.4be38407.chunk.css",
-    "static/js/2.5fac28e5.chunk.js",
+    "static/js/2.bd80de9c.chunk.js",
     "static/css/main.5fc83d6a.chunk.css",
-    "static/js/main.319bf81b.chunk.js"
+    "static/js/main.754e1d58.chunk.js"
   ]
 }

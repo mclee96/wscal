@@ -319,7 +319,7 @@ Lemma	Gloss	Part	Chapter
 ἁμαρτωλός	sinful	adjective	31
 ἀποδίδωμι	I am repaying, giving away	verb	31
 ἄρα	consequently, so then	conjunction	31
-ἄχρι	until (conj, prep +gen.)	conjunction	31
+ἄχρι	until (conj, prep +gen.)	preposition	31
 ἔμπροσθεν	+gen., before, in the presence of	preposition	31
 ἔτος	year	noun	31
 ἡμέτερος	our	adjective	31
@@ -337,7 +337,7 @@ Lemma	Gloss	Part	Chapter
 ποῦ	where, where?	adverb	31
 προσφέρω	I am offering, bringing to	verb	31
 σταυρόω	I am crucifying	noun	31
-φανερόω	I am revealing; I am appearing	verb	31
+φανερόω	I am revealing; I am appearing (pass.)	verb	31
 φόβος	fear	noun	31
 φυλακή	guard, prison	noun	31
 χρεία	need, necessity	noun	31
@@ -721,7 +721,7 @@ Lemma	Gloss	Part	Chapter
 πολλάκις	many times, often	adverb	47
 ἑκατόν	hundred	adjective	47
 ἐπαύριον	on the next day	adverb	47
-πλησίον	neighbor	noun	47
+πλησίον	subst., neighbor; +gen., near	preposition	47
 ὡσαύτως	likewise, similarly, the same	adverb	47
 ὑποκριτής	hypocrite	noun	47
 θησαυρός	treasure, treasury	noun	47
@@ -816,3 +816,103 @@ Lemma	Gloss	Part	Chapter
 ἀμφότεροι	both	adjective	50
 ἀτενίζω	I look intently at, stare at	verb	50
 νοέω	I understand	verb	50
+Ἕλλην	Greek	noun	51
+πωλέω	I sell	verb	51
+ἐφίστημι	I stand at, stand near	verb	51
+σκηνή	tent, tabernacle	noun	51
+ἡγεμών	ruler, governer	noun	51
+γεωργός	farmer, tenant farmer	noun	51
+μεριμνάω	I am anxious; I care for	verb	51
+ἐπιλαμβάνομαι	I take hold of, grasp	verb	51
+κόπος	work, labor; toil, trouble	noun	51
+ποταμός	river	noun	51
+καταλύω	I destroy, throw down, demolish	verb	51
+κερδαίνω	I gain	verb	51
+ἐμβαίνω	I embark; I get into	verb	51
+δηνάριον	denarius	noun	51
+εὐλογία	blessing; praise; generous gift	noun	51
+πέτρα	rock	noun	51
+διαμαρτύρομαι	I warn, testify solemnly	verb	51
+γυμνός	naked, poorly clothed	adjective	51
+ξένος	stranger, foreigner	noun	51
+κωφός	mute, unable to speak; deaf	adjective	51
+λύχνος	lamp	noun	51
+ἐπίσταμαι	I know, understand	verb	51
+Σαδδουκαῖος	Sadducee	noun	51
+αὔριον	tomorrow, next day	adverb	51
+σεισμός	earthquake	noun	51
+κοινόω	I defile	verb	52
+κοινός	common, ordinary; unclean	adjective	52
+μακροθυμία	patience, forbearance	noun	52
+σῖτος	wheat, grain	noun	52
+ἅπαξ	once, once and for all	adverb	52
+γράμμα	letter	noun	52
+οἷος	of what sort, such as	adjective	52
+ἄκανθα	thorn plant, thorn	noun	52
+ἀναχωρέω	I withdraw, go away	verb	52
+καπνός	smoke	noun	52
+πρίν	before	conjunction	52
+παράδοσις	tradition	noun	52
+καταισχύνω	I put to shame, humiliate	verb	52
+ἐξαποστέλλω	I send off, send out, send away	verb	52
+παιδίσκη	female slave	noun	52
+ταχύς	quickly	adverb	52
+ἄνωθεν	from above, top, again	adverb	52
+Τίτος	Titus	noun	52
+Ναζωραῖος	Nazarene	noun	52
+δράκων	dragon	noun	52
+ὕψιστος	highest; most high	adjective	52
+θερισμός	harvest	noun	52
+Μάρθα	Martha	noun	52
+ἔξωθεν	outside	adverb	52
+ζύμη	leaven	noun	52
+ἀνάγω	I put out to sea, set sail	verb	53
+λατρεύω	I serve, worship	verb	53
+βασιλεύω	I rule, reign, be king	verb	53
+ὑψόω	I lift up, exalt	verb	53
+νηστεύω	I fast	verb	53
+τοσοῦτος	so great, so much, so many	adjective	53
+κατακρίνω	I pronounce sentence on	verb	53
+καταγγέλλω	I proclaim	verb	53
+εἰσπορεύομαι	I enter, go into	verb	53
+τίκτω	I give birth (to)	verb	53
+ῥύομαι	I rescue, deliver	verb	53
+ἀρέσκω	I please	verb	53
+τολμάω	I dare, show boldness	verb	53
+ἀθετέω	I reject, declare invalid	verb	53
+κατέρχομαι	I come down, arrive	verb	53
+ἐπιθυμέω	I desire, long for, lust for	verb	53
+ἀνακρίνω	I examine, judge, question	verb	53
+προσδοκάω	I wait for, look for, expect	verb	53
+ὠφελέω	I benefit, aid, profit	verb	53
+δέρω	I beat, strike	verb	53
+θρίξ	hair	noun	53
+κατεσθίω	I eat up, consume, devour	verb	53
+ἐλάχιστος	least, insignificant, trivial	adjective	53
+χωλός	lame, crippled	adjective	53
+ἀλλότριος	belonging to another	adjective	53
+προάγω	I go before, precede	verb	54
+κοιμάω	I sleep, fall asleep	verb	54
+περιτέμνω	I circumcise	verb	54
+ὑπομένω	I endure	verb	54
+κατέχω	I hold fast to, restrain	verb	54
+συνίστημι	I commend, recommend	verb	54
+παρέχω	I cause, make happen, present	verb	54
+ὑστερέω	I lack, fall short of	verb	54
+ὄφις	snake, serpent	verb	54
+ἕκτος	sixth	adjective	54
+ἀνθίστημι	I oppose, resist	verb	54
+ἀπειθέω	I disobey; I am disobedient	verb	54
+ἀνάκειμαι	I recline, recline at table	verb	54
+κατανοέω	I consider, contemplate	part	54
+ἐμπαίζω	I ridicule, mock, make fun of	verb	54
+συνεργός	fellow worker	noun	54
+τρόπος	manner, way	noun	54
+καθάπερ	just as, as	conjunction	54
+ἀνά	each, apiece, in the midst	preposition	54
+Ἀνδρέας	Andrew	noun	54
+ἕξ	six	adjective	54
+δαιμονίζομαι	I am possessed by a demon	verb	54
+Φῆστος	Festus	noun	54
+ἐπιζητέω	I seek after, wish for	verb	54
+παιδεύω	I discipline, educate, train	verb	54
